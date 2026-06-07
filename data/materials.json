@@ -1,0 +1,31 @@
+{
+  "materials": [
+    {
+      "id": "m001",
+      "route": "01",
+      "title": "Название материала",
+      "description": "Короткое описание — 1-2 предложения",
+      "type": "video",
+      "url": "https://",
+      "status": "published"
+    },
+    {
+      "id": "m002",
+      "route": "01",
+      "title": "Название материала",
+      "description": "Короткое описание — 1-2 предложения",
+      "type": "article",
+      "url": "https://",
+      "status": "published"
+    },
+    {
+      "id": "m003",
+      "route": "02",
+      "title": "Название материала",
+      "description": "Короткое описание — 1-2 предложения",
+      "type": "podcast",
+      "url": "https://",
+      "status": "published"
+    }
+  ]
+}
