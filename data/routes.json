@@ -1,12 +1,76 @@
 {
   "routes": [
-    { "num": "01", "title": "Картина мира",   "count": 6, "link": "/route/01", "status": "done",     "type": "раздел" },
-    { "num": "02", "title": "Технологии",     "count": 5, "link": "/route/02", "status": "progress", "type": "раздел" },
-    { "num": "03", "title": "Дизайн доверия", "count": 2, "link": "/route/03", "status": "progress", "type": "раздел" },
-    { "num": "04", "title": "Профессия",      "count": 6, "link": "/route/04", "status": "done",     "type": "раздел" },
-    { "num": "05", "title": "Управление",     "count": 5, "link": "/route/05", "status": "progress", "type": "раздел" },
-    { "num": "06", "title": "Стратегия 2.0",  "count": 6, "link": "/route/06", "status": "progress", "type": "ИЧК"    },
-    { "num": "07", "title": "Антикризис",     "count": 4, "link": "/route/07", "status": "progress", "type": "раздел" },
-    { "num": "08", "title": "Сообщество",     "count": 1, "link": "/route/08", "status": "new",      "type": "live"   }
+    {
+      "num": "01",
+      "title": "Картина мира",
+      "desc": "Тренды, паттерны мышления и трендвотчинг — как читать ландшафт 2026.",
+      "count": 6,
+      "link": "/route/01",
+      "status": "done",
+      "type": "раздел"
+    },
+    {
+      "num": "02",
+      "title": "Технологии",
+      "desc": "ИИ, CommTech и цифровые экосистемы для управления коммуникациями.",
+      "count": 5,
+      "link": "/route/02",
+      "status": "progress",
+      "type": "раздел"
+    },
+    {
+      "num": "03",
+      "title": "Дизайн доверия",
+      "desc": "Визуальный язык и триггеры доверия в современных коммуникациях.",
+      "count": 2,
+      "link": "/route/03",
+      "status": "progress",
+      "type": "раздел"
+    },
+    {
+      "num": "04",
+      "title": "Профессия",
+      "desc": "Медиатизация, журналистика и стандарты профессии коммуникатора.",
+      "count": 6,
+      "link": "/route/04",
+      "status": "done",
+      "type": "раздел"
+    },
+    {
+      "num": "05",
+      "title": "Управление",
+      "desc": "Менеджмент коммуникационного направления и трансформация организации.",
+      "count": 5,
+      "link": "/route/05",
+      "status": "progress",
+      "type": "раздел"
+    },
+    {
+      "num": "06",
+      "title": "Стратегия 2.0",
+      "desc": "Человекоцентричный подход, ИЧК и разработка коммуникационной стратегии.",
+      "count": 6,
+      "link": "/route/06",
+      "status": "progress",
+      "type": "ИЧК"
+    },
+    {
+      "num": "07",
+      "title": "Антикризис",
+      "desc": "Кейсы, чек-листы и стратегии поведения в кризисных коммуникациях.",
+      "count": 4,
+      "link": "/route/07",
+      "status": "progress",
+      "type": "раздел"
+    },
+    {
+      "num": "08",
+      "title": "Сообщество",
+      "desc": "Живое сообщество для обсуждения тем книги и обмена опытом.",
+      "count": 1,
+      "link": "/route/08",
+      "status": "new",
+      "type": "live"
+    }
   ]
 }
