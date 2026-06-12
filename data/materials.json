@@ -60,6 +60,7 @@
       "link": "https://mmalova.com/kniga/link6",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m007",
@@ -90,6 +91,7 @@
       "link": "https://mmalova.com/kniga/link10",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m010",
@@ -110,6 +112,7 @@
       "link": "https://mmalova.com/kniga/link32",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m012",
@@ -120,6 +123,7 @@
       "link": "https://mmalova.com/kniga/link8",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m013",
@@ -130,6 +134,7 @@
       "link": "https://mmalova.com/kniga/link25",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m014",
@@ -140,6 +145,7 @@
       "link": "https://mmalova.com/kniga/link12",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m015",
@@ -170,6 +176,7 @@
       "link": "https://mmalova.com/kniga/link15",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m018",
@@ -200,6 +207,7 @@
       "link": "https://mmalova.com/kniga/link17",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m021",
@@ -230,6 +238,7 @@
       "link": "https://mmalova.com/kniga/link21",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m024",
@@ -240,6 +249,7 @@
       "link": "https://mmalova.com/kniga/link33",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m025",
@@ -270,6 +280,7 @@
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m028",
@@ -280,6 +291,7 @@
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m029",
@@ -300,6 +312,7 @@
       "link": "https://mmalova.com/kniga/link29",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m031",
@@ -310,6 +323,7 @@
       "link": "https://mmalova.com/kniga/link11",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m032",
@@ -330,6 +344,7 @@
       "link": "https://mmalova.com/kniga/link13",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m034",
@@ -350,6 +365,7 @@
       "link": "https://mmalova.com/kniga/link30",
       "status": "доступно",
       "level": 1
+      "expert": true
     },
     {
       "id": "m036",
