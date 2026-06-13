@@ -310,7 +310,7 @@
     {
       "id": "m031",
       "route": "07",
-      "title": "Разбор антикризисных кейсов | Ретроспектива классики | Российский цикл",
+      "title": "Разбор антикризисных кейсов | Ретроспектива | Российский цикл",
       "type": "кейс",
       "page": 92,
       "link": "https://mmalova.com/kniga/link11",
@@ -367,6 +367,16 @@
       "page": 173,
       "link": "https://mmalova.com/kniga/link28",
       "status": "доступно",
+      "level": 1
+    },
+    {
+      "id": "m037",
+      "route": "07",
+      "title": "Синдром чиновника в эпоху «стеклянных кабинетов»: как административный сбой угрожает репутации региона",
+      "type": "кейс",
+      "page": 92,
+      "link": "https://mmalova.com/sindrom-chinovnika-v-epohu-steklyannyh-kabinetov",
+      "status": "новое",
       "level": 1
     }
   ],
