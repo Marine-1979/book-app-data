@@ -59,8 +59,7 @@
       "page": 36,
       "link": "https://mmalova.com/kniga/link6",
       "status": "доступно",
-      "level": 1,
-      "expert": true
+      "level": 1      
     },
     {
       "id": "m007",
@@ -90,8 +89,7 @@
       "page": 70,
       "link": "https://mmalova.com/kniga/link10",
       "status": "доступно",
-      "level": 1,
-      "expert": true
+      "level": 1
     },
     {
       "id": "m010",
@@ -106,13 +104,12 @@
     {
       "id": "m011",
       "route": "02",
-      "title": "Центр управления коммуникациями, ЦУК | Цифровая экосистема для управления репутацией 2026 | Обзор CommTech в России и в мире",
+      "title": "Центр управления коммуникациями | Цифровая экосистема для управления репутацией 2026 | Обзор CommTech в России и в мире",
       "type": "гайд",
       "page": 232,
       "link": "https://mmalova.com/kniga/link32",
       "status": "доступно",
-      "level": 1,
-      "expert": true
+      "level": 1
     },
     {
       "id": "m012",
@@ -248,8 +245,7 @@
       "page": 238,
       "link": "https://mmalova.com/kniga/link33",
       "status": "доступно",
-      "level": 1,
-      "expert": true
+      "level": 1
     },
     {
       "id": "m025",
@@ -279,8 +275,7 @@
       "page": 207,
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
-      "level": 1,
-      "expert": false
+      "level": 1
     },
     {
       "id": "m028",
@@ -290,8 +285,7 @@
       "page": 211,
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
-      "level": 1,
-      "expert": false
+      "level": 1
     },
     {
       "id": "m029",
@@ -311,8 +305,7 @@
       "page": 213,
       "link": "https://mmalova.com/kniga/link29",
       "status": "доступно",
-      "level": 1,
-      "expert": false
+      "level": 1
     },
     {
       "id": "m031",
@@ -322,8 +315,7 @@
       "page": 92,
       "link": "https://mmalova.com/kniga/link11",
       "status": "доступно",
-      "level": 1,
-      "expert": false
+      "level": 1
     },
     {
       "id": "m032",
