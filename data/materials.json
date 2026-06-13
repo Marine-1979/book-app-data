@@ -280,7 +280,7 @@
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": false
     },
     {
       "id": "m028",
@@ -291,7 +291,7 @@
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": false
     },
     {
       "id": "m029",
@@ -312,7 +312,7 @@
       "link": "https://mmalova.com/kniga/link29",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": false
     },
     {
       "id": "m031",
@@ -323,7 +323,7 @@
       "link": "https://mmalova.com/kniga/link11",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": false
     },
     {
       "id": "m032",
