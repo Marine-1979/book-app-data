@@ -51,7 +51,7 @@
       "link": "https://mmalova.com/kniga/link5",
       "status": "доступно",
       "level": 1,
-      "expert": true,
+      "expert": true
     },
     {
       "id": "m006",
@@ -409,6 +409,19 @@
     "updated": "16 июня 2026",
     "updatesQuarter": "4 обновления за квартал",
     "year": "2026",
-    "spark": [2, 5, 3, 8, 4, 6, 9, 5, 7, 11, 4, 3]
+    "spark": [
+      2,
+      5,
+      3,
+      8,
+      4,
+      6,
+      9,
+      5,
+      7,
+      11,
+      4,
+      3
+    ]
   }
 }
