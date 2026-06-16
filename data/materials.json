@@ -19,7 +19,8 @@
       "page": 21,
       "link": "https://mmalova.com/kniga/link2",
       "status": "обновлено",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m003",
@@ -49,7 +50,8 @@
       "page": 33,
       "link": "https://mmalova.com/kniga/link5",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true,
     },
     {
       "id": "m006",
@@ -59,7 +61,8 @@
       "page": 36,
       "link": "https://mmalova.com/kniga/link6",
       "status": "доступно",
-      "level": 1      
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m007",
@@ -74,12 +77,13 @@
     {
       "id": "m008",
       "route": "02",
-      "title": "О Bluesky, проекте Джека Дорси, как о новом взгляде на децентрализованные сети",
+      "title": "О Bluesky, проекте Джека Дорси как о новом взгляде на децентрализованные сети",
       "type": "обзор",
       "page": 60,
       "link": "https://mmalova.com/kniga/link9",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m009",
@@ -89,7 +93,8 @@
       "page": 70,
       "link": "https://mmalova.com/kniga/link10",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m010",
@@ -99,7 +104,8 @@
       "page": 220,
       "link": "https://mmalova.com/kniga/link31",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m011",
@@ -109,7 +115,8 @@
       "page": 232,
       "link": "https://mmalova.com/kniga/link32",
       "status": "обновлено",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m012",
@@ -120,7 +127,8 @@
       "link": "https://mmalova.com/kniga/link8",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Антон Дубинчин"
     },
     {
       "id": "m013",
@@ -131,7 +139,8 @@
       "link": "https://mmalova.com/kniga/link25",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Марина Матасова"
     },
     {
       "id": "m014",
@@ -142,7 +151,8 @@
       "link": "https://mmalova.com/kniga/link12",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Тимур Асланов"
     },
     {
       "id": "m015",
@@ -173,7 +183,8 @@
       "link": "https://mmalova.com/kniga/link15",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Сергей Половников"
     },
     {
       "id": "m018",
@@ -204,7 +215,8 @@
       "link": "https://mmalova.com/kniga/link17",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Евгений Темпераментов"
     },
     {
       "id": "m021",
@@ -214,7 +226,8 @@
       "page": 170,
       "link": "https://mmalova.com/kniga/link18",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m022",
@@ -224,7 +237,8 @@
       "page": 174,
       "link": "https://mmalova.com/kniga/link19",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m023",
@@ -235,7 +249,8 @@
       "link": "https://mmalova.com/kniga/link21",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Ярослав Мешалкин"
     },
     {
       "id": "m024",
@@ -245,7 +260,8 @@
       "page": 238,
       "link": "https://mmalova.com/kniga/link33",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m025",
@@ -255,7 +271,8 @@
       "page": 196,
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m026",
@@ -285,7 +302,8 @@
       "page": 211,
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m029",
@@ -305,7 +323,8 @@
       "page": 213,
       "link": "https://mmalova.com/kniga/link29",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m031",
@@ -315,7 +334,8 @@
       "page": 92,
       "link": "https://mmalova.com/kniga/link11",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m032",
@@ -325,7 +345,8 @@
       "page": 195,
       "link": "https://mmalova.com/kniga/link23",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "expert": true
     },
     {
       "id": "m033",
@@ -336,7 +357,8 @@
       "link": "https://mmalova.com/kniga/link13",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Иван Афанасьев"
     },
     {
       "id": "m034",
@@ -357,7 +379,8 @@
       "link": "https://mmalova.com/kniga/link30",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Ника Комарова"
     },
     {
       "id": "m036",
@@ -377,13 +400,14 @@
       "page": 92,
       "link": "https://mmalova.com/sindrom-chinovnika-v-epohu-steklyannyh-kabinetov",
       "status": "новое",
-      "level": 1
+      "level": 1,
+      "expert": true
     }
   ],
   "meta": {
-    "newLast30": 3,
-    "updated": "18 мая 2026",
-    "updatesQuarter": "14 обновлений за квартал",
+    "newLast30": 2,
+    "updated": "16 июня 2026",
+    "updatesQuarter": "4 обновления за квартал",
     "year": "2026",
     "spark": [2, 5, 3, 8, 4, 6, 9, 5, 7, 11, 4, 3]
   }
