@@ -96,7 +96,8 @@
       "link": "https://mmalova.com/kniga/link10",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m010",
@@ -118,7 +119,8 @@
       "link": "https://mmalova.com/kniga/link32",
       "status": "",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m012",
@@ -158,7 +160,7 @@
     {
       "id": "m015",
       "route": "04",
-      "title": "«Нарратив vs. инфоповод: ваши коммуникации создают ценность для людей или просто “кормят публику”?»",
+      "title": "«Нарратив vs инфоповод: ваши коммуникации создают ценность для людей или просто “кормят публику”?»",
       "type": "статья",
       "page": 124,
       "link": "https://mmalova.com/kniga/link35",
@@ -260,9 +262,10 @@
       "type": "гайд",
       "page": 238,
       "link": "https://mmalova.com/kniga/link33",
-      "status": "доступно",
+      "status": "обновлено",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m025",
@@ -273,7 +276,8 @@
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m026",
@@ -293,7 +297,8 @@
       "page": 207,
       "link": "https://mmalova.com/kniga/link26",
       "status": "",
-      "level": 1
+      "level": 1,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m028",
@@ -304,7 +309,8 @@
       "link": "https://mmalova.com/kniga/link26",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m029",
@@ -319,13 +325,14 @@
     {
       "id": "m030",
       "route": "06",
-      "title": "Расчет ИЧК: руководство по оценке человекоцентричности коммуникаций в любой организации",
+      "title": "Методология расчета ИЧК: руководство по оценке человекоцентричности коммуникаций в любой организации",
       "type": "методика",
       "page": 213,
       "link": "https://mmalova.com/kniga/link29",
-      "status": "доступно",
+      "status": "обновлено",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m031",
@@ -336,7 +343,8 @@
       "link": "https://mmalova.com/kniga/link11",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m032",
@@ -347,7 +355,8 @@
       "link": "https://mmalova.com/kniga/link23",
       "status": "доступно",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     },
     {
       "id": "m033",
@@ -402,13 +411,14 @@
       "link": "https://mmalova.com/sindrom-chinovnika-v-epohu-steklyannyh-kabinetov",
       "status": "новое",
       "level": 1,
-      "expert": true
+      "expert": true,
+      "expert_name": "Мадина Малова"
     }
   ],
   "meta": {
-    "newLast30": 2,
-    "updated": "16 июня 2026",
-    "updatesQuarter": "4 обновления за квартал",
+    "newLast30": 3,
+    "updated": "13 июля 2026",
+    "updatesQuarter": "6 обновлений за квартал",
     "year": "2026",
     "spark": [
       2,
