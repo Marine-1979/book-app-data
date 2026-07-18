@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mmalova.com/schema/materials.schema.json",
+  "title": "Материалы цифрового приложения",
+  "type": "object",
+  "required": [
+    "materials",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": [
+        "updated",
+        "year"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "newLast30": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "updated": {
+          "type": "string",
+          "minLength": 1
+        },
+        "updatesQuarter": {
+          "type": "string"
+        },
+        "year": {
+          "type": [
+            "string",
+            "integer"
+          ]
+        },
+        "spark": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "route",
+          "title",
+          "type",
+          "page",
+          "link",
+          "status",
+          "level"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^m\\d{3,}$"
+          },
+          "route": {
+            "type": "string",
+            "pattern": "^\\d{2}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 3
+          },
+          "desc": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "гайд",
+              "видео",
+              "статья",
+              "кейс",
+              "обзор",
+              "методика",
+              "сообщество",
+              "чек-лист",
+              "подкаст"
+            ]
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "link": {
+            "type": "string",
+            "pattern": "^https://mmalova\\.com/"
+          },
+          "status": {
+            "enum": [
+              "",
+              "доступно",
+              "новое",
+              "обновлено",
+              "скоро"
+            ]
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expert": {
+            "type": "boolean"
+          },
+          "expert_name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "parent_id": {
+            "type": "string",
+            "pattern": "^m\\d{3,}$"
+          },
+          "anchor": {
+            "type": "string",
+            "pattern": "^#?[A-Za-zА-Яа-я0-9_-]+$"
+          }
+        }
+      }
+    }
+  }
+}
