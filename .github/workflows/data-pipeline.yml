@@ -1,0 +1,45 @@
+name: Validate and publish app data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/**"
+      - "schema/**"
+      - "scripts/**"
+      - ".github/workflows/data-pipeline.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate source JSON
+        run: node scripts/validate-data.mjs
+
+      - name: Build one runtime data file
+        run: node scripts/build-app-data.mjs
+
+      - name: Commit generated dist/app-data.json
+        shell: bash
+        run: |
+          if git diff --quiet -- dist/app-data.json; then
+            echo "Runtime file is already current."
+            exit 0
+          fi
+          git config user.name "bapp-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add dist/app-data.json
+          git commit -m "chore(data): rebuild app-data.json"
+          git push
