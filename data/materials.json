@@ -234,12 +234,12 @@
     },
     {
       "id": "m022",
-      "route": "05",
+      "route": "04",
       "title": "Статья о роли стандарта ISO 9001:2015 в управлении коммуникациями. Когда PR-директор влюбляется в стандарт",
       "type": "статья",
       "page": 174,
       "link": "https://mmalova.com/kniga/link19",
-      "status": "доступно",
+      "status": "новое",
       "level": 1,
       "expert": true
     },
@@ -296,7 +296,7 @@
       "type": "методика",
       "page": 207,
       "link": "https://mmalova.com/kniga/link26",
-      "status": "",
+      "status": "доступно",
       "level": 1,
       "expert_name": "Мадина Малова"
     },
@@ -329,7 +329,7 @@
       "type": "методика",
       "page": 213,
       "link": "https://mmalova.com/kniga/link29",
-      "status": "обновлено",
+      "status": "новое",
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова"
@@ -413,7 +413,20 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова"
-    }
+    },
+    {
+  "id": "m038",
+  "title": "Допуск к профессии: как мир проверяет коммуникаторов и какой экзамен предстоит сдать России",
+  "type": "статья",
+  "route": "04",
+  "page": "174",
+  "link": "https://mmalova.com/dopusk-k-professii",
+  "desc": "Разбор систем оценки соответствия США, Великобритании, ЕС в сопоставлении с российской практикой",
+  "status": "новое",
+  "level": 1,
+  "expert": true,
+  "expert_name": "Мадина Малова"
+}
   ],
   "meta": {
     "newLast30": 3,
