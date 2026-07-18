@@ -1,8 +1,8 @@
 {
   "build": {
     "schemaVersion": "1.0.0",
-    "sourceCommit": "local",
-    "generatedAt": "2026-07-18T09:45:54.190Z"
+    "sourceCommit": "71958c916c574dd1a40958a8923791070cd26b17",
+    "generatedAt": "2026-07-18T19:23:33.369Z"
   },
   "meta": {
     "newLast30": 3,
