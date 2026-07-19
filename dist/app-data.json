@@ -1,8 +1,8 @@
 {
   "build": {
     "schemaVersion": "1.0.0",
-    "sourceCommit": "71958c916c574dd1a40958a8923791070cd26b17",
-    "generatedAt": "2026-07-18T19:23:33.369Z"
+    "sourceCommit": "679da24ee08dade15b7dad1286b26b1177a6408f",
+    "generatedAt": "2026-07-19T06:32:30.549Z"
   },
   "meta": {
     "newLast30": 3,
@@ -56,7 +56,7 @@
       "num": "04",
       "title": "Профессия",
       "desc": "Медиатизация, журналистика и стандарты профессии коммуникатора.",
-      "count": 6,
+      "count": 8,
       "link": "/route/04",
       "status": "new",
       "type": "раздел"
@@ -65,7 +65,7 @@
       "num": "05",
       "title": "Управление",
       "desc": "Менеджмент коммуникационного направления и трансформация организации.",
-      "count": 5,
+      "count": 4,
       "link": "/route/05",
       "status": "progress",
       "type": "раздел"
@@ -333,12 +333,12 @@
     },
     {
       "id": "m022",
-      "route": "05",
+      "route": "04",
       "title": "Статья о роли стандарта ISO 9001:2015 в управлении коммуникациями. Когда PR-директор влюбляется в стандарт",
       "type": "статья",
       "page": 174,
       "link": "https://mmalova.com/kniga/link19",
-      "status": "доступно",
+      "status": "новое",
       "level": 1,
       "expert": true
     },
@@ -395,7 +395,7 @@
       "type": "методика",
       "page": 207,
       "link": "https://mmalova.com/kniga/link26",
-      "status": "",
+      "status": "доступно",
       "level": 1,
       "expert_name": "Мадина Малова"
     },
@@ -428,7 +428,7 @@
       "type": "методика",
       "page": 213,
       "link": "https://mmalova.com/kniga/link29",
-      "status": "обновлено",
+      "status": "новое",
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова"
@@ -508,6 +508,19 @@
       "type": "кейс",
       "page": 92,
       "link": "https://mmalova.com/sindrom-chinovnika-v-epohu-steklyannyh-kabinetov",
+      "status": "новое",
+      "level": 1,
+      "expert": true,
+      "expert_name": "Мадина Малова"
+    },
+    {
+      "id": "m038",
+      "title": "Допуск к профессии: как мир проверяет коммуникаторов и какой экзамен предстоит сдать России",
+      "type": "статья",
+      "route": "04",
+      "page": 174,
+      "link": "https://mmalova.com/dopusk-k-professii",
+      "desc": "Разбор систем оценки соответствия США, Великобритании, ЕС в сопоставлении с российской практикой",
       "status": "новое",
       "level": 1,
       "expert": true,
