@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mmalova.com/schema/materials.schema.json",
   "title": "Материалы цифрового приложения",
+  "description": "Schema v2 для Этапа 2: совместима с текущими материалами и поддерживает поиск по задачам, аудиториям и темам книги.",
   "type": "object",
   "required": [
     "materials",
@@ -19,14 +20,17 @@
       "properties": {
         "newLast30": {
           "type": "integer",
-          "minimum": 0
+          "minimum": 0,
+          "description": "Legacy-поле. В дальнейшем рассчитывается только по подтвержденным publishedAt."
         },
         "updated": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "description": "Legacy-подпись. Не использовать как замену подтвержденной дате материала."
         },
         "updatesQuarter": {
-          "type": "string"
+          "type": "string",
+          "description": "Legacy-поле. Не заполнять вымышленными значениями."
         },
         "year": {
           "type": [
@@ -38,7 +42,8 @@
           "type": "array",
           "items": {
             "type": "number"
-          }
+          },
+          "description": "Legacy-поле. Не использовать как неподтвержденную аналитику."
         }
       }
     },
@@ -58,6 +63,24 @@
           "level"
         ],
         "additionalProperties": true,
+        "allOf": [
+          {
+            "not": {
+              "required": [
+                "publishedAt",
+                "published_at"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "updatedAt",
+                "updated_at"
+              ]
+            }
+          }
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -102,7 +125,8 @@
               "новое",
               "обновлено",
               "скоро"
-            ]
+            ],
+            "description": "Значения «новое» и «обновлено» сохранены временно для совместимости. В новой модели свежесть рассчитывается по датам."
           },
           "level": {
             "type": "integer",
@@ -115,19 +139,55 @@
             "type": "string",
             "minLength": 2
           },
-          "published_at": {
+          "publishedAt": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "Каноническая дата публикации в формате YYYY-MM-DD."
           },
-          "updated_at": {
+          "updatedAt": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "Каноническая дата реального обновления в формате YYYY-MM-DD."
+          },
+          "changeSummary": {
+            "type": "string",
+            "minLength": 3,
+            "description": "Краткое описание фактически внесенного изменения."
+          },
+          "shareQuoteId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+            "description": "Идентификатор цитаты готового сервиса «Цитатник»."
+          },
+          "bookTheme": {
+            "type": "string",
+            "enum": [
+              "доверие",
+              "стратегия",
+              "кризис",
+              "управление",
+              "профессия",
+              "ии и технологии",
+              "человекоцентричность",
+              "сообщество"
+            ]
+          },
+          "audiences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^[^A-ZА-ЯЁ]*$"
+            },
+            "uniqueItems": true
           },
           "tags": {
             "type": "array",
             "items": {
               "type": "string",
-              "minLength": 1
+              "minLength": 1,
+              "pattern": "^[^A-ZА-ЯЁ]*$"
             },
             "uniqueItems": true
           },
@@ -135,9 +195,22 @@
             "type": "array",
             "items": {
               "type": "string",
-              "minLength": 1
+              "minLength": 1,
+              "pattern": "^[^A-ZА-ЯЁ]*$"
             },
             "uniqueItems": true
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date",
+            "deprecated": true,
+            "description": "Legacy-поле. Временно принимается; заменить на publishedAt."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date",
+            "deprecated": true,
+            "description": "Legacy-поле. Временно принимается; заменить на updatedAt."
           },
           "parent_id": {
             "type": "string",
@@ -145,7 +218,7 @@
           },
           "anchor": {
             "type": "string",
-            "pattern": "^#?[A-Za-zА-Яа-я0-9_-]+$"
+            "pattern": "^#?[A-Za-zА-Яа-яЁё0-9_-]+$"
           }
         }
       }
