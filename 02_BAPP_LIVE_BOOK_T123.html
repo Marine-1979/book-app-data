@@ -1,0 +1,522 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ЦИФРОВОЕ ПРИЛОЖЕНИЕ · ЖИЗНЬ КНИГИ ОНЛАЙН · Stage 3
+     Модуль: 02_BAPP_LIVE_BOOK_T123.html
+     Версия: 1.0 · 08.08.2026
+     Размещение: /navigator, отдельный T123 после Hero/search и до маршрутов.
+
+     ВАЖНО:
+     - использует ТОЛЬКО существующий BAPP_DATA loader / BAPP_DATA_READY;
+     - не делает собственных fetch-запросов;
+     - классы/ID только bapp-livebook-*;
+     - не использует .mm*, --mm-*, @font-face, @import, :root;
+     - история строится по publishedAt / updatedAt;
+     - cutoff живого постпечатного слоя: 2026-03-01;
+     - технические build/generatedAt и legacy status не используются;
+     - статичная разметка ниже = fail-open на последних подтвержденных событиях.
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<style>
+#bapp-livebook,
+#bapp-livebook *{box-sizing:border-box;}
+
+#bapp-livebook{
+  --c-primary:#FF6B35;
+  --c-accent:#E85114;
+  --c-accent-text:#C1400F;
+  --c-heading:#111111;
+  --c-body:#595959;
+  --c-meta:#6E6E6E;
+  --c-page:#FAFAFA;
+  --c-card:#FFFFFF;
+  --c-soft:#FFF0EB;
+  --c-warm:#FFF7F3;
+  --c-border:#E2E2E2;
+  --r-sm:4px;
+  --r-md:8px;
+  --r-lg:16px;
+  --f-system:'Unbounded',-apple-system,BlinkMacSystemFont,sans-serif;
+  --f-heading:'Poiret One','Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --f-ui:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --shadow:0 8px 28px rgba(0,0,0,.055);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,#FAFAFA 0%,#FFFFFF 100%);
+  color:var(--c-body);
+  font-family:var(--f-ui);
+  padding:72px 0 78px;
+  border-top:1px solid rgba(226,226,226,.72);
+  border-bottom:1px solid rgba(226,226,226,.72);
+  -webkit-font-smoothing:antialiased;
+}
+
+#bapp-livebook .bapp-livebook__wrap{
+  width:min(1140px,calc(100% - 48px));
+  margin:0 auto;
+}
+
+/* Цифровой сигнал: не график и не метрика, только фирменный live-мотив. */
+#bapp-livebook .bapp-livebook__signal{
+  position:relative;
+  height:28px;
+  margin:0 0 26px;
+  overflow:hidden;
+  opacity:.92;
+}
+#bapp-livebook .bapp-livebook__signal-line{
+  position:absolute;
+  left:0;right:0;top:13px;height:1px;
+  background:linear-gradient(90deg,transparent 0%,var(--c-border) 8%,var(--c-border) 92%,transparent 100%);
+}
+#bapp-livebook .bapp-livebook__signal-wave{
+  position:absolute;
+  top:8px;left:-150px;
+  width:150px;height:11px;
+  background:
+    linear-gradient(90deg,transparent 0 8%,var(--c-primary) 8% 9%,transparent 9% 17%,var(--c-primary) 17% 18%,transparent 18% 31%,var(--c-primary) 31% 33%,transparent 33% 40%,var(--c-primary) 40% 42%,transparent 42% 70%,var(--c-primary) 70% 71%,transparent 71% 100%);
+  clip-path:polygon(0 48%,16% 48%,20% 0,24% 100%,29% 48%,48% 48%,52% 22%,56% 75%,60% 48%,100% 48%,100% 56%,60% 56%,56% 82%,52% 30%,48% 56%,29% 56%,24% 100%,20% 10%,16% 56%,0 56%);
+  animation:bapp-livebook-signal 5.8s linear infinite;
+}
+#bapp-livebook .bapp-livebook__signal-dot{
+  position:absolute;top:9px;width:9px;height:9px;border-radius:50%;
+  background:var(--c-card);border:2px solid var(--c-primary);
+  box-shadow:0 0 0 4px rgba(255,107,53,.08);
+}
+#bapp-livebook .bapp-livebook__signal-dot--1{left:23%;}
+#bapp-livebook .bapp-livebook__signal-dot--2{left:61%;}
+#bapp-livebook .bapp-livebook__signal-dot--3{left:87%;}
+@keyframes bapp-livebook-signal{
+  0%{transform:translateX(0);opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{transform:translateX(calc(100vw + 300px));opacity:0;}
+}
+
+#bapp-livebook .bapp-livebook__top{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:36px;
+  align-items:start;
+  margin-bottom:38px;
+}
+#bapp-livebook .bapp-livebook__kicker{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--f-system);
+  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--c-accent-text);
+  margin-bottom:14px;
+}
+#bapp-livebook .bapp-livebook__live-dot{
+  position:relative;width:8px;height:8px;border-radius:50%;background:var(--c-primary);flex:0 0 auto;
+}
+#bapp-livebook .bapp-livebook__live-dot::after{
+  content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(255,107,53,.38);
+  animation:bapp-livebook-pulse 2.3s ease-out infinite;
+}
+@keyframes bapp-livebook-pulse{
+  0%{transform:scale(.65);opacity:.9;}
+  75%,100%{transform:scale(1.65);opacity:0;}
+}
+#bapp-livebook .bapp-livebook__title{
+  margin:0 0 14px;
+  font-family:var(--f-heading);
+  font-weight:400;
+  font-size:clamp(34px,4.2vw,50px);
+  line-height:1.08;
+  color:var(--c-heading);
+}
+#bapp-livebook .bapp-livebook__lead{
+  max-width:690px;
+  margin:0;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--c-body);
+}
+
+#bapp-livebook .bapp-livebook__release{
+  min-width:250px;
+  padding:16px 18px;
+  background:rgba(255,255,255,.82);
+  border:1px solid var(--c-border);
+  border-radius:var(--r-md);
+  box-shadow:0 4px 16px rgba(0,0,0,.025);
+}
+#bapp-livebook .bapp-livebook__release-label{
+  display:block;
+  font-family:var(--f-system);font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--c-meta);margin-bottom:8px;
+}
+#bapp-livebook .bapp-livebook__release-date{
+  display:block;color:var(--c-heading);font-size:15px;font-weight:600;line-height:1.35;margin-bottom:7px;
+}
+#bapp-livebook .bapp-livebook__release-counts{
+  display:block;color:var(--c-meta);font-size:12px;line-height:1.5;
+}
+
+#bapp-livebook .bapp-livebook__log{
+  position:relative;
+  background:var(--c-card);
+  border:1px solid var(--c-border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+#bapp-livebook .bapp-livebook__log-head{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:14px 20px;
+  border-bottom:1px solid var(--c-border);
+  background:linear-gradient(90deg,#FFF7F3 0%,#FFFFFF 58%);
+}
+#bapp-livebook .bapp-livebook__log-name{
+  font-family:var(--f-system);font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--c-accent-text);
+}
+#bapp-livebook .bapp-livebook__log-scope{
+  font-size:11px;color:var(--c-meta);
+}
+#bapp-livebook .bapp-livebook__events{
+  list-style:none;margin:0;padding:6px 0;
+}
+#bapp-livebook .bapp-livebook__event{
+  position:relative;
+  display:grid;
+  grid-template-columns:144px minmax(0,1fr) 26px;
+  gap:22px;
+  padding:24px 24px 24px 42px;
+}
+#bapp-livebook .bapp-livebook__event + .bapp-livebook__event{border-top:1px solid #F0F0F0;}
+#bapp-livebook .bapp-livebook__event::before{
+  content:'';position:absolute;left:20px;top:30px;width:9px;height:9px;border-radius:50%;
+  background:var(--c-card);border:2px solid var(--c-primary);z-index:2;
+}
+#bapp-livebook .bapp-livebook__event::after{
+  content:'';position:absolute;left:24px;top:0;bottom:0;width:1px;background:#F0D7CC;z-index:1;
+}
+#bapp-livebook .bapp-livebook__event:first-child::after{top:30px;}
+#bapp-livebook .bapp-livebook__event:last-child::after{bottom:calc(100% - 35px);}
+#bapp-livebook .bapp-livebook__event-date{
+  font-family:var(--f-system);font-size:10px;font-weight:600;line-height:1.45;letter-spacing:.04em;
+  color:var(--c-heading);padding-top:1px;
+}
+#bapp-livebook .bapp-livebook__event-kind{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:8px;padding:4px 7px;border-radius:var(--r-sm);
+  font-family:var(--f-system);font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid transparent;
+}
+#bapp-livebook .bapp-livebook__event-kind--new{
+  color:#9A330E;background:#FFF0EB;border-color:#FFD7C8;
+}
+#bapp-livebook .bapp-livebook__event-kind--updated{
+  color:#6D4410;background:#FFF8EA;border-color:#F0DEC0;
+}
+#bapp-livebook .bapp-livebook__event-title{
+  margin:0 0 8px;
+  font-size:16px;font-weight:600;line-height:1.42;color:var(--c-heading);
+}
+#bapp-livebook .bapp-livebook__event-summary{
+  margin:0 0 10px;font-size:13px;line-height:1.55;color:var(--c-body);
+}
+#bapp-livebook .bapp-livebook__event-meta{
+  display:flex;gap:9px;align-items:center;flex-wrap:wrap;
+  font-size:11px;line-height:1.4;color:var(--c-meta);
+}
+#bapp-livebook .bapp-livebook__event-meta-sep{color:#C5C5C5;}
+#bapp-livebook .bapp-livebook__event-link{
+  align-self:center;justify-self:end;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  color:var(--c-accent-text)!important;text-decoration:none!important;
+  transition:transform .22s var(--spring),background .2s ease;
+}
+#bapp-livebook .bapp-livebook__event-link:hover{transform:translateX(3px);background:var(--c-soft);}
+#bapp-livebook .bapp-livebook__event-link:focus-visible,
+#bapp-livebook .bapp-livebook__history-btn:focus-visible{
+  outline:2px solid var(--c-accent-text);outline-offset:3px;
+}
+
+#bapp-livebook .bapp-livebook__history{
+  border-top:1px solid var(--c-border);
+  background:#FCFCFC;
+}
+#bapp-livebook .bapp-livebook__history-btn{
+  width:100%;border:0;background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:16px 20px;
+  font:600 12px/1.4 var(--f-ui);color:var(--c-accent-text);text-align:left;
+}
+#bapp-livebook .bapp-livebook__history-btn:hover{background:var(--c-warm);}
+#bapp-livebook .bapp-livebook__history-btn[hidden]{display:none!important;}
+#bapp-livebook .bapp-livebook__history-icon{transition:transform .24s var(--spring);}
+#bapp-livebook .bapp-livebook__history-btn[aria-expanded='true'] .bapp-livebook__history-icon{transform:rotate(180deg);}
+#bapp-livebook .bapp-livebook__history-list{display:none;border-top:1px solid #F0F0F0;}
+#bapp-livebook .bapp-livebook__history-list.is-open{display:block;}
+#bapp-livebook .bapp-livebook__history-note{
+  padding:15px 20px;font-size:11px;color:var(--c-meta);line-height:1.5;
+}
+
+#bapp-livebook .bapp-livebook__empty{
+  padding:28px 24px;font-size:13px;line-height:1.6;color:var(--c-meta);display:none;
+}
+#bapp-livebook.is-empty .bapp-livebook__events{display:none;}
+#bapp-livebook.is-empty .bapp-livebook__empty{display:block;}
+#bapp-livebook.is-empty .bapp-livebook__history{display:none;}
+
+@media(max-width:820px){
+  #bapp-livebook{padding:58px 0 62px;}
+  #bapp-livebook .bapp-livebook__wrap{width:min(100% - 36px,1140px);}
+  #bapp-livebook .bapp-livebook__top{grid-template-columns:1fr;gap:22px;margin-bottom:30px;}
+  #bapp-livebook .bapp-livebook__release{min-width:0;display:grid;grid-template-columns:1fr auto;column-gap:18px;align-items:end;}
+  #bapp-livebook .bapp-livebook__release-label{grid-column:1/-1;}
+  #bapp-livebook .bapp-livebook__release-date{margin:0;}
+  #bapp-livebook .bapp-livebook__release-counts{text-align:right;}
+  #bapp-livebook .bapp-livebook__event{grid-template-columns:112px minmax(0,1fr) 24px;gap:14px;padding:21px 18px 21px 38px;}
+  #bapp-livebook .bapp-livebook__event::before{left:16px;top:27px;}
+  #bapp-livebook .bapp-livebook__event::after{left:20px;}
+}
+
+@media(max-width:560px){
+  #bapp-livebook{padding:50px 0 54px;}
+  #bapp-livebook .bapp-livebook__wrap{width:calc(100% - 32px);}
+  #bapp-livebook .bapp-livebook__signal{margin-bottom:18px;}
+  #bapp-livebook .bapp-livebook__title{font-size:clamp(32px,10vw,42px);}
+  #bapp-livebook .bapp-livebook__lead{font-size:14px;line-height:1.62;}
+  #bapp-livebook .bapp-livebook__release{display:block;padding:14px 15px;}
+  #bapp-livebook .bapp-livebook__release-date{margin-bottom:5px;}
+  #bapp-livebook .bapp-livebook__release-counts{text-align:left;}
+  #bapp-livebook .bapp-livebook__log{border-radius:12px;}
+  #bapp-livebook .bapp-livebook__log-head{padding:12px 15px;align-items:flex-start;flex-direction:column;gap:4px;}
+  #bapp-livebook .bapp-livebook__event{
+    grid-template-columns:1fr 24px;
+    grid-template-areas:'date link' 'main link';
+    gap:8px 10px;
+    padding:20px 14px 20px 34px;
+  }
+  #bapp-livebook .bapp-livebook__event::before{left:13px;top:26px;width:8px;height:8px;}
+  #bapp-livebook .bapp-livebook__event::after{left:17px;}
+  #bapp-livebook .bapp-livebook__event-date{grid-area:date;}
+  #bapp-livebook .bapp-livebook__event-main{grid-area:main;}
+  #bapp-livebook .bapp-livebook__event-link{grid-area:link;align-self:center;}
+  #bapp-livebook .bapp-livebook__event-title{font-size:15px;}
+  #bapp-livebook .bapp-livebook__event-summary{font-size:12px;}
+  #bapp-livebook .bapp-livebook__event-meta{font-size:10.5px;gap:6px;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #bapp-livebook .bapp-livebook__signal-wave,
+  #bapp-livebook .bapp-livebook__live-dot::after{animation:none!important;}
+  #bapp-livebook .bapp-livebook__event-link,
+  #bapp-livebook .bapp-livebook__history-icon{transition:none!important;}
+}
+</style>
+
+<section id="bapp-livebook" aria-labelledby="bapp-livebook-title">
+  <div class="bapp-livebook__wrap">
+    <div class="bapp-livebook__signal" aria-hidden="true">
+      <span class="bapp-livebook__signal-line"></span>
+      <span class="bapp-livebook__signal-wave"></span>
+      <span class="bapp-livebook__signal-dot bapp-livebook__signal-dot--1"></span>
+      <span class="bapp-livebook__signal-dot bapp-livebook__signal-dot--2"></span>
+      <span class="bapp-livebook__signal-dot bapp-livebook__signal-dot--3"></span>
+    </div>
+
+    <div class="bapp-livebook__top">
+      <div>
+        <div class="bapp-livebook__kicker"><span class="bapp-livebook__live-dot" aria-hidden="true"></span>LIVE EDITION · RELEASE NOTES</div>
+        <h2 class="bapp-livebook__title" id="bapp-livebook-title">Жизнь книги онлайн</h2>
+        <p class="bapp-livebook__lead">Печатная книга задает систему координат. Цифровое приложение продолжает ее: добавляет новые разборы и актуализирует материалы, когда меняется профессиональная реальность.</p>
+      </div>
+      <div class="bapp-livebook__release" aria-live="polite">
+        <span class="bapp-livebook__release-label">Последнее изменение</span>
+        <span class="bapp-livebook__release-date" id="bapp-livebook-last-date">18 июля 2026</span>
+        <span class="bapp-livebook__release-counts" id="bapp-livebook-counts">После печатной версии: 2 новых материала · 1 актуализация</span>
+      </div>
+    </div>
+
+    <div class="bapp-livebook__log">
+      <div class="bapp-livebook__log-head">
+        <span class="bapp-livebook__log-name">Журнал изменений</span>
+        <span class="bapp-livebook__log-scope">Постпечатный цифровой слой · с марта 2026</span>
+      </div>
+
+      <ol class="bapp-livebook__events" id="bapp-livebook-events">
+        <!-- Fail-open: последние подтвержденные события. JS заменит их актуальными данными. -->
+        <li class="bapp-livebook__event">
+          <div class="bapp-livebook__event-date">18 июля 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--new">NEW</span></div>
+          <div class="bapp-livebook__event-main">
+            <h3 class="bapp-livebook__event-title">Допуск к профессии: как мир проверяет коммуникаторов и какой экзамен предстоит сдать России</h3>
+            <p class="bapp-livebook__event-summary">Добавлен сравнительный обзор систем допуска и профессиональной оценки коммуникаторов.</p>
+            <div class="bapp-livebook__event-meta"><span>Книга · с. 174</span><span class="bapp-livebook__event-meta-sep">◆</span><span>Маршрут 04 · Профессия</span></div>
+          </div>
+          <a class="bapp-livebook__event-link" href="https://mmalova.com/dopusk-k-professii" aria-label="Открыть материал «Допуск к профессии»">→</a>
+        </li>
+        <li class="bapp-livebook__event">
+          <div class="bapp-livebook__event-date">13 июля 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--updated">UPDATE</span></div>
+          <div class="bapp-livebook__event-main">
+            <h3 class="bapp-livebook__event-title">Обзор ключевых исследований 2026: технологические тренды, стратегические коммуникации, репутация и корпоративная культура</h3>
+            <p class="bapp-livebook__event-summary">Обновлен обзор ключевых исследований 2026.</p>
+            <div class="bapp-livebook__event-meta"><span>Книга · с. 21</span><span class="bapp-livebook__event-meta-sep">◆</span><span>Маршрут 01 · Картина мира</span></div>
+          </div>
+          <a class="bapp-livebook__event-link" href="https://mmalova.com/kniga/link2" aria-label="Открыть обновленный обзор исследований 2026">→</a>
+        </li>
+        <li class="bapp-livebook__event">
+          <div class="bapp-livebook__event-date">13 июня 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--new">NEW</span></div>
+          <div class="bapp-livebook__event-main">
+            <h3 class="bapp-livebook__event-title">Синдром нижнего звена в эпоху стеклянных кабинетов</h3>
+            <p class="bapp-livebook__event-summary">Добавлен новый кейс о репутационном риске нижнего звена в условиях цифровой прозрачности.</p>
+            <div class="bapp-livebook__event-meta"><span>Книга · с. 92</span><span class="bapp-livebook__event-meta-sep">◆</span><span>Маршрут 07 · Антикризис</span></div>
+          </div>
+          <a class="bapp-livebook__event-link" href="https://mmalova.com/sindrom-chinovnika-v-epohu-steklyannyh-kabinetov" aria-label="Открыть материал «Синдром нижнего звена»">→</a>
+        </li>
+      </ol>
+
+      <div class="bapp-livebook__empty" id="bapp-livebook-empty">История обновлений временно недоступна. Материалы приложения продолжают работать по прямым ссылкам.</div>
+
+      <div class="bapp-livebook__history" id="bapp-livebook-history">
+        <button class="bapp-livebook__history-btn" id="bapp-livebook-history-btn" type="button" aria-expanded="false" aria-controls="bapp-livebook-history-list" hidden>
+          <span>Показать всю историю обновлений</span><span class="bapp-livebook__history-icon" aria-hidden="true">⌄</span>
+        </button>
+        <div class="bapp-livebook__history-list" id="bapp-livebook-history-list"></div>
+        <div class="bapp-livebook__history-note" id="bapp-livebook-history-note">Вся постпечатная история сейчас помещается в трех событиях. Новые записи появятся здесь автоматически.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(w,d){
+  'use strict';
+
+  var root=d.getElementById('bapp-livebook');
+  if(!root)return;
+
+  var CUTOFF='2026-03-01';
+  var VISIBLE_LIMIT=3;
+  var eventsEl=d.getElementById('bapp-livebook-events');
+  var lastDateEl=d.getElementById('bapp-livebook-last-date');
+  var countsEl=d.getElementById('bapp-livebook-counts');
+  var historyBtn=d.getElementById('bapp-livebook-history-btn');
+  var historyList=d.getElementById('bapp-livebook-history-list');
+  var historyNote=d.getElementById('bapp-livebook-history-note');
+  var routeNames={};
+
+  function esc(value){
+    return String(value==null?'':value)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+  }
+
+  function validDate(value){return /^\d{4}-\d{2}-\d{2}$/.test(String(value||''));}
+
+  function formatDate(value){
+    if(!validDate(value))return '—';
+    var p=value.split('-');
+    var months=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    return Number(p[2])+' '+months[Number(p[1])-1]+' '+p[0];
+  }
+
+  function plural(n,one,few,many){
+    var n10=n%10,n100=n%100;
+    if(n10===1&&n100!==11)return one;
+    if(n10>=2&&n10<=4&&(n100<12||n100>14))return few;
+    return many;
+  }
+
+  function buildEvents(data){
+    var materials=Array.isArray(data&&data.materials)?data.materials:[];
+    var routes=Array.isArray(data&&data.routes)?data.routes:[];
+    routeNames={};
+    routes.forEach(function(r){if(r&&r.num)routeNames[r.num]=r.title||('Маршрут '+r.num);});
+
+    var result=[];
+    materials.forEach(function(m){
+      if(!m||!m.id)return;
+      if(validDate(m.publishedAt)&&m.publishedAt>=CUTOFF){
+        result.push({date:m.publishedAt,kind:'new',material:m});
+      }
+      if(validDate(m.updatedAt)&&m.updatedAt>=CUTOFF){
+        result.push({date:m.updatedAt,kind:'updated',material:m});
+      }
+    });
+
+    result.sort(function(a,b){
+      if(a.date!==b.date)return a.date<b.date?1:-1;
+      if(a.kind!==b.kind)return a.kind==='updated'?-1:1;
+      return String(a.material.id).localeCompare(String(b.material.id),'ru');
+    });
+    return result;
+  }
+
+  function eventSummary(event){
+    var m=event.material;
+    if(event.kind==='updated')return m.changeSummary||'Материал актуализирован.';
+    return m.changeSummary||m.desc||'Добавлен новый материал цифрового приложения.';
+  }
+
+  function eventHtml(event){
+    var m=event.material;
+    var routeTitle=routeNames[m.route]||('Маршрут '+m.route);
+    var kindLabel=event.kind==='updated'?'UPDATE':'NEW';
+    var kindClass=event.kind==='updated'?'updated':'new';
+    var meta='Книга · с. '+esc(m.page)+'<span class="bapp-livebook__event-meta-sep">◆</span>Маршрут '+esc(m.route)+' · '+esc(routeTitle);
+    var linkLabel=event.kind==='updated'?'Открыть обновленный материал ':'Открыть материал ';
+    return '<li class="bapp-livebook__event">'+
+      '<div class="bapp-livebook__event-date">'+esc(formatDate(event.date))+'<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--'+kindClass+'">'+kindLabel+'</span></div>'+
+      '<div class="bapp-livebook__event-main">'+
+        '<h3 class="bapp-livebook__event-title">'+esc(m.title)+'</h3>'+
+        '<p class="bapp-livebook__event-summary">'+esc(eventSummary(event))+'</p>'+
+        '<div class="bapp-livebook__event-meta">'+meta+'</div>'+
+      '</div>'+
+      '<a class="bapp-livebook__event-link" href="'+esc(m.link)+'" aria-label="'+esc(linkLabel+m.title)+'">→</a>'+
+    '</li>';
+  }
+
+  function render(data){
+    var events=buildEvents(data);
+    if(!events.length){
+      /* Данные без новой модели дат (например embedded fallback старого loader):
+         не затираем статичную подтвержденную ленту. */
+      return;
+    }
+    root.classList.remove('is-empty');
+
+    var visible=events.slice(0,VISIBLE_LIMIT);
+    var rest=events.slice(VISIBLE_LIMIT);
+    eventsEl.innerHTML=visible.map(eventHtml).join('');
+    lastDateEl.textContent=formatDate(events[0].date);
+
+    var newCount=events.filter(function(e){return e.kind==='new';}).length;
+    var updateCount=events.filter(function(e){return e.kind==='updated';}).length;
+    countsEl.textContent='После печатной версии: '+newCount+' '+plural(newCount,'новый материал','новых материала','новых материалов')+' · '+updateCount+' '+plural(updateCount,'актуализация','актуализации','актуализаций');
+
+    if(rest.length){
+      historyList.innerHTML='<ol class="bapp-livebook__events">'+rest.map(eventHtml).join('')+'</ol>';
+      historyBtn.hidden=false;
+      historyNote.textContent='Показаны 3 последних события из '+events.length+'.';
+    }else{
+      historyList.innerHTML='';
+      historyList.classList.remove('is-open');
+      historyBtn.hidden=true;
+      historyBtn.setAttribute('aria-expanded','false');
+      historyNote.textContent='Вся постпечатная история сейчас помещается в '+events.length+' '+plural(events.length,'событии','событиях','событиях')+'. Новые записи появятся здесь автоматически.';
+    }
+  }
+
+  historyBtn.addEventListener('click',function(){
+    var open=historyBtn.getAttribute('aria-expanded')==='true';
+    historyBtn.setAttribute('aria-expanded',open?'false':'true');
+    historyList.classList.toggle('is-open',!open);
+    historyBtn.querySelector('span:first-child').textContent=open?'Показать всю историю обновлений':'Свернуть историю обновлений';
+  });
+
+  function useData(data){
+    try{render(data);}catch(error){/* fail-open: статичная подтвержденная лента остается видимой */}
+  }
+
+  var ready=null;
+  if(w.BAPP_DATA_READY&&typeof w.BAPP_DATA_READY.then==='function')ready=w.BAPP_DATA_READY;
+  else if(w.BAPP_DATA&&typeof w.BAPP_DATA.get==='function')ready=w.BAPP_DATA.get();
+
+  if(ready)ready.then(useData).catch(function(){/* статичный fail-open */});
+  w.addEventListener('bapp:data-updated',function(event){if(event&&event.detail)useData(event.detail);});
+})(window,document);
+</script>
