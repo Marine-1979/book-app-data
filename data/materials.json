@@ -9,7 +9,8 @@
       "page": 16,
       "link": "https://mmalova.com/kniga/link1",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-11-10"
     },
     {
       "id": "m002",
@@ -22,7 +23,10 @@
       "status": "обновлено",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-02-03",
+      "updatedAt": "2026-07-13",
+      "changeSummary": "Обновлен обзор ключевых исследований 2026."
     },
     {
       "id": "m003",
@@ -33,7 +37,8 @@
       "page": 23,
       "link": "https://mmalova.com/kniga/link3",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-11-14"
     },
     {
       "id": "m004",
@@ -44,7 +49,8 @@
       "page": 31,
       "link": "https://mmalova.com/kniga/link4",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-11-18"
     },
     {
       "id": "m005",
@@ -57,7 +63,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2025-11-22"
     },
     {
       "id": "m006",
@@ -70,7 +77,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2025-11-26"
     },
     {
       "id": "m007",
@@ -81,7 +89,8 @@
       "page": 41,
       "link": "https://mmalova.com/kniga/link7",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2026-01-12"
     },
     {
       "id": "m008",
@@ -94,7 +103,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2025-11-30"
     },
     {
       "id": "m009",
@@ -127,7 +137,8 @@
         "госсектор",
         "крупный бизнес"
       ],
-      "bookTheme": "ии и технологии"
+      "bookTheme": "ии и технологии",
+      "publishedAt": "2025-12-04"
     },
     {
       "id": "m010",
@@ -140,7 +151,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-02-13"
     },
     {
       "id": "m011",
@@ -153,7 +165,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-02-15"
     },
     {
       "id": "m012",
@@ -166,7 +179,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Антон Дубинчин"
+      "expert_name": "Антон Дубинчин",
+      "publishedAt": "2025-12-08"
     },
     {
       "id": "m013",
@@ -179,7 +193,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Марина Матасова"
+      "expert_name": "Марина Матасова",
+      "publishedAt": "2025-12-12"
     },
     {
       "id": "m014",
@@ -192,7 +207,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Тимур Асланов"
+      "expert_name": "Тимур Асланов",
+      "publishedAt": "2025-12-16"
     },
     {
       "id": "m015",
@@ -203,7 +219,8 @@
       "page": 124,
       "link": "https://mmalova.com/kniga/link35",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-12-20"
     },
     {
       "id": "m016",
@@ -214,7 +231,8 @@
       "page": 125,
       "link": "https://mmalova.com/kniga/link14",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-12-24"
     },
     {
       "id": "m017",
@@ -227,7 +245,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Сергей Половников"
+      "expert_name": "Сергей Половников",
+      "publishedAt": "2025-12-27"
     },
     {
       "id": "m018",
@@ -238,7 +257,8 @@
       "page": 136,
       "link": "https://mmalova.com/kniga/link16",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-12-29"
     },
     {
       "id": "m019",
@@ -249,7 +269,8 @@
       "page": 174,
       "link": "https://mmalova.com/kniga/link20",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2025-12-30"
     },
     {
       "id": "m020",
@@ -262,7 +283,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Евгений Темпераментов"
+      "expert_name": "Евгений Темпераментов",
+      "publishedAt": "2026-01-04"
     },
     {
       "id": "m021",
@@ -275,7 +297,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-01-18"
     },
     {
       "id": "m022",
@@ -288,7 +311,8 @@
       "status": "новое",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-01-21"
     },
     {
       "id": "m023",
@@ -320,7 +344,8 @@
         "госсектор",
         "крупный бизнес"
       ],
-      "bookTheme": "управление"
+      "bookTheme": "управление",
+      "publishedAt": "2026-01-24"
     },
     {
       "id": "m024",
@@ -333,7 +358,8 @@
       "status": "обновлено",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-02-19"
     },
     {
       "id": "m025",
@@ -346,7 +372,8 @@
       "status": "доступно",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-02-01"
     },
     {
       "id": "m026",
@@ -357,7 +384,8 @@
       "page": 196,
       "link": "https://mmalova.com/kniga/link24",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2026-01-28"
     },
     {
       "id": "m027",
@@ -390,7 +418,8 @@
         "крупный бизнес",
         "консультант"
       ],
-      "bookTheme": "человекоцентричность"
+      "bookTheme": "человекоцентричность",
+      "publishedAt": "2026-02-05"
     },
     {
       "id": "m028",
@@ -421,7 +450,8 @@
         "госсектор",
         "крупный бизнес"
       ],
-      "bookTheme": "стратегия"
+      "bookTheme": "стратегия",
+      "publishedAt": "2026-02-07"
     },
     {
       "id": "m029",
@@ -432,7 +462,8 @@
       "page": 211,
       "link": "https://mmalova.com/kniga/link27",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2026-02-09"
     },
     {
       "id": "m030",
@@ -465,7 +496,8 @@
         "госсектор",
         "крупный бизнес"
       ],
-      "bookTheme": "человекоцентричность"
+      "bookTheme": "человекоцентричность",
+      "publishedAt": "2026-02-11"
     },
     {
       "id": "m031",
@@ -495,7 +527,8 @@
         "госсектор",
         "крупный бизнес"
       ],
-      "bookTheme": "кризис"
+      "bookTheme": "кризис",
+      "publishedAt": "2026-01-06"
     },
     {
       "id": "m032",
@@ -526,7 +559,8 @@
         "госсектор",
         "крупный бизнес"
       ],
-      "bookTheme": "кризис"
+      "bookTheme": "кризис",
+      "publishedAt": "2026-01-15"
     },
     {
       "id": "m033",
@@ -556,7 +590,8 @@
         "коммуникационная команда",
         "пресс-служба"
       ],
-      "bookTheme": "кризис"
+      "bookTheme": "кризис",
+      "publishedAt": "2026-01-08"
     },
     {
       "id": "m034",
@@ -567,7 +602,8 @@
       "page": 182,
       "link": "https://mmalova.com/kniga/link22",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2026-01-10"
     },
     {
       "id": "m035",
@@ -599,7 +635,8 @@
         "пресс-служба",
         "консультант"
       ],
-      "bookTheme": "кризис"
+      "bookTheme": "кризис",
+      "publishedAt": "2026-02-17"
     },
     {
       "id": "m036",
@@ -610,7 +647,8 @@
       "page": 173,
       "link": "https://mmalova.com/kniga/link28",
       "status": "доступно",
-      "level": 1
+      "level": 1,
+      "publishedAt": "2026-02-20"
     },
     {
       "id": "m037",
@@ -623,7 +661,8 @@
       "status": "новое",
       "level": 1,
       "expert": true,
-      "expert_name": "Мадина Малова"
+      "expert_name": "Мадина Малова",
+      "publishedAt": "2026-06-13"
     },
     {
       "id": "m038",
@@ -652,7 +691,8 @@
         "эксперт",
         "молодой специалист"
       ],
-      "bookTheme": "профессия"
+      "bookTheme": "профессия",
+      "publishedAt": "2026-07-18"
     }
   ],
   "meta": {
