@@ -1,7 +1,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
      ЦИФРОВОЕ ПРИЛОЖЕНИЕ · ЖИЗНЬ КНИГИ ОНЛАЙН · Stage 3
      Модуль: 02_BAPP_LIVE_BOOK_T123.html
-     Версия: 1.0 · 08.08.2026
+     Версия: 1.2 · 08.08.2026
      Размещение: /navigator, отдельный T123 после Hero/search и до маршрутов.
 
      ВАЖНО:
@@ -12,7 +12,10 @@
      - история строится по publishedAt / updatedAt;
      - cutoff живого постпечатного слоя: 2026-03-01;
      - технические build/generatedAt и legacy status не используются;
-     - статичная разметка ниже = fail-open на последних подтвержденных событиях.
+     - статичная разметка ниже = fail-open на последних подтвержденных событиях;
+     - v1.1: англоязычные интерфейсные метки заменены русскими цифровыми терминами;
+     - v1.1: signal-line приведена к фирменному отблеску сайта вместо бегущей waveform;
+     - v1.2: «Постпечатный цифровой слой» заменен на более понятное «Цифровое продолжение книги».
      ═══════════════════════════════════════════════════════════════════════════ -->
 <style>
 #bapp-livebook,
@@ -54,27 +57,37 @@
   margin:0 auto;
 }
 
-/* Цифровой сигнал: не график и не метрика, только фирменный live-мотив. */
+/* Фирменная пульс-полоска экосистемы: спокойный отблеск, как на основном сайте.
+   Это не график и не метрика — только визуальный маркер «живого» цифрового слоя. */
 #bapp-livebook .bapp-livebook__signal{
   position:relative;
   height:28px;
   margin:0 0 26px;
   overflow:hidden;
-  opacity:.92;
+  opacity:.94;
 }
 #bapp-livebook .bapp-livebook__signal-line{
   position:absolute;
-  left:0;right:0;top:13px;height:1px;
-  background:linear-gradient(90deg,transparent 0%,var(--c-border) 8%,var(--c-border) 92%,transparent 100%);
+  left:0;right:0;top:12px;height:3px;
+  background:#FFE3D6;
+  border-radius:999px;
+  overflow:hidden;
 }
 #bapp-livebook .bapp-livebook__signal-wave{
   position:absolute;
-  top:8px;left:-150px;
-  width:150px;height:11px;
-  background:
-    linear-gradient(90deg,transparent 0 8%,var(--c-primary) 8% 9%,transparent 9% 17%,var(--c-primary) 17% 18%,transparent 18% 31%,var(--c-primary) 31% 33%,transparent 33% 40%,var(--c-primary) 40% 42%,transparent 42% 70%,var(--c-primary) 70% 71%,transparent 71% 100%);
-  clip-path:polygon(0 48%,16% 48%,20% 0,24% 100%,29% 48%,48% 48%,52% 22%,56% 75%,60% 48%,100% 48%,100% 56%,60% 56%,56% 82%,52% 30%,48% 56%,29% 56%,24% 100%,20% 10%,16% 56%,0 56%);
-  animation:bapp-livebook-signal 5.8s linear infinite;
+  top:12px;left:-40%;
+  width:40%;height:3px;
+  border-radius:999px;
+  background:linear-gradient(90deg,
+    transparent,
+    rgba(255,107,53,.24),
+    var(--c-primary),
+    #FF8C5A,
+    var(--c-primary),
+    rgba(255,107,53,.24),
+    transparent);
+  box-shadow:0 0 9px rgba(255,107,53,.18);
+  animation:bapp-livebook-signal 2.6s linear infinite;
 }
 #bapp-livebook .bapp-livebook__signal-dot{
   position:absolute;top:9px;width:9px;height:9px;border-radius:50%;
@@ -85,10 +98,10 @@
 #bapp-livebook .bapp-livebook__signal-dot--2{left:61%;}
 #bapp-livebook .bapp-livebook__signal-dot--3{left:87%;}
 @keyframes bapp-livebook-signal{
-  0%{transform:translateX(0);opacity:0;}
-  10%{opacity:1;}
-  90%{opacity:1;}
-  100%{transform:translateX(calc(100vw + 300px));opacity:0;}
+  0%{left:-40%;opacity:0;}
+  12%{opacity:1;}
+  88%{opacity:1;}
+  100%{left:100%;opacity:0;}
 }
 
 #bapp-livebook .bapp-livebook__top{
@@ -200,7 +213,7 @@
 #bapp-livebook .bapp-livebook__event-kind{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:8px;padding:4px 7px;border-radius:var(--r-sm);
-  font-family:var(--f-system);font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  font-family:var(--f-system);font-size:8px;font-weight:600;letter-spacing:.055em;text-transform:uppercase;
   border:1px solid transparent;
 }
 #bapp-livebook .bapp-livebook__event-kind--new{
@@ -321,7 +334,7 @@
 
     <div class="bapp-livebook__top">
       <div>
-        <div class="bapp-livebook__kicker"><span class="bapp-livebook__live-dot" aria-hidden="true"></span>LIVE EDITION · RELEASE NOTES</div>
+        <div class="bapp-livebook__kicker"><span class="bapp-livebook__live-dot" aria-hidden="true"></span>ЖИВОЕ ИЗДАНИЕ · ЖУРНАЛ ВЕРСИЙ</div>
         <h2 class="bapp-livebook__title" id="bapp-livebook-title">Жизнь книги онлайн</h2>
         <p class="bapp-livebook__lead">Печатная книга задает систему координат. Цифровое приложение продолжает ее: добавляет новые разборы и актуализирует материалы, когда меняется профессиональная реальность.</p>
       </div>
@@ -335,13 +348,13 @@
     <div class="bapp-livebook__log">
       <div class="bapp-livebook__log-head">
         <span class="bapp-livebook__log-name">Журнал изменений</span>
-        <span class="bapp-livebook__log-scope">Постпечатный цифровой слой · с марта 2026</span>
+        <span class="bapp-livebook__log-scope">Цифровое продолжение книги · с марта 2026</span>
       </div>
 
       <ol class="bapp-livebook__events" id="bapp-livebook-events">
         <!-- Fail-open: последние подтвержденные события. JS заменит их актуальными данными. -->
         <li class="bapp-livebook__event">
-          <div class="bapp-livebook__event-date">18 июля 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--new">NEW</span></div>
+          <div class="bapp-livebook__event-date">18 июля 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--new">ДОБАВЛЕНО</span></div>
           <div class="bapp-livebook__event-main">
             <h3 class="bapp-livebook__event-title">Допуск к профессии: как мир проверяет коммуникаторов и какой экзамен предстоит сдать России</h3>
             <p class="bapp-livebook__event-summary">Добавлен сравнительный обзор систем допуска и профессиональной оценки коммуникаторов.</p>
@@ -350,7 +363,7 @@
           <a class="bapp-livebook__event-link" href="https://mmalova.com/dopusk-k-professii" aria-label="Открыть материал «Допуск к профессии»">→</a>
         </li>
         <li class="bapp-livebook__event">
-          <div class="bapp-livebook__event-date">13 июля 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--updated">UPDATE</span></div>
+          <div class="bapp-livebook__event-date">13 июля 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--updated">ОБНОВЛЕНО</span></div>
           <div class="bapp-livebook__event-main">
             <h3 class="bapp-livebook__event-title">Обзор ключевых исследований 2026: технологические тренды, стратегические коммуникации, репутация и корпоративная культура</h3>
             <p class="bapp-livebook__event-summary">Обновлен обзор ключевых исследований 2026.</p>
@@ -359,7 +372,7 @@
           <a class="bapp-livebook__event-link" href="https://mmalova.com/kniga/link2" aria-label="Открыть обновленный обзор исследований 2026">→</a>
         </li>
         <li class="bapp-livebook__event">
-          <div class="bapp-livebook__event-date">13 июня 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--new">NEW</span></div>
+          <div class="bapp-livebook__event-date">13 июня 2026<br><span class="bapp-livebook__event-kind bapp-livebook__event-kind--new">ДОБАВЛЕНО</span></div>
           <div class="bapp-livebook__event-main">
             <h3 class="bapp-livebook__event-title">Синдром нижнего звена в эпоху стеклянных кабинетов</h3>
             <p class="bapp-livebook__event-summary">Добавлен новый кейс о репутационном риске нижнего звена в условиях цифровой прозрачности.</p>
@@ -455,7 +468,7 @@
   function eventHtml(event){
     var m=event.material;
     var routeTitle=routeNames[m.route]||('Маршрут '+m.route);
-    var kindLabel=event.kind==='updated'?'UPDATE':'NEW';
+    var kindLabel=event.kind==='updated'?'ОБНОВЛЕНО':'ДОБАВЛЕНО';
     var kindClass=event.kind==='updated'?'updated':'new';
     var meta='Книга · с. '+esc(m.page)+'<span class="bapp-livebook__event-meta-sep">◆</span>Маршрут '+esc(m.route)+' · '+esc(routeTitle);
     var linkLabel=event.kind==='updated'?'Открыть обновленный материал ':'Открыть материал ';
