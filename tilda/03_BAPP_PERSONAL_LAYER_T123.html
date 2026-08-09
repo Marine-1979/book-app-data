@@ -1,7 +1,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
   ЦИФРОВОЕ ПРИЛОЖЕНИЕ · ПЕРСОНАЛЬНЫЙ РАБОЧИЙ СЛОЙ · Stage 3
   Модуль: 03_BAPP_PERSONAL_LAYER_T123.html
-  Версия: 1.0 · 09.08.2026
+  Версия: 1.2 · 09.08.2026
   Размещение: сначала на тестовой копии страницы; после приемки — /navigator, после «С чего начать» и до «Экспресс-разбора».
 
   Архитектура:
@@ -952,7 +952,7 @@
               Добавить материал
             </button>
             <button class="bapp-personal__btn" type="button" id="bapp-personal-copy-route">Скопировать маршрут</button>
-            <button class="bapp-personal__btn" type="button" id="bapp-personal-share-route">Поделиться ссылкой</button>
+            <button class="bapp-personal__btn" type="button" id="bapp-personal-share-route">Скопировать ссылку</button>
           </div>
 
           <div class="bapp-personal__finder" id="bapp-personal-finder-route">
@@ -1460,23 +1460,6 @@
     }
 
     var url = routeShareUrl(personalState.customRoute);
-
-    if (w.navigator && typeof w.navigator.share === 'function') {
-      return w.navigator.share({
-        title: 'Мой рабочий маршрут',
-        text: 'Рабочий маршрут в цифровом приложении к книге «От PR к индустрии доверия».',
-        url: url
-      }).then(function () {
-        status('Маршрут передан.');
-        return true;
-      }).catch(function (error) {
-        if (error && error.name === 'AbortError') return false;
-        return copyText(url).then(function () {
-          status('Ссылка на маршрут скопирована.');
-          return true;
-        });
-      });
-    }
 
     return copyText(url).then(function () {
       status('Ссылка на маршрут скопирована.');
@@ -2124,12 +2107,26 @@
     }
   }
 
+  function clearSharedRouteParam() {
+    try {
+      var url = new URL(w.location.href);
+      if (!url.searchParams.has('myroute')) return;
+      url.searchParams.delete('myroute');
+      var nextUrl = url.pathname + (url.search ? url.search : '') + (url.hash ? url.hash : '');
+      w.history.replaceState(null, '', nextUrl);
+    } catch (error) {
+      /* URL останется как есть; сохраненный маршрут продолжит работать. */
+    }
+  }
+
   function saveSharedRoute() {
     if (!sharedRoute.length) return;
 
     var next = cloneState();
     next.customRoute = sharedRoute.slice(0, MAX_ROUTE);
     sharedPreview = false;
+    sharedRoute = [];
+    clearSharedRouteParam();
     writeState(next);
     status('Маршрут по ссылке сохранен в этом браузере.');
   }
