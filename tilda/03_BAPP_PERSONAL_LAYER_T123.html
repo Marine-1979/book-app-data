@@ -1,0 +1,2258 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+  ЦИФРОВОЕ ПРИЛОЖЕНИЕ · ПЕРСОНАЛЬНЫЙ РАБОЧИЙ СЛОЙ · Stage 3
+  Модуль: 03_BAPP_PERSONAL_LAYER_T123.html
+  Версия: 1.0 · 09.08.2026
+  Размещение: сначала на тестовой копии страницы; после приемки — /navigator, после «С чего начать» и до «Экспресс-разбора».
+
+  Архитектура:
+  - данные материалов/маршрутов: только window.BookAppData;
+  - персональное состояние: localStorage, ключ bapp_personal_v1;
+  - при запрете localStorage — memory fallback в текущей вкладке;
+  - поисковые фразы и текст рабочих ситуаций не сохраняются;
+  - публичный API: window.BookAppPersonal;
+  - событие изменений: bapp:personal-updated;
+  - shared route: /navigator?myroute=m001,m002,...
+  - все CSS/ID изолированы префиксом bapp-personal-.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+#bapp-personal-layer,
+#bapp-personal-layer *{box-sizing:border-box;}
+
+#bapp-personal-layer{
+  --c-primary:#FF6B35;
+  --c-accent:#E85114;
+  --c-accent-text:#C1400F;
+  --c-action:#CE4711;
+  --c-action-hover:#B03A0C;
+  --c-heading:#111111;
+  --c-body:#595959;
+  --c-meta:#6E6E6E;
+  --c-page:#FAFAFA;
+  --c-card:#FFFFFF;
+  --c-soft:#FFF0EB;
+  --c-warm:#FFF7F3;
+  --c-border:#E2E2E2;
+  --c-border-soft:#EEE7E3;
+  --c-success:#2D6B55;
+  --r-sm:4px;
+  --r-md:8px;
+  --r-lg:16px;
+  --f-system:'Unbounded',-apple-system,BlinkMacSystemFont,sans-serif;
+  --f-heading:'Poiret One','Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --f-ui:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --shadow:0 8px 28px rgba(0,0,0,.055);
+  --shadow-hover:0 14px 34px rgba(255,107,53,.12);
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  padding:18px 0 84px;
+  background:var(--c-page);
+  font-family:var(--f-ui);
+  color:var(--c-body);
+}
+
+#bapp-personal-layer button,
+#bapp-personal-layer input{
+  font:inherit;
+}
+
+#bapp-personal-layer button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+#bapp-personal-layer .bapp-personal__container{
+  width:min(1140px,calc(100% - 48px));
+  margin:0 auto;
+}
+
+#bapp-personal-layer .bapp-personal__header{
+  max-width:790px;
+  margin-bottom:28px;
+}
+
+#bapp-personal-layer .bapp-personal__eyebrow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 13px;
+  font-family:var(--f-system);
+  font-size:9px;
+  font-weight:600;
+  line-height:1.4;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  color:var(--c-accent);
+}
+
+#bapp-personal-layer .bapp-personal__dot{
+  width:8px;
+  height:8px;
+  flex:0 0 8px;
+  border-radius:50%;
+  background:var(--c-primary);
+  animation:bapp-personal-dot 2s ease-in-out infinite;
+}
+
+@keyframes bapp-personal-dot{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(1.35)}
+}
+
+#bapp-personal-layer .bapp-personal__title{
+  margin:0;
+  font-family:var(--f-heading);
+  font-size:clamp(31px,4vw,43px);
+  font-weight:400;
+  line-height:1.12;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__lead{
+  max-width:720px;
+  margin:12px 0 0;
+  font-size:15px;
+  line-height:1.6;
+  color:var(--c-body);
+}
+
+#bapp-personal-layer .bapp-personal__privacy{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:32px;
+  margin-top:15px;
+  padding:6px 10px;
+  border:1px solid var(--c-border-soft);
+  border-radius:999px;
+  background:var(--c-card);
+  font-size:11px;
+  line-height:1.35;
+  color:var(--c-meta);
+}
+
+#bapp-personal-layer .bapp-personal__privacy svg{
+  width:14px;
+  height:14px;
+  flex:0 0 14px;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__storage-note{
+  display:none;
+  margin:12px 0 0;
+  padding:10px 12px;
+  border-left:3px solid var(--c-accent);
+  background:var(--c-warm);
+  font-size:12px;
+  line-height:1.5;
+  color:var(--c-body);
+}
+
+#bapp-personal-layer .bapp-personal__storage-note.is-visible{
+  display:block;
+}
+
+#bapp-personal-layer .bapp-personal__summary{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0 0 18px;
+}
+
+#bapp-personal-layer .bapp-personal__summary-item{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  min-height:34px;
+  padding:6px 10px;
+  border:1px solid var(--c-border-soft);
+  border-radius:999px;
+  background:var(--c-card);
+  font-size:11px;
+  line-height:1;
+  color:var(--c-meta);
+}
+
+#bapp-personal-layer .bapp-personal__summary-num{
+  font-family:var(--f-system);
+  font-size:10px;
+  font-weight:600;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__shared{
+  display:none;
+  margin:0 0 18px;
+  padding:15px 16px;
+  border:1px solid rgba(255,107,53,.28);
+  border-radius:var(--r-md);
+  background:linear-gradient(135deg,var(--c-warm),var(--c-card));
+}
+
+#bapp-personal-layer .bapp-personal__shared.is-visible{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+#bapp-personal-layer .bapp-personal__shared-copy{
+  min-width:0;
+}
+
+#bapp-personal-layer .bapp-personal__shared-kicker{
+  display:block;
+  margin-bottom:4px;
+  font-family:var(--f-system);
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__shared-title{
+  margin:0;
+  font-size:14px;
+  font-weight:600;
+  line-height:1.45;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__shared-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+#bapp-personal-layer .bapp-personal__tabs{
+  display:none;
+  gap:4px;
+  margin:0 0 14px;
+  padding:4px;
+  border:1px solid var(--c-border);
+  border-radius:10px;
+  background:var(--c-card);
+}
+
+#bapp-personal-layer .bapp-personal__tab{
+  flex:1 1 0;
+  min-height:44px;
+  padding:8px 10px;
+  border:0;
+  border-radius:7px;
+  background:transparent;
+  color:var(--c-meta);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+#bapp-personal-layer .bapp-personal__tab[aria-selected="true"]{
+  background:var(--c-soft);
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(310px,.85fr);
+  gap:16px;
+  align-items:start;
+}
+
+#bapp-personal-layer .bapp-personal__side{
+  display:grid;
+  gap:16px;
+}
+
+#bapp-personal-layer .bapp-personal__panel{
+  min-width:0;
+  overflow:hidden;
+  border:1px solid var(--c-border);
+  border-radius:var(--r-lg);
+  background:var(--c-card);
+  box-shadow:var(--shadow);
+}
+
+#bapp-personal-layer .bapp-personal__panel--route{
+  border-color:rgba(255,107,53,.24);
+}
+
+#bapp-personal-layer .bapp-personal__panel-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  padding:20px 20px 17px;
+  border-bottom:1px solid var(--c-border-soft);
+}
+
+#bapp-personal-layer .bapp-personal__panel-title-wrap{
+  min-width:0;
+}
+
+#bapp-personal-layer .bapp-personal__panel-kicker{
+  display:block;
+  margin-bottom:5px;
+  font-family:var(--f-system);
+  font-size:8px;
+  font-weight:600;
+  line-height:1.4;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__panel-title{
+  margin:0;
+  font-family:var(--f-heading);
+  font-size:25px;
+  font-weight:400;
+  line-height:1.2;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__panel-count{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:38px;
+  min-height:28px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:var(--c-soft);
+  font-family:var(--f-system);
+  font-size:8px;
+  font-weight:600;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__body{
+  padding:16px 20px 20px;
+}
+
+#bapp-personal-layer .bapp-personal__toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+#bapp-personal-layer .bapp-personal__btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:42px;
+  padding:9px 13px;
+  border:1px solid var(--c-border);
+  border-radius:7px;
+  background:var(--c-card);
+  color:var(--c-heading);
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  line-height:1.25;
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease;
+}
+
+#bapp-personal-layer .bapp-personal__btn:hover,
+#bapp-personal-layer .bapp-personal__btn:focus-visible{
+  border-color:rgba(255,107,53,.48);
+  background:var(--c-warm);
+  color:var(--c-accent-text);
+  outline:none;
+}
+
+#bapp-personal-layer .bapp-personal__btn:active{
+  transform:translateY(1px);
+}
+
+#bapp-personal-layer .bapp-personal__btn--primary{
+  border-color:var(--c-action);
+  background:var(--c-action);
+  color:#FFFFFF;
+}
+
+#bapp-personal-layer .bapp-personal__btn--primary:hover,
+#bapp-personal-layer .bapp-personal__btn--primary:focus-visible{
+  border-color:var(--c-action-hover);
+  background:var(--c-action-hover);
+  color:#FFFFFF;
+}
+
+#bapp-personal-layer .bapp-personal__btn--quiet{
+  min-height:36px;
+  padding:7px 9px;
+  border-color:transparent;
+  background:transparent;
+  color:var(--c-meta);
+  font-size:11px;
+}
+
+#bapp-personal-layer .bapp-personal__btn--quiet:hover,
+#bapp-personal-layer .bapp-personal__btn--quiet:focus-visible{
+  border-color:var(--c-border);
+  background:var(--c-warm);
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__btn svg{
+  width:15px;
+  height:15px;
+  flex:0 0 15px;
+}
+
+#bapp-personal-layer .bapp-personal__empty{
+  padding:20px 18px;
+  border:1px dashed var(--c-border);
+  border-radius:var(--r-md);
+  background:#FDFDFD;
+}
+
+#bapp-personal-layer .bapp-personal__empty-title{
+  margin:0 0 5px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__empty-text{
+  margin:0;
+  font-size:12px;
+  line-height:1.55;
+  color:var(--c-meta);
+}
+
+#bapp-personal-layer .bapp-personal__list{
+  display:grid;
+  gap:8px;
+}
+
+#bapp-personal-layer .bapp-personal__item{
+  position:relative;
+  padding:13px 13px 12px;
+  border:1px solid var(--c-border-soft);
+  border-radius:var(--r-md);
+  background:var(--c-card);
+}
+
+#bapp-personal-layer .bapp-personal__item--route{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:11px;
+}
+
+#bapp-personal-layer .bapp-personal__step{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--c-soft);
+  font-family:var(--f-system);
+  font-size:9px;
+  font-weight:600;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__item-content{
+  min-width:0;
+}
+
+#bapp-personal-layer .bapp-personal__item-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+#bapp-personal-layer .bapp-personal__type{
+  display:inline-flex;
+  align-items:center;
+  min-height:22px;
+  margin-bottom:6px;
+  padding:3px 7px;
+  border-radius:999px;
+  background:var(--c-soft);
+  font-size:9px;
+  font-weight:600;
+  line-height:1.1;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__item-title{
+  margin:0;
+  font-size:13px;
+  font-weight:600;
+  line-height:1.45;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__item-title a{
+  color:inherit !important;
+  text-decoration:none !important;
+}
+
+#bapp-personal-layer .bapp-personal__item-title a:hover,
+#bapp-personal-layer .bapp-personal__item-title a:focus-visible{
+  color:var(--c-accent-text) !important;
+  outline:none;
+}
+
+#bapp-personal-layer .bapp-personal__meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px 10px;
+  margin-top:7px;
+  font-size:10px;
+  line-height:1.4;
+  color:var(--c-meta);
+}
+
+#bapp-personal-layer .bapp-personal__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:3px;
+  margin-top:9px;
+}
+
+#bapp-personal-layer .bapp-personal__icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  min-height:34px;
+  padding:5px 8px;
+  border:1px solid transparent;
+  border-radius:6px;
+  background:transparent;
+  color:var(--c-meta);
+  font-size:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+#bapp-personal-layer .bapp-personal__icon-btn:hover,
+#bapp-personal-layer .bapp-personal__icon-btn:focus-visible{
+  border-color:var(--c-border);
+  background:var(--c-warm);
+  color:var(--c-accent-text);
+  outline:none;
+}
+
+#bapp-personal-layer .bapp-personal__icon-btn:disabled{
+  opacity:.35;
+  cursor:default;
+  background:transparent;
+}
+
+#bapp-personal-layer .bapp-personal__finder{
+  display:none;
+  margin-bottom:14px;
+  padding:13px;
+  border:1px solid rgba(255,107,53,.25);
+  border-radius:var(--r-md);
+  background:var(--c-warm);
+}
+
+#bapp-personal-layer .bapp-personal__finder.is-open{
+  display:block;
+}
+
+#bapp-personal-layer .bapp-personal__finder-row{
+  display:flex;
+  gap:8px;
+}
+
+#bapp-personal-layer .bapp-personal__search{
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:10px 12px;
+  border:1px solid #D7D0CC;
+  border-radius:7px;
+  background:var(--c-card);
+  color:var(--c-heading);
+  font-size:13px;
+  outline:none;
+}
+
+#bapp-personal-layer .bapp-personal__search:focus{
+  border-color:var(--c-primary);
+  box-shadow:0 0 0 3px rgba(255,107,53,.12);
+}
+
+#bapp-personal-layer .bapp-personal__search::placeholder{
+  color:#8A8A8A;
+  opacity:1;
+}
+
+#bapp-personal-layer .bapp-personal__finder-results{
+  display:grid;
+  gap:6px;
+  margin-top:9px;
+}
+
+#bapp-personal-layer .bapp-personal__finder-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+  border:1px solid var(--c-border-soft);
+  border-radius:7px;
+  background:var(--c-card);
+}
+
+#bapp-personal-layer .bapp-personal__finder-title{
+  margin:0;
+  font-size:11px;
+  font-weight:600;
+  line-height:1.4;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__finder-meta{
+  margin:3px 0 0;
+  font-size:9px;
+  line-height:1.4;
+  color:var(--c-meta);
+}
+
+#bapp-personal-layer .bapp-personal__finder-actions{
+  display:flex;
+  gap:5px;
+}
+
+#bapp-personal-layer .bapp-personal__finder-btn{
+  min-height:34px;
+  padding:6px 8px;
+  border:1px solid var(--c-border);
+  border-radius:6px;
+  background:var(--c-card);
+  color:var(--c-heading);
+  font-size:9px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+#bapp-personal-layer .bapp-personal__finder-btn:hover,
+#bapp-personal-layer .bapp-personal__finder-btn:focus-visible{
+  border-color:var(--c-primary);
+  background:var(--c-soft);
+  color:var(--c-accent-text);
+  outline:none;
+}
+
+#bapp-personal-layer .bapp-personal__recent-scroll{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:4px;
+  scrollbar-width:thin;
+  scrollbar-color:#D8D8D8 transparent;
+}
+
+#bapp-personal-layer .bapp-personal__recent-card{
+  flex:0 0 min(260px,82vw);
+  min-width:0;
+  padding:12px;
+  border:1px solid var(--c-border-soft);
+  border-radius:var(--r-md);
+  background:var(--c-card);
+}
+
+#bapp-personal-layer .bapp-personal__recent-card a{
+  color:inherit !important;
+  text-decoration:none !important;
+}
+
+#bapp-personal-layer .bapp-personal__recent-card a:hover .bapp-personal__item-title,
+#bapp-personal-layer .bapp-personal__recent-card a:focus-visible .bapp-personal__item-title{
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__book-routes{
+  display:grid;
+  gap:6px;
+}
+
+#bapp-personal-layer .bapp-personal__book-route{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  gap:9px;
+  align-items:center;
+  min-height:50px;
+  padding:7px 8px;
+  border:1px solid var(--c-border-soft);
+  border-radius:var(--r-md);
+  background:var(--c-card);
+}
+
+#bapp-personal-layer .bapp-personal__book-route-num{
+  font-family:var(--f-system);
+  font-size:10px;
+  font-weight:600;
+  color:#B8AEBB;
+}
+
+#bapp-personal-layer .bapp-personal__book-route-title{
+  min-width:0;
+  font-size:11px;
+  font-weight:600;
+  line-height:1.35;
+  color:var(--c-heading);
+}
+
+#bapp-personal-layer .bapp-personal__route-toggle{
+  min-width:92px;
+  min-height:34px;
+  padding:6px 8px;
+  border:1px solid var(--c-border);
+  border-radius:6px;
+  background:var(--c-card);
+  color:var(--c-meta);
+  font-size:9px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+#bapp-personal-layer .bapp-personal__route-toggle[aria-pressed="true"]{
+  border-color:rgba(255,107,53,.35);
+  background:var(--c-soft);
+  color:var(--c-accent-text);
+}
+
+#bapp-personal-layer .bapp-personal__footer-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid var(--c-border-soft);
+}
+
+#bapp-personal-layer .bapp-personal__footnote{
+  max-width:650px;
+  margin:0;
+  font-size:10px;
+  line-height:1.5;
+  color:var(--c-meta);
+}
+
+#bapp-personal-layer .bapp-personal__status{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+}
+
+@media (max-width:900px){
+  #bapp-personal-layer .bapp-personal__layout{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:720px){
+  #bapp-personal-layer{
+    padding:12px 0 66px;
+  }
+
+  #bapp-personal-layer .bapp-personal__container{
+    width:min(100% - 32px,1140px);
+  }
+
+  #bapp-personal-layer .bapp-personal__header{
+    margin-bottom:22px;
+  }
+
+  #bapp-personal-layer .bapp-personal__lead{
+    font-size:14px;
+  }
+
+  #bapp-personal-layer .bapp-personal__tabs{
+    display:flex;
+  }
+
+  #bapp-personal-layer .bapp-personal__layout{
+    display:block;
+  }
+
+  #bapp-personal-layer [data-bapp-personal-pane]{
+    display:none;
+  }
+
+  #bapp-personal-layer [data-bapp-personal-pane].is-active{
+    display:block;
+  }
+
+  #bapp-personal-layer .bapp-personal__side{
+    display:block;
+  }
+
+  #bapp-personal-layer .bapp-personal__panel{
+    border-radius:12px;
+  }
+
+  #bapp-personal-layer .bapp-personal__panel-head{
+    padding:17px 16px 14px;
+  }
+
+  #bapp-personal-layer .bapp-personal__body{
+    padding:14px 16px 17px;
+  }
+
+  #bapp-personal-layer .bapp-personal__shared.is-visible{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  #bapp-personal-layer .bapp-personal__btn{
+    min-height:44px;
+  }
+
+  #bapp-personal-layer .bapp-personal__finder-row{
+    flex-direction:column;
+  }
+
+  #bapp-personal-layer .bapp-personal__finder-item{
+    grid-template-columns:1fr;
+  }
+
+  #bapp-personal-layer .bapp-personal__finder-actions{
+    width:100%;
+  }
+
+  #bapp-personal-layer .bapp-personal__finder-btn{
+    flex:1 1 0;
+    min-height:40px;
+  }
+
+  #bapp-personal-layer .bapp-personal__item--route{
+    grid-template-columns:30px minmax(0,1fr);
+    gap:9px;
+  }
+
+  #bapp-personal-layer .bapp-personal__step{
+    width:30px;
+    height:30px;
+  }
+
+  #bapp-personal-layer .bapp-personal__book-route{
+    grid-template-columns:30px minmax(0,1fr);
+  }
+
+  #bapp-personal-layer .bapp-personal__route-toggle{
+    grid-column:1 / -1;
+    width:100%;
+    min-height:40px;
+  }
+
+  #bapp-personal-layer .bapp-personal__footer-actions{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  #bapp-personal-layer .bapp-personal__footer-actions .bapp-personal__btn{
+    width:100%;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  #bapp-personal-layer *,
+  #bapp-personal-layer *::before,
+  #bapp-personal-layer *::after{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+
+<section id="bapp-personal-layer" aria-labelledby="bapp-personal-title">
+  <div class="bapp-personal__container">
+    <header class="bapp-personal__header">
+      <p class="bapp-personal__eyebrow">
+        <span class="bapp-personal__dot" aria-hidden="true"></span>
+        Персональный рабочий слой
+      </p>
+
+      <h2 class="bapp-personal__title" id="bapp-personal-title">Собрать свой маршрут</h2>
+
+      <p class="bapp-personal__lead">
+        Сохраните нужные материалы и соберите из них рабочую последовательность под свою задачу.
+        Без регистрации и отдельного личного кабинета.
+      </p>
+
+      <div class="bapp-personal__privacy">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="4.5" y="8.5" width="11" height="8" rx="2" stroke="currentColor" stroke-width="1.4"></rect>
+          <path d="M7 8.5V6.7a3 3 0 0 1 6 0v1.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+        </svg>
+        Сохраняется только в этом браузере · без регистрации
+      </div>
+
+      <div class="bapp-personal__storage-note" id="bapp-personal-storage-note" role="status">
+        Локальное сохранение в браузере недоступно. Подборка будет работать только до закрытия этой вкладки.
+      </div>
+    </header>
+
+    <div class="bapp-personal__summary" aria-label="Состояние персонального слоя">
+      <span class="bapp-personal__summary-item">
+        Мой маршрут <strong class="bapp-personal__summary-num" id="bapp-personal-summary-route">0/8</strong>
+      </span>
+      <span class="bapp-personal__summary-item">
+        В подборке <strong class="bapp-personal__summary-num" id="bapp-personal-summary-saved">0</strong>
+      </span>
+      <span class="bapp-personal__summary-item">
+        Недавние <strong class="bapp-personal__summary-num" id="bapp-personal-summary-recent">0</strong>
+      </span>
+    </div>
+
+    <div class="bapp-personal__shared" id="bapp-personal-shared">
+      <div class="bapp-personal__shared-copy">
+        <span class="bapp-personal__shared-kicker">Маршрут по ссылке</span>
+        <p class="bapp-personal__shared-title" id="bapp-personal-shared-title">Открыт маршрут · 0 материалов</p>
+      </div>
+      <div class="bapp-personal__shared-actions">
+        <button class="bapp-personal__btn" id="bapp-personal-preview-shared" type="button">Открыть маршрут</button>
+        <button class="bapp-personal__btn bapp-personal__btn--primary" id="bapp-personal-save-shared" type="button">Сохранить себе</button>
+      </div>
+    </div>
+
+    <div class="bapp-personal__tabs" role="tablist" aria-label="Разделы персонального слоя">
+      <button class="bapp-personal__tab" type="button" role="tab" aria-selected="true" data-bapp-personal-tab="route">Маршрут</button>
+      <button class="bapp-personal__tab" type="button" role="tab" aria-selected="false" data-bapp-personal-tab="saved">Подборка</button>
+      <button class="bapp-personal__tab" type="button" role="tab" aria-selected="false" data-bapp-personal-tab="recent">Недавние</button>
+    </div>
+
+    <div class="bapp-personal__layout">
+      <div class="bapp-personal__panel bapp-personal__panel--route is-active" data-bapp-personal-pane="route">
+        <div class="bapp-personal__panel-head">
+          <div class="bapp-personal__panel-title-wrap">
+            <span class="bapp-personal__panel-kicker" id="bapp-personal-route-kicker">Рабочая последовательность</span>
+            <h3 class="bapp-personal__panel-title" id="bapp-personal-route-title">Мой маршрут</h3>
+          </div>
+          <span class="bapp-personal__panel-count" id="bapp-personal-route-count">0/8</span>
+        </div>
+
+        <div class="bapp-personal__body">
+          <div class="bapp-personal__toolbar" id="bapp-personal-route-toolbar">
+            <button class="bapp-personal__btn bapp-personal__btn--primary" type="button" data-bapp-personal-open-finder="route">
+              Добавить материал
+            </button>
+            <button class="bapp-personal__btn" type="button" id="bapp-personal-copy-route">Скопировать маршрут</button>
+            <button class="bapp-personal__btn" type="button" id="bapp-personal-share-route">Поделиться ссылкой</button>
+          </div>
+
+          <div class="bapp-personal__finder" id="bapp-personal-finder-route">
+            <div class="bapp-personal__finder-row">
+              <input
+                class="bapp-personal__search"
+                id="bapp-personal-search-route"
+                type="search"
+                autocomplete="off"
+                placeholder="Название, тема, эксперт, страница..."
+                aria-label="Найти материал для маршрута"
+              >
+              <button class="bapp-personal__btn" type="button" data-bapp-personal-close-finder="route">Закрыть</button>
+            </div>
+            <div class="bapp-personal__finder-results" id="bapp-personal-results-route"></div>
+          </div>
+
+          <div id="bapp-personal-route-list"></div>
+        </div>
+      </div>
+
+      <div class="bapp-personal__side">
+        <div class="bapp-personal__panel is-active" data-bapp-personal-pane="saved">
+          <div class="bapp-personal__panel-head">
+            <div class="bapp-personal__panel-title-wrap">
+              <span class="bapp-personal__panel-kicker">Материалы на потом</span>
+              <h3 class="bapp-personal__panel-title">Моя подборка</h3>
+            </div>
+            <span class="bapp-personal__panel-count" id="bapp-personal-saved-count">0</span>
+          </div>
+
+          <div class="bapp-personal__body">
+            <div class="bapp-personal__toolbar">
+              <button class="bapp-personal__btn bapp-personal__btn--primary" type="button" data-bapp-personal-open-finder="saved">
+                Добавить материал
+              </button>
+            </div>
+
+            <div class="bapp-personal__finder" id="bapp-personal-finder-saved">
+              <div class="bapp-personal__finder-row">
+                <input
+                  class="bapp-personal__search"
+                  id="bapp-personal-search-saved"
+                  type="search"
+                  autocomplete="off"
+                  placeholder="Название, тема, эксперт, страница..."
+                  aria-label="Найти материал для подборки"
+                >
+                <button class="bapp-personal__btn" type="button" data-bapp-personal-close-finder="saved">Закрыть</button>
+              </div>
+              <div class="bapp-personal__finder-results" id="bapp-personal-results-saved"></div>
+            </div>
+
+            <div id="bapp-personal-saved-list"></div>
+
+            <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--c-border-soft)">
+              <span class="bapp-personal__panel-kicker">Навигация книги</span>
+              <h4 style="margin:0 0 10px;font-size:13px;font-weight:600;color:var(--c-heading)">Маршруты книги</h4>
+              <div class="bapp-personal__book-routes" id="bapp-personal-book-routes"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bapp-personal__panel is-active" data-bapp-personal-pane="recent">
+          <div class="bapp-personal__panel-head">
+            <div class="bapp-personal__panel-title-wrap">
+              <span class="bapp-personal__panel-kicker">Быстрый возврат</span>
+              <h3 class="bapp-personal__panel-title">Недавно открытые</h3>
+            </div>
+            <span class="bapp-personal__panel-count" id="bapp-personal-recent-count">0</span>
+          </div>
+
+          <div class="bapp-personal__body">
+            <div id="bapp-personal-recent-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bapp-personal__footer-actions">
+      <p class="bapp-personal__footnote">
+        В браузере сохраняются только идентификаторы материалов и маршрутов. Поисковые запросы,
+        введенные рабочие ситуации и контактные данные здесь не сохраняются.
+      </p>
+      <button class="bapp-personal__btn" id="bapp-personal-reset" type="button">Очистить мои данные</button>
+    </div>
+
+    <div class="bapp-personal__status" id="bapp-personal-status" aria-live="polite" aria-atomic="true"></div>
+  </div>
+</section>
+
+<script>
+(function (w, d) {
+  'use strict';
+
+  var root = d.getElementById('bapp-personal-layer');
+  if (!root) return;
+
+  var STORAGE_KEY = 'bapp_personal_v1';
+  var CANONICAL_NAV_URL = 'https://mmalova.com/navigator';
+  var MAX_SAVED = 50;
+  var MAX_RECENT = 12;
+  var MAX_ROUTE = 8;
+
+  var TYPES = {
+    'гайд':'Гайд',
+    'видео':'Видео',
+    'статья':'Статья',
+    'кейс':'Кейс',
+    'обзор':'Обзор',
+    'методика':'Методика',
+    'сообщество':'Сообщество',
+    'чек-лист':'Чек-лист',
+    'подкаст':'Подкаст'
+  };
+
+  var dataState = {
+    materials: [],
+    routes: [],
+    materialById: {},
+    routeByNum: {}
+  };
+
+  var sharedRoute = [];
+  var sharedPreview = false;
+  var storageAvailable = true;
+  var memoryRaw = null;
+
+  function emptyState() {
+    return {
+      version: 1,
+      savedMaterials: [],
+      savedRoutes: [],
+      recentMaterials: [],
+      customRoute: [],
+      updatedAt: null
+    };
+  }
+
+  function uniqueStrings(values, max) {
+    var seen = {};
+    var out = [];
+    (Array.isArray(values) ? values : []).forEach(function (value) {
+      var str = String(value || '');
+      if (!str || seen[str]) return;
+      seen[str] = true;
+      out.push(str);
+    });
+    return typeof max === 'number' ? out.slice(0, max) : out;
+  }
+
+  function normalizeRecent(values) {
+    var seen = {};
+    var out = [];
+    (Array.isArray(values) ? values : []).forEach(function (entry) {
+      if (!entry || !entry.id) return;
+      var id = String(entry.id);
+      if (seen[id]) return;
+      seen[id] = true;
+      out.push({
+        id: id,
+        openedAt: typeof entry.openedAt === 'string' ? entry.openedAt : ''
+      });
+    });
+    return out.slice(0, MAX_RECENT);
+  }
+
+  function normalizeState(input) {
+    var base = emptyState();
+    var source = input && typeof input === 'object' ? input : {};
+    base.savedMaterials = uniqueStrings(source.savedMaterials, MAX_SAVED);
+    base.savedRoutes = uniqueStrings(source.savedRoutes, 8);
+    base.recentMaterials = normalizeRecent(source.recentMaterials);
+    base.customRoute = uniqueStrings(source.customRoute, MAX_ROUTE);
+    base.updatedAt = typeof source.updatedAt === 'string' ? source.updatedAt : null;
+    return base;
+  }
+
+  function testStorage() {
+    try {
+      var key = '__bapp_personal_test__';
+      w.localStorage.setItem(key, '1');
+      w.localStorage.removeItem(key);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  storageAvailable = testStorage();
+
+  function readState() {
+    var raw = null;
+
+    try {
+      raw = storageAvailable ? w.localStorage.getItem(STORAGE_KEY) : memoryRaw;
+    } catch (error) {
+      storageAvailable = false;
+      raw = memoryRaw;
+    }
+
+    if (!raw) return emptyState();
+
+    try {
+      return normalizeState(JSON.parse(raw));
+    } catch (error) {
+      return emptyState();
+    }
+  }
+
+  var personalState = readState();
+
+  function writeState(nextState) {
+    personalState = normalizeState(nextState);
+    personalState.updatedAt = new Date().toISOString();
+
+    var raw = JSON.stringify(personalState);
+    memoryRaw = raw;
+
+    if (storageAvailable) {
+      try {
+        w.localStorage.setItem(STORAGE_KEY, raw);
+      } catch (error) {
+        storageAvailable = false;
+      }
+    }
+
+    storageNote();
+    emitUpdate();
+    renderAll();
+    return personalState;
+  }
+
+  function cloneState() {
+    return JSON.parse(JSON.stringify(personalState));
+  }
+
+  function emitUpdate() {
+    try {
+      w.dispatchEvent(new CustomEvent('bapp:personal-updated', {
+        detail: cloneState()
+      }));
+    } catch (error) {
+      /* Старый браузер продолжит работу без внешнего события. */
+    }
+  }
+
+  function status(message) {
+    var node = d.getElementById('bapp-personal-status');
+    if (!node) return;
+    node.textContent = '';
+    w.setTimeout(function () {
+      node.textContent = message;
+    }, 20);
+  }
+
+  function storageNote() {
+    var note = d.getElementById('bapp-personal-storage-note');
+    if (!note) return;
+    note.classList.toggle('is-visible', !storageAvailable);
+  }
+
+  function materialExists(id) {
+    if (!id) return false;
+    if (dataState.materials.length) return !!dataState.materialById[id];
+    return /^m\d{3,}$/.test(String(id));
+  }
+
+  function routeExists(num) {
+    if (!num) return false;
+    if (dataState.routes.length) return !!dataState.routeByNum[num];
+    return /^\d{2}$/.test(String(num));
+  }
+
+  function saveMaterial(id) {
+    id = String(id || '');
+    if (!materialExists(id)) return false;
+    if (personalState.savedMaterials.indexOf(id) !== -1) return true;
+    if (personalState.savedMaterials.length >= MAX_SAVED) {
+      status('В подборке уже 50 материалов.');
+      return false;
+    }
+    var next = cloneState();
+    next.savedMaterials.unshift(id);
+    writeState(next);
+    status('Материал сохранен в подборку.');
+    return true;
+  }
+
+  function unsaveMaterial(id) {
+    id = String(id || '');
+    var next = cloneState();
+    next.savedMaterials = next.savedMaterials.filter(function (item) {
+      return item !== id;
+    });
+    writeState(next);
+    status('Материал удален из подборки.');
+    return true;
+  }
+
+  function isSaved(id) {
+    return personalState.savedMaterials.indexOf(String(id || '')) !== -1;
+  }
+
+  function addToRoute(id) {
+    id = String(id || '');
+    if (!materialExists(id)) return false;
+    if (personalState.customRoute.indexOf(id) !== -1) {
+      status('Материал уже есть в маршруте.');
+      return true;
+    }
+    if (personalState.customRoute.length >= MAX_ROUTE) {
+      status('В маршруте может быть не больше 8 материалов.');
+      return false;
+    }
+    var next = cloneState();
+    next.customRoute.push(id);
+    writeState(next);
+    status('Материал добавлен в маршрут.');
+    return true;
+  }
+
+  function removeFromRoute(id) {
+    id = String(id || '');
+    var next = cloneState();
+    next.customRoute = next.customRoute.filter(function (item) {
+      return item !== id;
+    });
+    writeState(next);
+    status('Материал удален из маршрута.');
+    return true;
+  }
+
+  function moveRouteItem(id, direction) {
+    id = String(id || '');
+    var next = cloneState();
+    var index = next.customRoute.indexOf(id);
+    if (index === -1) return false;
+
+    var target = direction === 'up' || direction === -1 ? index - 1 : index + 1;
+    if (target < 0 || target >= next.customRoute.length) return false;
+
+    var temp = next.customRoute[target];
+    next.customRoute[target] = next.customRoute[index];
+    next.customRoute[index] = temp;
+    writeState(next);
+    status('Порядок маршрута изменен.');
+    return true;
+  }
+
+  function saveBookRoute(routeNum) {
+    routeNum = String(routeNum || '');
+    if (!routeExists(routeNum)) return false;
+    if (personalState.savedRoutes.indexOf(routeNum) !== -1) return true;
+    var next = cloneState();
+    next.savedRoutes.push(routeNum);
+    writeState(next);
+    status('Маршрут книги сохранен.');
+    return true;
+  }
+
+  function unsaveBookRoute(routeNum) {
+    routeNum = String(routeNum || '');
+    var next = cloneState();
+    next.savedRoutes = next.savedRoutes.filter(function (item) {
+      return item !== routeNum;
+    });
+    writeState(next);
+    status('Маршрут книги удален из сохраненных.');
+    return true;
+  }
+
+  function trackOpen(id) {
+    id = String(id || '');
+    if (!materialExists(id)) return false;
+
+    var next = cloneState();
+    next.recentMaterials = next.recentMaterials.filter(function (entry) {
+      return entry.id !== id;
+    });
+    next.recentMaterials.unshift({
+      id: id,
+      openedAt: new Date().toISOString()
+    });
+    next.recentMaterials = next.recentMaterials.slice(0, MAX_RECENT);
+    writeState(next);
+    return true;
+  }
+
+  function resetPersonal() {
+    personalState = emptyState();
+    memoryRaw = null;
+
+    if (storageAvailable) {
+      try {
+        w.localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        storageAvailable = false;
+      }
+    }
+
+    sharedPreview = false;
+    storageNote();
+    emitUpdate();
+    renderAll();
+    status('Персональные данные очищены.');
+  }
+
+  function materialLabel(material) {
+    return material && TYPES[material.type] ? TYPES[material.type] : (material && material.type ? material.type : 'Материал');
+  }
+
+  function routeTitle(routeNum) {
+    var route = dataState.routeByNum[routeNum];
+    return route ? route.title : ('Маршрут ' + routeNum);
+  }
+
+  function routeMeta(material) {
+    var parts = [];
+    if (material && material.page) parts.push('Книга, с. ' + material.page);
+    if (material && material.route) parts.push('Маршрут ' + material.route + ' · ' + routeTitle(material.route));
+    return parts;
+  }
+
+  function escapeText(value) {
+    return String(value == null ? '' : value);
+  }
+
+  function buildRouteText(ids) {
+    var valid = ids.map(function (id) {
+      return dataState.materialById[id];
+    }).filter(Boolean);
+
+    if (!valid.length) return '';
+
+    var lines = [
+      'Мой рабочий маршрут · цифровое приложение к книге «От PR к индустрии доверия»',
+      ''
+    ];
+
+    valid.forEach(function (material, index) {
+      lines.push((index + 1) + '. ' + material.title);
+      if (material.page) lines.push('   Книга, с. ' + material.page);
+      if (material.link) lines.push('   ' + material.link);
+    });
+
+    lines.push('');
+    lines.push('Навигатор: https://mmalova.com/navigator');
+    return lines.join('\n');
+  }
+
+  function routeShareUrl(ids) {
+    var valid = uniqueStrings(ids, MAX_ROUTE).filter(function (id) {
+      return materialExists(id);
+    });
+    var base = CANONICAL_NAV_URL;
+    return valid.length ? base + '?myroute=' + encodeURIComponent(valid.join(',')) : base;
+  }
+
+  function copyText(text) {
+    if (!text) return Promise.reject(new Error('empty'));
+
+    if (w.navigator && w.navigator.clipboard && typeof w.navigator.clipboard.writeText === 'function') {
+      return w.navigator.clipboard.writeText(text);
+    }
+
+    return new Promise(function (resolve, reject) {
+      try {
+        var area = d.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        d.body.appendChild(area);
+        area.select();
+        var ok = d.execCommand('copy');
+        d.body.removeChild(area);
+        ok ? resolve() : reject(new Error('copy failed'));
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  function copyRoute() {
+    var text = buildRouteText(personalState.customRoute);
+    if (!text) {
+      status('Сначала добавьте материалы в маршрут.');
+      return Promise.resolve(false);
+    }
+
+    return copyText(text).then(function () {
+      status('Маршрут скопирован.');
+      return true;
+    }).catch(function () {
+      status('Не удалось скопировать маршрут.');
+      return false;
+    });
+  }
+
+  function shareRoute() {
+    if (!personalState.customRoute.length) {
+      status('Сначала добавьте материалы в маршрут.');
+      return Promise.resolve(false);
+    }
+
+    var url = routeShareUrl(personalState.customRoute);
+
+    if (w.navigator && typeof w.navigator.share === 'function') {
+      return w.navigator.share({
+        title: 'Мой рабочий маршрут',
+        text: 'Рабочий маршрут в цифровом приложении к книге «От PR к индустрии доверия».',
+        url: url
+      }).then(function () {
+        status('Маршрут передан.');
+        return true;
+      }).catch(function (error) {
+        if (error && error.name === 'AbortError') return false;
+        return copyText(url).then(function () {
+          status('Ссылка на маршрут скопирована.');
+          return true;
+        });
+      });
+    }
+
+    return copyText(url).then(function () {
+      status('Ссылка на маршрут скопирована.');
+      return true;
+    }).catch(function () {
+      status('Не удалось скопировать ссылку.');
+      return false;
+    });
+  }
+
+  function getState() {
+    return cloneState();
+  }
+
+  w.BookAppPersonal = {
+    saveMaterial: saveMaterial,
+    unsaveMaterial: unsaveMaterial,
+    isSaved: isSaved,
+    addToRoute: addToRoute,
+    removeFromRoute: removeFromRoute,
+    moveRouteItem: moveRouteItem,
+    saveBookRoute: saveBookRoute,
+    unsaveBookRoute: unsaveBookRoute,
+    trackOpen: trackOpen,
+    getState: getState,
+    reset: resetPersonal,
+    shareRoute: shareRoute,
+    copyRoute: copyRoute
+  };
+
+  function clearNode(node) {
+    while (node && node.firstChild) node.removeChild(node.firstChild);
+  }
+
+  function createEmpty(title, text) {
+    var box = d.createElement('div');
+    box.className = 'bapp-personal__empty';
+
+    var heading = d.createElement('p');
+    heading.className = 'bapp-personal__empty-title';
+    heading.textContent = title;
+
+    var body = d.createElement('p');
+    body.className = 'bapp-personal__empty-text';
+    body.textContent = text;
+
+    box.appendChild(heading);
+    box.appendChild(body);
+    return box;
+  }
+
+  function createMeta(material) {
+    var meta = d.createElement('div');
+    meta.className = 'bapp-personal__meta';
+
+    routeMeta(material).forEach(function (text) {
+      var span = d.createElement('span');
+      span.textContent = text;
+      meta.appendChild(span);
+    });
+
+    return meta;
+  }
+
+  function createOpenLink(material) {
+    var a = d.createElement('a');
+    a.href = material.link || '#';
+    a.textContent = material.title || 'Материал';
+    return a;
+  }
+
+  function currentRouteIds() {
+    return sharedPreview && sharedRoute.length ? sharedRoute.slice() : personalState.customRoute.slice();
+  }
+
+  function renderRoute() {
+    var list = d.getElementById('bapp-personal-route-list');
+    var count = d.getElementById('bapp-personal-route-count');
+    var title = d.getElementById('bapp-personal-route-title');
+    var kicker = d.getElementById('bapp-personal-route-kicker');
+    var toolbar = d.getElementById('bapp-personal-route-toolbar');
+
+    if (!list) return;
+    clearNode(list);
+
+    var ids = currentRouteIds();
+    if (count) count.textContent = ids.length + '/8';
+
+    if (sharedPreview && sharedRoute.length) {
+      if (title) title.textContent = 'Маршрут по ссылке';
+      if (kicker) kicker.textContent = 'Предпросмотр · без сохранения';
+      if (toolbar) toolbar.style.display = 'none';
+    } else {
+      if (title) title.textContent = 'Мой маршрут';
+      if (kicker) kicker.textContent = 'Рабочая последовательность';
+      if (toolbar) toolbar.style.display = '';
+    }
+
+    var valid = ids.map(function (id) {
+      return dataState.materialById[id];
+    }).filter(Boolean);
+
+    if (!valid.length) {
+      list.appendChild(createEmpty(
+        sharedPreview ? 'Маршрут по ссылке пока недоступен' : 'Маршрут пока пуст',
+        sharedPreview
+          ? 'В ссылке нет материалов, которые есть в текущей версии приложения.'
+          : 'Добавьте до 8 материалов и расположите их в нужной рабочей последовательности.'
+      ));
+      return;
+    }
+
+    var wrap = d.createElement('div');
+    wrap.className = 'bapp-personal__list';
+
+    valid.forEach(function (material, index) {
+      var item = d.createElement('article');
+      item.className = 'bapp-personal__item bapp-personal__item--route';
+
+      var step = d.createElement('span');
+      step.className = 'bapp-personal__step';
+      step.textContent = String(index + 1).padStart(2, '0');
+
+      var content = d.createElement('div');
+      content.className = 'bapp-personal__item-content';
+
+      var type = d.createElement('span');
+      type.className = 'bapp-personal__type';
+      type.textContent = materialLabel(material);
+
+      var heading = d.createElement('h4');
+      heading.className = 'bapp-personal__item-title';
+      heading.appendChild(createOpenLink(material));
+
+      content.appendChild(type);
+      content.appendChild(heading);
+      content.appendChild(createMeta(material));
+
+      if (!sharedPreview) {
+        var actions = d.createElement('div');
+        actions.className = 'bapp-personal__actions';
+
+        var up = d.createElement('button');
+        up.className = 'bapp-personal__icon-btn';
+        up.type = 'button';
+        up.textContent = '↑ Выше';
+        up.disabled = index === 0;
+        up.setAttribute('aria-label', 'Переместить материал выше');
+        up.addEventListener('click', function () {
+          moveRouteItem(material.id, 'up');
+        });
+
+        var down = d.createElement('button');
+        down.className = 'bapp-personal__icon-btn';
+        down.type = 'button';
+        down.textContent = '↓ Ниже';
+        down.disabled = index === valid.length - 1;
+        down.setAttribute('aria-label', 'Переместить материал ниже');
+        down.addEventListener('click', function () {
+          moveRouteItem(material.id, 'down');
+        });
+
+        var remove = d.createElement('button');
+        remove.className = 'bapp-personal__icon-btn';
+        remove.type = 'button';
+        remove.textContent = 'Убрать';
+        remove.setAttribute('aria-label', 'Убрать материал из маршрута');
+        remove.addEventListener('click', function () {
+          removeFromRoute(material.id);
+        });
+
+        actions.appendChild(up);
+        actions.appendChild(down);
+        actions.appendChild(remove);
+        content.appendChild(actions);
+      }
+
+      item.appendChild(step);
+      item.appendChild(content);
+      wrap.appendChild(item);
+    });
+
+    list.appendChild(wrap);
+
+    if (sharedPreview) {
+      var footer = d.createElement('div');
+      footer.className = 'bapp-personal__toolbar';
+      footer.style.marginTop = '12px';
+
+      var save = d.createElement('button');
+      save.className = 'bapp-personal__btn bapp-personal__btn--primary';
+      save.type = 'button';
+      save.textContent = 'Сохранить себе';
+      save.addEventListener('click', saveSharedRoute);
+
+      var back = d.createElement('button');
+      back.className = 'bapp-personal__btn';
+      back.type = 'button';
+      back.textContent = 'Вернуться к моему маршруту';
+      back.addEventListener('click', function () {
+        sharedPreview = false;
+        renderRoute();
+      });
+
+      footer.appendChild(save);
+      footer.appendChild(back);
+      list.appendChild(footer);
+    }
+  }
+
+  function renderSaved() {
+    var list = d.getElementById('bapp-personal-saved-list');
+    var count = d.getElementById('bapp-personal-saved-count');
+    if (!list) return;
+    clearNode(list);
+    if (count) count.textContent = String(personalState.savedMaterials.length);
+
+    var valid = personalState.savedMaterials.map(function (id) {
+      return dataState.materialById[id];
+    }).filter(Boolean);
+
+    if (!valid.length) {
+      list.appendChild(createEmpty(
+        'Подборка пока пустая',
+        'Сохраняйте материалы, к которым хотите вернуться, и при необходимости добавляйте их в свой маршрут.'
+      ));
+      return;
+    }
+
+    var wrap = d.createElement('div');
+    wrap.className = 'bapp-personal__list';
+
+    valid.forEach(function (material) {
+      var item = d.createElement('article');
+      item.className = 'bapp-personal__item';
+
+      var type = d.createElement('span');
+      type.className = 'bapp-personal__type';
+      type.textContent = materialLabel(material);
+
+      var heading = d.createElement('h4');
+      heading.className = 'bapp-personal__item-title';
+      heading.appendChild(createOpenLink(material));
+
+      var actions = d.createElement('div');
+      actions.className = 'bapp-personal__actions';
+
+      var routeBtn = d.createElement('button');
+      routeBtn.className = 'bapp-personal__icon-btn';
+      routeBtn.type = 'button';
+      routeBtn.textContent = personalState.customRoute.indexOf(material.id) === -1 ? 'В маршрут' : 'В маршруте';
+      routeBtn.disabled = personalState.customRoute.indexOf(material.id) !== -1;
+      routeBtn.addEventListener('click', function () {
+        addToRoute(material.id);
+      });
+
+      var remove = d.createElement('button');
+      remove.className = 'bapp-personal__icon-btn';
+      remove.type = 'button';
+      remove.textContent = 'Удалить';
+      remove.addEventListener('click', function () {
+        unsaveMaterial(material.id);
+      });
+
+      actions.appendChild(routeBtn);
+      actions.appendChild(remove);
+
+      item.appendChild(type);
+      item.appendChild(heading);
+      item.appendChild(createMeta(material));
+      item.appendChild(actions);
+      wrap.appendChild(item);
+    });
+
+    list.appendChild(wrap);
+  }
+
+  function renderRecent() {
+    var list = d.getElementById('bapp-personal-recent-list');
+    var count = d.getElementById('bapp-personal-recent-count');
+    if (!list) return;
+    clearNode(list);
+
+    var valid = personalState.recentMaterials.map(function (entry) {
+      return dataState.materialById[entry.id];
+    }).filter(Boolean);
+
+    if (count) count.textContent = String(valid.length);
+
+    if (!valid.length) {
+      list.appendChild(createEmpty(
+        'Здесь появится история переходов',
+        'После открытия материалов из приложения вы сможете быстро вернуться к последним двенадцати.'
+      ));
+      return;
+    }
+
+    var scroll = d.createElement('div');
+    scroll.className = 'bapp-personal__recent-scroll';
+
+    valid.forEach(function (material) {
+      var card = d.createElement('article');
+      card.className = 'bapp-personal__recent-card';
+
+      var link = d.createElement('a');
+      link.href = material.link || '#';
+      var type = d.createElement('span');
+      type.className = 'bapp-personal__type';
+      type.textContent = materialLabel(material);
+
+      var heading = d.createElement('h4');
+      heading.className = 'bapp-personal__item-title';
+      heading.textContent = material.title || 'Материал';
+
+      link.appendChild(type);
+      link.appendChild(heading);
+      link.appendChild(createMeta(material));
+      card.appendChild(link);
+      scroll.appendChild(card);
+    });
+
+    list.appendChild(scroll);
+  }
+
+  function renderBookRoutes() {
+    var node = d.getElementById('bapp-personal-book-routes');
+    if (!node) return;
+    clearNode(node);
+
+    if (!dataState.routes.length) {
+      node.appendChild(createEmpty('Маршруты загружаются', 'Список появится после получения данных приложения.'));
+      return;
+    }
+
+    dataState.routes.forEach(function (route) {
+      var item = d.createElement('div');
+      item.className = 'bapp-personal__book-route';
+
+      var num = d.createElement('span');
+      num.className = 'bapp-personal__book-route-num';
+      num.textContent = route.num;
+
+      var title = d.createElement('a');
+      title.className = 'bapp-personal__book-route-title';
+      title.href = '/navigator-karta-materialov?route=' + encodeURIComponent(route.num) + '&view=routes';
+      title.textContent = route.title;
+      title.style.textDecoration = 'none';
+      title.style.color = 'var(--c-heading)';
+
+      var saved = personalState.savedRoutes.indexOf(String(route.num)) !== -1;
+      var toggle = d.createElement('button');
+      toggle.className = 'bapp-personal__route-toggle';
+      toggle.type = 'button';
+      toggle.setAttribute('aria-pressed', saved ? 'true' : 'false');
+      toggle.textContent = saved ? 'Сохранен' : 'Сохранить';
+      toggle.addEventListener('click', function () {
+        if (personalState.savedRoutes.indexOf(String(route.num)) !== -1) {
+          unsaveBookRoute(route.num);
+        } else {
+          saveBookRoute(route.num);
+        }
+      });
+
+      item.appendChild(num);
+      item.appendChild(title);
+      item.appendChild(toggle);
+      node.appendChild(item);
+    });
+  }
+
+  function renderSummary() {
+    var route = d.getElementById('bapp-personal-summary-route');
+    var saved = d.getElementById('bapp-personal-summary-saved');
+    var recent = d.getElementById('bapp-personal-summary-recent');
+
+    if (route) route.textContent = personalState.customRoute.length + '/8';
+    if (saved) saved.textContent = String(personalState.savedMaterials.length);
+    if (recent) {
+      var validRecent = personalState.recentMaterials.filter(function (entry) {
+        return !!dataState.materialById[entry.id];
+      });
+      recent.textContent = String(validRecent.length);
+    }
+  }
+
+  function renderSharedBanner() {
+    var banner = d.getElementById('bapp-personal-shared');
+    var title = d.getElementById('bapp-personal-shared-title');
+    if (!banner || !title) return;
+
+    if (!sharedRoute.length) {
+      banner.classList.remove('is-visible');
+      return;
+    }
+
+    title.textContent = 'Открыт маршрут по ссылке · ' + sharedRoute.length + ' ' + materialWord(sharedRoute.length);
+    banner.classList.add('is-visible');
+  }
+
+  function materialWord(count) {
+    var mod100 = count % 100;
+    var mod10 = count % 10;
+    if (mod100 >= 11 && mod100 <= 14) return 'материалов';
+    if (mod10 === 1) return 'материал';
+    if (mod10 >= 2 && mod10 <= 4) return 'материала';
+    return 'материалов';
+  }
+
+  function renderAll() {
+    renderSummary();
+    renderSharedBanner();
+    renderRoute();
+    renderSaved();
+    renderRecent();
+    renderBookRoutes();
+  }
+
+  function normalizeSearch(value) {
+    return String(value == null ? '' : value)
+      .toLocaleLowerCase('ru-RU')
+      .replace(/ё/g, 'е')
+      .replace(/[^a-zа-я0-9]+/gi, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function searchable(material) {
+    var route = dataState.routeByNum[material.route] || {};
+    return normalizeSearch([
+      material.title,
+      material.desc,
+      material.type,
+      material.page,
+      material.expert_name,
+      material.bookTheme,
+      (Array.isArray(material.tasks) ? material.tasks.join(' ') : ''),
+      (Array.isArray(material.tags) ? material.tags.join(' ') : ''),
+      (Array.isArray(material.audiences) ? material.audiences.join(' ') : ''),
+      route.title,
+      'страница ' + (material.page || ''),
+      'маршрут ' + (material.route || '')
+    ].join(' '));
+  }
+
+  function searchMaterials(query) {
+    var q = normalizeSearch(query);
+    if (!q) return dataState.materials.slice(0, 6);
+
+    var tokens = q.split(' ').filter(Boolean);
+
+    return dataState.materials.filter(function (material) {
+      var haystack = searchable(material);
+      return tokens.every(function (token) {
+        return haystack.indexOf(token) !== -1;
+      });
+    }).slice(0, 6);
+  }
+
+  function renderFinder(kind, query) {
+    var node = d.getElementById('bapp-personal-results-' + kind);
+    if (!node) return;
+    clearNode(node);
+
+    if (!dataState.materials.length) {
+      node.appendChild(createEmpty('Данные еще загружаются', 'Повторите поиск через несколько секунд.'));
+      return;
+    }
+
+    var results = searchMaterials(query);
+    if (!results.length) {
+      node.appendChild(createEmpty('Ничего не найдено', 'Попробуйте более короткую формулировку или номер страницы.'));
+      return;
+    }
+
+    results.forEach(function (material) {
+      var row = d.createElement('div');
+      row.className = 'bapp-personal__finder-item';
+
+      var copy = d.createElement('div');
+
+      var title = d.createElement('p');
+      title.className = 'bapp-personal__finder-title';
+      title.textContent = material.title;
+
+      var meta = d.createElement('p');
+      meta.className = 'bapp-personal__finder-meta';
+      meta.textContent = materialLabel(material) + ' · с. ' + (material.page || '—') + ' · маршрут ' + material.route;
+
+      copy.appendChild(title);
+      copy.appendChild(meta);
+
+      var actions = d.createElement('div');
+      actions.className = 'bapp-personal__finder-actions';
+
+      if (kind === 'route') {
+        var addRoute = d.createElement('button');
+        addRoute.className = 'bapp-personal__finder-btn';
+        addRoute.type = 'button';
+        addRoute.textContent = personalState.customRoute.indexOf(material.id) === -1 ? 'В маршрут' : 'Добавлено';
+        addRoute.disabled = personalState.customRoute.indexOf(material.id) !== -1;
+        addRoute.addEventListener('click', function () {
+          addToRoute(material.id);
+          renderFinder(kind, query);
+        });
+        actions.appendChild(addRoute);
+
+        var save = d.createElement('button');
+        save.className = 'bapp-personal__finder-btn';
+        save.type = 'button';
+        save.textContent = isSaved(material.id) ? 'Сохранено' : 'В подборку';
+        save.disabled = isSaved(material.id);
+        save.addEventListener('click', function () {
+          saveMaterial(material.id);
+          renderFinder(kind, query);
+        });
+        actions.appendChild(save);
+      } else {
+        var addSaved = d.createElement('button');
+        addSaved.className = 'bapp-personal__finder-btn';
+        addSaved.type = 'button';
+        addSaved.textContent = isSaved(material.id) ? 'Сохранено' : 'В подборку';
+        addSaved.disabled = isSaved(material.id);
+        addSaved.addEventListener('click', function () {
+          saveMaterial(material.id);
+          renderFinder(kind, query);
+        });
+        actions.appendChild(addSaved);
+
+        var routeBtn = d.createElement('button');
+        routeBtn.className = 'bapp-personal__finder-btn';
+        routeBtn.type = 'button';
+        routeBtn.textContent = personalState.customRoute.indexOf(material.id) === -1 ? 'В маршрут' : 'Добавлено';
+        routeBtn.disabled = personalState.customRoute.indexOf(material.id) !== -1;
+        routeBtn.addEventListener('click', function () {
+          addToRoute(material.id);
+          renderFinder(kind, query);
+        });
+        actions.appendChild(routeBtn);
+      }
+
+      row.appendChild(copy);
+      row.appendChild(actions);
+      node.appendChild(row);
+    });
+  }
+
+  function setFinder(kind, open) {
+    var finder = d.getElementById('bapp-personal-finder-' + kind);
+    var input = d.getElementById('bapp-personal-search-' + kind);
+    if (!finder || !input) return;
+
+    finder.classList.toggle('is-open', open);
+
+    if (open) {
+      renderFinder(kind, input.value);
+      w.setTimeout(function () {
+        input.focus();
+      }, 20);
+    }
+  }
+
+  root.querySelectorAll('[data-bapp-personal-open-finder]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      setFinder(button.getAttribute('data-bapp-personal-open-finder'), true);
+    });
+  });
+
+  root.querySelectorAll('[data-bapp-personal-close-finder]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      setFinder(button.getAttribute('data-bapp-personal-close-finder'), false);
+    });
+  });
+
+  ['route', 'saved'].forEach(function (kind) {
+    var input = d.getElementById('bapp-personal-search-' + kind);
+    if (!input) return;
+    input.addEventListener('input', function () {
+      renderFinder(kind, input.value);
+    });
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setFinder(kind, false);
+      }
+    });
+  });
+
+  function setMobileTab(name) {
+    root.querySelectorAll('[data-bapp-personal-tab]').forEach(function (button) {
+      var active = button.getAttribute('data-bapp-personal-tab') === name;
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    root.querySelectorAll('[data-bapp-personal-pane]').forEach(function (pane) {
+      pane.classList.toggle('is-active', pane.getAttribute('data-bapp-personal-pane') === name);
+    });
+  }
+
+  root.querySelectorAll('[data-bapp-personal-tab]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      setMobileTab(button.getAttribute('data-bapp-personal-tab'));
+    });
+  });
+
+  var copyButton = d.getElementById('bapp-personal-copy-route');
+  var shareButton = d.getElementById('bapp-personal-share-route');
+  var resetButton = d.getElementById('bapp-personal-reset');
+  var previewSharedButton = d.getElementById('bapp-personal-preview-shared');
+  var saveSharedButton = d.getElementById('bapp-personal-save-shared');
+
+  if (copyButton) copyButton.addEventListener('click', copyRoute);
+  if (shareButton) shareButton.addEventListener('click', shareRoute);
+
+  if (resetButton) {
+    resetButton.addEventListener('click', function () {
+      var hasData =
+        personalState.savedMaterials.length ||
+        personalState.savedRoutes.length ||
+        personalState.recentMaterials.length ||
+        personalState.customRoute.length;
+
+      if (!hasData) {
+        status('Персональные данные уже пусты.');
+        return;
+      }
+
+      if (w.confirm('Очистить подборку, личный маршрут, сохраненные маршруты книги и историю недавних материалов в этом браузере?')) {
+        resetPersonal();
+      }
+    });
+  }
+
+  function openSharedPreview() {
+    if (!sharedRoute.length) return;
+    sharedPreview = true;
+    renderRoute();
+    setMobileTab('route');
+
+    var panel = root.querySelector('[data-bapp-personal-pane="route"]');
+    if (panel && typeof panel.scrollIntoView === 'function') {
+      panel.scrollIntoView({
+        behavior: w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
+  function saveSharedRoute() {
+    if (!sharedRoute.length) return;
+
+    var next = cloneState();
+    next.customRoute = sharedRoute.slice(0, MAX_ROUTE);
+    sharedPreview = false;
+    writeState(next);
+    status('Маршрут по ссылке сохранен в этом браузере.');
+  }
+
+  if (previewSharedButton) previewSharedButton.addEventListener('click', openSharedPreview);
+  if (saveSharedButton) saveSharedButton.addEventListener('click', saveSharedRoute);
+
+  function parseSharedRoute() {
+    try {
+      var params = new URLSearchParams(w.location.search);
+      var raw = params.get('myroute');
+      if (!raw) return [];
+      return uniqueStrings(raw.split(','), MAX_ROUTE).filter(function (id) {
+        return /^m\d{3,}$/.test(id);
+      });
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function validateSharedRoute() {
+    var raw = parseSharedRoute();
+    sharedRoute = raw.filter(function (id) {
+      return !!dataState.materialById[id];
+    });
+  }
+
+  function cleanStateAgainstData() {
+    if (!dataState.materials.length) return;
+
+    var next = cloneState();
+    next.savedMaterials = next.savedMaterials.filter(function (id) {
+      return !!dataState.materialById[id];
+    });
+    next.customRoute = next.customRoute.filter(function (id) {
+      return !!dataState.materialById[id];
+    });
+    next.savedRoutes = next.savedRoutes.filter(function (num) {
+      return !!dataState.routeByNum[num];
+    });
+    next.recentMaterials = next.recentMaterials.filter(function (entry) {
+      return !!dataState.materialById[entry.id];
+    });
+
+    var before = JSON.stringify(normalizeState(personalState));
+    var after = JSON.stringify(normalizeState(next));
+
+    if (before !== after) {
+      writeState(next);
+    }
+  }
+
+  function normalizePath(urlLike) {
+    try {
+      var url = new URL(urlLike, w.location.origin);
+      var host = url.hostname.replace(/^www\./, '');
+      if (host !== 'mmalova.com') return '';
+      var path = url.pathname.replace(/\/+$/, '') || '/';
+      return path;
+    } catch (error) {
+      return '';
+    }
+  }
+
+  var materialByPath = {};
+
+  function buildTrackingMap() {
+    materialByPath = {};
+    dataState.materials.forEach(function (material) {
+      var path = normalizePath(material.link);
+      if (path && !materialByPath[path]) materialByPath[path] = material.id;
+    });
+  }
+
+  d.addEventListener('click', function (event) {
+    var link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+    if (!link) return;
+    var path = normalizePath(link.href);
+    if (!path) return;
+    var id = materialByPath[path];
+    if (id) trackOpen(id);
+  }, true);
+
+  function initialize(data) {
+    data = data || {};
+    dataState.materials = Array.isArray(data.materials) ? data.materials.slice() : [];
+    dataState.routes = Array.isArray(data.routes) ? data.routes.slice() : [];
+    dataState.materialById = {};
+    dataState.routeByNum = {};
+
+    dataState.materials.forEach(function (material) {
+      if (material && material.id) dataState.materialById[String(material.id)] = material;
+    });
+
+    dataState.routes.forEach(function (route) {
+      if (route && route.num) dataState.routeByNum[String(route.num)] = route;
+    });
+
+    buildTrackingMap();
+    cleanStateAgainstData();
+    validateSharedRoute();
+    storageNote();
+    renderAll();
+
+    renderFinder('route', d.getElementById('bapp-personal-search-route').value);
+    renderFinder('saved', d.getElementById('bapp-personal-search-saved').value);
+  }
+
+  storageNote();
+  renderAll();
+
+  if (w.BookAppData && typeof w.BookAppData.then === 'function') {
+    w.BookAppData.then(initialize).catch(function () {
+      status('Не удалось загрузить каталог материалов. Сохраненные ID останутся в браузере.');
+    });
+  } else {
+    status('Загрузчик данных приложения не найден.');
+  }
+
+  w.addEventListener('bapp:data-updated', function (event) {
+    if (!event.detail) return;
+    initialize(event.detail);
+  });
+
+})(window, document);
+</script>
