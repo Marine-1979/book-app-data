@@ -1,0 +1,389 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+  ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 3 · HERO PERSONAL ACTIONS PATCH
+  Файл: 04_PATCH_HERO_PERSONAL_ACTIONS_T123.html
+  Версия: 1.0 · 09.08.2026
+
+  Назначение:
+  - добавляет «Сохранить / Сохранено» и «В мой маршрут / В маршруте»
+    к результатам глобального поиска в #bapp-search-hero;
+  - НЕ меняет поиск, ранжирование, ссылки, MAP_URL и исходный Hero;
+  - НЕ содержит собственного fetch и НЕ пишет в localStorage;
+  - использует только window.BookAppData + window.BookAppPersonal;
+  - fail-open: если персональный API недоступен, обычные результаты поиска
+    продолжают работать без персональных кнопок.
+
+  Установка для приемки:
+  - отдельный T123 на /navigator-copy;
+  - размещать ПОСЛЕ T123 Hero (можно сразу после Hero);
+  - ядро BookAppPersonal может находиться ниже по странице: патч дождется его.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+#bapp-search-hero .bapp-hero__result-card--personalized{
+  padding:0;
+  overflow:hidden;
+}
+
+#bapp-search-hero .bapp-hero__result-main{
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  min-width:0;
+  padding:17px 17px 12px;
+  color:inherit!important;
+  text-decoration:none!important;
+}
+
+#bapp-search-hero .bapp-hero__personal-actions{
+  display:none;
+  flex-wrap:wrap;
+  gap:7px;
+  padding:0 17px 15px;
+}
+
+#bapp-search-hero .bapp-hero__result-card--personal-ready .bapp-hero__personal-actions{
+  display:flex;
+}
+
+#bapp-search-hero .bapp-hero__personal-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  padding:7px 10px;
+  border:1px solid var(--c-border);
+  border-radius:6px;
+  background:var(--bg-card);
+  color:var(--c-body);
+  font-family:var(--f-ui);
+  font-size:10px;
+  font-weight:600;
+  line-height:1.2;
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,color .18s ease;
+}
+
+#bapp-search-hero .bapp-hero__personal-btn:hover,
+#bapp-search-hero .bapp-hero__personal-btn:focus-visible{
+  border-color:rgba(255,107,53,.48);
+  background:var(--bg-warm);
+  color:var(--c-accent);
+  outline:none;
+}
+
+#bapp-search-hero .bapp-hero__personal-btn[aria-pressed="true"]{
+  border-color:rgba(255,107,53,.34);
+  background:var(--bg-soft);
+  color:var(--c-accent);
+}
+
+#bapp-search-hero .bapp-hero__personal-btn:disabled{
+  opacity:.46;
+  cursor:default;
+}
+
+@media(max-width:760px){
+  #bapp-search-hero .bapp-hero__personal-actions{
+    gap:8px;
+    padding:0 16px 16px;
+  }
+
+  #bapp-search-hero .bapp-hero__personal-btn{
+    flex:1 1 145px;
+    min-height:44px;
+    padding:9px 11px;
+    font-size:11px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #bapp-search-hero .bapp-hero__personal-btn{
+    transition:none!important;
+  }
+}
+</style>
+
+<script>
+(function (w, d) {
+  'use strict';
+
+  var PATCH_ID = 'bapp-hero-personal-actions-v1';
+  if (w[PATCH_ID]) return;
+  w[PATCH_ID] = true;
+
+  var root = d.getElementById('bapp-search-hero');
+  if (!root) return;
+
+  var grid = d.getElementById('bapp-hero-results-grid');
+  if (!grid) return;
+
+  var materialByPath = {};
+  var materialsReady = false;
+  var observer = null;
+  var apiTimer = null;
+  var apiTries = 0;
+  var MAX_API_TRIES = 80;
+
+  function normalizePath(urlLike) {
+    try {
+      var url = new URL(urlLike, w.location.origin);
+      var host = String(url.hostname || '').replace(/^www\./, '');
+      if (host !== 'mmalova.com') return '';
+      return (url.pathname || '/').replace(/\/+$/, '') || '/';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function buildMaterialMap(data) {
+    materialByPath = {};
+
+    var materials = data && Array.isArray(data.materials) ? data.materials : [];
+    materials.forEach(function (material) {
+      if (!material || !material.id || !material.link) return;
+      var path = normalizePath(material.link);
+      if (path && !materialByPath[path]) {
+        materialByPath[path] = String(material.id);
+      }
+    });
+
+    materialsReady = true;
+    processGrid();
+  }
+
+  function personalApi() {
+    var api = w.BookAppPersonal;
+    if (!api) return null;
+
+    var required = [
+      'saveMaterial',
+      'unsaveMaterial',
+      'isSaved',
+      'addToRoute',
+      'removeFromRoute',
+      'getState'
+    ];
+
+    for (var i = 0; i < required.length; i += 1) {
+      if (typeof api[required[i]] !== 'function') return null;
+    }
+
+    return api;
+  }
+
+  function routeHas(api, id) {
+    try {
+      var state = api.getState();
+      return !!(
+        state &&
+        Array.isArray(state.customRoute) &&
+        state.customRoute.indexOf(id) !== -1
+      );
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function updateButtonState(card) {
+    if (!card) return;
+
+    var id = card.getAttribute('data-bapp-material-id');
+    var saveButton = card.querySelector('[data-bapp-personal-action="save"]');
+    var routeButton = card.querySelector('[data-bapp-personal-action="route"]');
+    var api = personalApi();
+
+    if (!id || !saveButton || !routeButton || !api) {
+      card.classList.remove('bapp-hero__result-card--personal-ready');
+      return;
+    }
+
+    var saved = false;
+    var inRoute = false;
+
+    try {
+      saved = !!api.isSaved(id);
+      inRoute = routeHas(api, id);
+    } catch (error) {
+      card.classList.remove('bapp-hero__result-card--personal-ready');
+      return;
+    }
+
+    saveButton.setAttribute('aria-pressed', saved ? 'true' : 'false');
+    saveButton.textContent = saved ? 'Сохранено' : 'Сохранить';
+
+    routeButton.setAttribute('aria-pressed', inRoute ? 'true' : 'false');
+    routeButton.textContent = inRoute ? 'В маршруте' : 'В мой маршрут';
+
+    card.classList.add('bapp-hero__result-card--personal-ready');
+  }
+
+  function makeActionButton(action, label) {
+    var button = d.createElement('button');
+    button.className = 'bapp-hero__personal-btn';
+    button.type = 'button';
+    button.setAttribute('data-bapp-personal-action', action);
+    button.setAttribute('aria-pressed', 'false');
+    button.textContent = label;
+    return button;
+  }
+
+  function transformCard(anchor) {
+    if (!anchor || anchor.nodeType !== 1) return;
+    if (!anchor.matches('a.bapp-hero__result-card')) return;
+    if (anchor.getAttribute('data-bapp-personal-processed') === '1') return;
+    if (!materialsReady) return;
+
+    var path = normalizePath(anchor.href);
+    var id = path ? materialByPath[path] : '';
+    if (!id) return;
+
+    var card = d.createElement('article');
+    card.className = anchor.className + ' bapp-hero__result-card--personalized';
+    card.setAttribute('data-bapp-personal-processed', '1');
+    card.setAttribute('data-bapp-material-id', id);
+
+    var main = d.createElement('a');
+    main.className = 'bapp-hero__result-main';
+    main.href = anchor.href;
+
+    if (anchor.target) main.target = anchor.target;
+    if (anchor.rel) main.rel = anchor.rel;
+
+    while (anchor.firstChild) {
+      main.appendChild(anchor.firstChild);
+    }
+
+    var actions = d.createElement('div');
+    actions.className = 'bapp-hero__personal-actions';
+    actions.setAttribute('aria-label', 'Персональные действия с материалом');
+
+    var saveButton = makeActionButton('save', 'Сохранить');
+    var routeButton = makeActionButton('route', 'В мой маршрут');
+
+    actions.appendChild(saveButton);
+    actions.appendChild(routeButton);
+
+    card.appendChild(main);
+    card.appendChild(actions);
+
+    anchor.replaceWith(card);
+    updateButtonState(card);
+  }
+
+  function processGrid() {
+    if (!materialsReady) return;
+
+    var cards = grid.querySelectorAll('a.bapp-hero__result-card');
+    cards.forEach(transformCard);
+
+    var processed = grid.querySelectorAll(
+      '.bapp-hero__result-card--personalized[data-bapp-material-id]'
+    );
+    processed.forEach(updateButtonState);
+  }
+
+  function handleAction(event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest('[data-bapp-personal-action]')
+      : null;
+
+    if (!button || !root.contains(button)) return;
+
+    var card = button.closest('[data-bapp-material-id]');
+    if (!card) return;
+
+    var id = card.getAttribute('data-bapp-material-id');
+    var action = button.getAttribute('data-bapp-personal-action');
+    var api = personalApi();
+
+    if (!id || !api) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    try {
+      if (action === 'save') {
+        if (api.isSaved(id)) {
+          api.unsaveMaterial(id);
+        } else {
+          api.saveMaterial(id);
+        }
+      }
+
+      if (action === 'route') {
+        if (routeHas(api, id)) {
+          api.removeFromRoute(id);
+        } else {
+          api.addToRoute(id);
+        }
+      }
+    } catch (error) {
+      return;
+    }
+
+    updateButtonState(card);
+  }
+
+  function startApiWait() {
+    if (personalApi()) {
+      processGrid();
+      return;
+    }
+
+    if (apiTimer) return;
+
+    apiTimer = w.setInterval(function () {
+      apiTries += 1;
+
+      if (personalApi()) {
+        w.clearInterval(apiTimer);
+        apiTimer = null;
+        processGrid();
+        return;
+      }
+
+      if (apiTries >= MAX_API_TRIES) {
+        w.clearInterval(apiTimer);
+        apiTimer = null;
+      }
+    }, 250);
+  }
+
+  grid.addEventListener('click', handleAction);
+
+  w.addEventListener('bapp:personal-updated', function () {
+    processGrid();
+  });
+
+  w.addEventListener('bapp:data-updated', function (event) {
+    if (!event.detail) return;
+    buildMaterialMap(event.detail);
+  });
+
+  observer = new MutationObserver(function () {
+    processGrid();
+    startApiWait();
+  });
+
+  observer.observe(grid, {
+    childList: true,
+    subtree: false
+  });
+
+  if (w.BookAppData && typeof w.BookAppData.then === 'function') {
+    w.BookAppData.then(function (data) {
+      buildMaterialMap(data || {});
+      startApiWait();
+    }).catch(function () {
+      /* Fail-open: поиск остается полностью рабочим без персональных действий. */
+    });
+  }
+
+  if (d.readyState === 'loading') {
+    d.addEventListener('DOMContentLoaded', startApiWait, { once: true });
+  } else {
+    startApiWait();
+  }
+
+})(window, document);
+</script>
