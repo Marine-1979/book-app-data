@@ -1,0 +1,640 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+  ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 4A · «ЦИТАТНИК» SHARE ADAPTER
+  Файл: 06_BAPP_CITATNIK_ADAPTER_T123.html
+  Версия: 1.0 · 10.08.2026
+
+  Назначение:
+  - использует shareQuoteId из window.BookAppData;
+  - добавляет «Поделиться идеей» ТОЛЬКО материалам с shareQuoteId;
+  - открывает каноническую цитату на /kniga?quote=ID#mmkquotes;
+  - дает действия: открыть цитату, скопировать ссылку, Telegram,
+    системное меню (если поддерживается браузером);
+  - НЕ хранит тексты цитат;
+  - НЕ содержит собственного fetch;
+  - НЕ использует собственное браузерное хранилище;
+  - НЕ меняет поиск, ранжирование, ссылки материалов и персональный слой;
+  - fail-open: при отсутствии данных/адаптера обычный поиск и персональные
+    действия продолжают работать.
+
+  Зависимости:
+  - window.BookAppData;
+  - для кнопки в Hero ожидается принятый Stage 3 patch
+    04_PATCH_HERO_PERSONAL_ACTIONS_T123.html.
+    Если его нет, адаптер просто не добавит UI и не ломает страницу.
+
+  Установка для приемки:
+  - сначала сохранить файл в репозитории:
+    tilda/06_BAPP_CITATNIK_ADAPTER_T123.html
+  - затем отдельный T123 на /navigator-copy;
+  - размещать ПОСЛЕ 04_PATCH_HERO_PERSONAL_ACTIONS_T123
+    и ДО «Жизнь книги онлайн».
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+#bapp-search-hero .bapp-share__trigger{
+  white-space:nowrap;
+}
+
+#bapp-search-hero .bapp-share__panel{
+  display:none;
+  width:100%;
+  margin:0;
+  padding:12px 17px 15px;
+  border-top:1px solid var(--c-border,#E2E2E2);
+  background:linear-gradient(180deg,var(--bg-card,#FFFFFF),var(--bg-warm,#FFF7F3));
+}
+
+#bapp-search-hero .bapp-share__panel.is-open{
+  display:block;
+}
+
+#bapp-search-hero .bapp-share__panel-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+#bapp-search-hero .bapp-share__panel-copy{
+  min-width:0;
+}
+
+#bapp-search-hero .bapp-share__eyebrow{
+  display:block;
+  margin:0 0 3px;
+  font-family:var(--f-system,'Unbounded',sans-serif);
+  font-size:8px;
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--c-accent-text,#C1400F);
+}
+
+#bapp-search-hero .bapp-share__title{
+  margin:0;
+  font-family:var(--f-ui,'Montserrat',sans-serif);
+  font-size:12px;
+  font-weight:600;
+  line-height:1.4;
+  color:var(--c-heading,#111111);
+}
+
+#bapp-search-hero .bapp-share__close{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 36px;
+  width:36px;
+  height:36px;
+  padding:0;
+  border:1px solid var(--c-border,#E2E2E2);
+  border-radius:6px;
+  background:var(--bg-card,#FFFFFF);
+  color:var(--c-body,#595959);
+  cursor:pointer;
+}
+
+#bapp-search-hero .bapp-share__close svg{
+  width:16px;
+  height:16px;
+  pointer-events:none;
+}
+
+#bapp-search-hero .bapp-share__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+#bapp-search-hero .bapp-share__action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:8px 11px;
+  border:1px solid var(--c-border,#E2E2E2);
+  border-radius:6px;
+  background:var(--bg-card,#FFFFFF);
+  color:var(--c-body,#595959);
+  font-family:var(--f-ui,'Montserrat',sans-serif);
+  font-size:10px;
+  font-weight:600;
+  line-height:1.25;
+  cursor:pointer;
+  text-decoration:none!important;
+  transition:border-color .18s ease,background .18s ease,color .18s ease;
+}
+
+#bapp-search-hero .bapp-share__action:hover{
+  border-color:rgba(193,64,15,.42);
+  background:var(--bg-soft,#FFF0EB);
+  color:var(--c-accent-text,#C1400F);
+}
+
+#bapp-search-hero .bapp-share__trigger:focus-visible,
+#bapp-search-hero .bapp-share__action:focus-visible,
+#bapp-search-hero .bapp-share__close:focus-visible{
+  outline:2px solid var(--c-accent-text,#C1400F)!important;
+  outline-offset:2px;
+}
+
+#bapp-search-hero .bapp-share__status{
+  min-height:17px;
+  margin:8px 0 0;
+  font-family:var(--f-ui,'Montserrat',sans-serif);
+  font-size:10px;
+  line-height:1.4;
+  color:var(--c-accent-text,#C1400F);
+}
+
+@media(max-width:760px){
+  #bapp-search-hero .bapp-share__trigger{
+    flex:1 1 145px;
+  }
+
+  #bapp-search-hero .bapp-share__panel{
+    padding:13px 16px 16px;
+  }
+
+  #bapp-search-hero .bapp-share__close{
+    flex-basis:44px;
+    width:44px;
+    height:44px;
+  }
+
+  #bapp-search-hero .bapp-share__action{
+    flex:1 1 calc(50% - 4px);
+    min-height:44px;
+    padding:9px 10px;
+    font-size:11px;
+  }
+
+  #bapp-search-hero .bapp-share__status{
+    font-size:11px;
+  }
+}
+
+@media(max-width:390px){
+  #bapp-search-hero .bapp-share__action{
+    flex-basis:100%;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #bapp-search-hero .bapp-share__action{
+    transition:none!important;
+  }
+}
+</style>
+
+<script>
+(function (w, d) {
+  'use strict';
+
+  var PATCH_ID = 'bapp-citatnik-adapter-v1';
+  if (w[PATCH_ID]) return;
+  w[PATCH_ID] = true;
+
+  var root = d.getElementById('bapp-search-hero');
+  var grid = d.getElementById('bapp-hero-results-grid');
+  if (!root || !grid) return;
+
+  var QUOTE_BASE = 'https://mmalova.com/kniga';
+  var materialById = {};
+  var dataReady = false;
+  var observer = null;
+  var statusTimers = {};
+
+  function cleanId(value) {
+    var id = String(value || '').trim();
+    return /^[A-Za-z0-9_-]+$/.test(id) ? id : '';
+  }
+
+  function buildData(data) {
+    materialById = {};
+
+    var materials = data && Array.isArray(data.materials) ? data.materials : [];
+    materials.forEach(function (material) {
+      if (!material || !material.id) return;
+
+      var materialId = cleanId(material.id);
+      var quoteId = cleanId(material.shareQuoteId);
+      if (!materialId) return;
+
+      materialById[materialId] = {
+        id: materialId,
+        quoteId: quoteId
+      };
+    });
+
+    dataReady = true;
+    processGrid();
+  }
+
+  function quoteIdFor(materialId) {
+    var id = cleanId(materialId);
+    if (!id || !materialById[id]) return '';
+    return cleanId(materialById[id].quoteId);
+  }
+
+  function getQuoteUrl(materialId) {
+    var quoteId = quoteIdFor(materialId);
+    if (!quoteId) return '';
+
+    try {
+      var url = new URL(QUOTE_BASE);
+      url.searchParams.set('quote', quoteId);
+      url.hash = 'mmkquotes';
+      return url.toString();
+    } catch (error) {
+      return QUOTE_BASE + '?quote=' + encodeURIComponent(quoteId) + '#mmkquotes';
+    }
+  }
+
+  function openQuote(materialId) {
+    var url = getQuoteUrl(materialId);
+    if (!url) return false;
+
+    var opened = w.open(url, '_blank', 'noopener,noreferrer');
+    if (opened) {
+      try { opened.opener = null; } catch (error) {}
+    }
+    return true;
+  }
+
+  function copyText(value) {
+    if (!value) return Promise.resolve(false);
+
+    if (w.navigator.clipboard && typeof w.navigator.clipboard.writeText === 'function') {
+      return w.navigator.clipboard.writeText(value).then(function () {
+        return true;
+      }).catch(function () {
+        return fallbackCopy(value);
+      });
+    }
+
+    return fallbackCopy(value);
+  }
+
+  function fallbackCopy(value) {
+    return new Promise(function (resolve) {
+      var area = d.createElement('textarea');
+      area.value = value;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.left = '-9999px';
+      area.style.top = '0';
+      area.style.opacity = '0';
+
+      d.body.appendChild(area);
+      area.focus();
+      area.select();
+
+      var ok = false;
+      try {
+        ok = !!d.execCommand('copy');
+      } catch (error) {
+        ok = false;
+      }
+
+      area.remove();
+      resolve(ok);
+    });
+  }
+
+  function copyQuoteUrl(materialId) {
+    var url = getQuoteUrl(materialId);
+    if (!url) return Promise.resolve(false);
+    return copyText(url);
+  }
+
+  function telegram(materialId) {
+    var url = getQuoteUrl(materialId);
+    if (!url) return false;
+
+    var shareUrl = 'https://t.me/share/url?url=' +
+      encodeURIComponent(url) +
+      '&text=' +
+      encodeURIComponent('Идея из книги «От PR к индустрии доверия»');
+
+    w.open(shareUrl, '_blank', 'noopener,noreferrer');
+    return true;
+  }
+
+  function nativeShare(materialId) {
+    var url = getQuoteUrl(materialId);
+    if (!url || !w.navigator.share) return Promise.resolve(false);
+
+    return w.navigator.share({
+      title: 'Идея из книги «От PR к индустрии доверия»',
+      text: 'Цитата и профессиональный контекст',
+      url: url
+    }).then(function () {
+      return true;
+    }).catch(function (error) {
+      if (error && error.name === 'AbortError') return false;
+      return copyQuoteUrl(materialId);
+    });
+  }
+
+  w.BAPP_SHARE = {
+    hasQuote: function (materialId) {
+      return !!quoteIdFor(materialId);
+    },
+    getQuoteUrl: getQuoteUrl,
+    open: openQuote,
+    copy: copyQuoteUrl,
+    telegram: telegram,
+    native: nativeShare
+  };
+
+  function panelId(materialId) {
+    return 'bapp-share-panel-' + cleanId(materialId);
+  }
+
+  function createTrigger(materialId) {
+    var button = d.createElement('button');
+    button.className = 'bapp-hero__personal-btn bapp-share__trigger';
+    button.type = 'button';
+    button.setAttribute('data-bapp-share-trigger', materialId);
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', panelId(materialId));
+    button.textContent = 'Поделиться идеей';
+    return button;
+  }
+
+  function actionButton(action, label) {
+    var button = d.createElement('button');
+    button.className = 'bapp-share__action';
+    button.type = 'button';
+    button.setAttribute('data-bapp-share-action', action);
+    button.textContent = label;
+    return button;
+  }
+
+  function createPanel(materialId) {
+    var panel = d.createElement('div');
+    panel.className = 'bapp-share__panel';
+    panel.id = panelId(materialId);
+    panel.setAttribute('data-bapp-share-panel', materialId);
+    panel.setAttribute('aria-label', 'Поделиться идеей из книги');
+
+    var head = d.createElement('div');
+    head.className = 'bapp-share__panel-head';
+
+    var copy = d.createElement('div');
+    copy.className = 'bapp-share__panel-copy';
+
+    var eyebrow = d.createElement('span');
+    eyebrow.className = 'bapp-share__eyebrow';
+    eyebrow.textContent = 'Цитатник';
+
+    var title = d.createElement('p');
+    title.className = 'bapp-share__title';
+    title.textContent = 'Открыть или отправить связанную цитату';
+
+    copy.appendChild(eyebrow);
+    copy.appendChild(title);
+
+    var close = d.createElement('button');
+    close.className = 'bapp-share__close';
+    close.type = 'button';
+    close.setAttribute('data-bapp-share-action', 'close');
+    close.setAttribute('aria-label', 'Закрыть меню «Поделиться идеей»');
+    close.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" ' +
+      'stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>';
+
+    head.appendChild(copy);
+    head.appendChild(close);
+
+    var actions = d.createElement('div');
+    actions.className = 'bapp-share__actions';
+
+    actions.appendChild(actionButton('open', 'Открыть цитату'));
+    actions.appendChild(actionButton('copy', 'Скопировать ссылку'));
+    actions.appendChild(actionButton('telegram', 'Telegram'));
+
+    if (w.navigator.share) {
+      actions.appendChild(actionButton('native', 'Ещё'));
+    }
+
+    var status = d.createElement('p');
+    status.className = 'bapp-share__status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+
+    panel.appendChild(head);
+    panel.appendChild(actions);
+    panel.appendChild(status);
+
+    return panel;
+  }
+
+  function closePanel(card, restoreFocus) {
+    if (!card) return;
+
+    var panel = card.querySelector('[data-bapp-share-panel]');
+    var trigger = card.querySelector('[data-bapp-share-trigger]');
+    if (panel) panel.classList.remove('is-open');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+
+    if (restoreFocus && trigger) {
+      try { trigger.focus(); } catch (error) {}
+    }
+  }
+
+  function closeAll(exceptCard) {
+    var cards = grid.querySelectorAll(
+      '.bapp-hero__result-card--personalized[data-bapp-material-id]'
+    );
+
+    cards.forEach(function (card) {
+      if (card !== exceptCard) closePanel(card, false);
+    });
+  }
+
+  function togglePanel(card) {
+    if (!card) return;
+
+    var panel = card.querySelector('[data-bapp-share-panel]');
+    var trigger = card.querySelector('[data-bapp-share-trigger]');
+    if (!panel || !trigger) return;
+
+    var willOpen = !panel.classList.contains('is-open');
+    closeAll(willOpen ? card : null);
+
+    panel.classList.toggle('is-open', willOpen);
+    trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+
+    if (willOpen) {
+      var first = panel.querySelector('[data-bapp-share-action="open"]');
+      if (first) {
+        w.setTimeout(function () {
+          try { first.focus(); } catch (error) {}
+        }, 0);
+      }
+    }
+  }
+
+  function say(card, text) {
+    if (!card) return;
+
+    var materialId = cleanId(card.getAttribute('data-bapp-material-id'));
+    var status = card.querySelector('.bapp-share__status');
+    if (!status) return;
+
+    status.textContent = text || '';
+
+    if (statusTimers[materialId]) {
+      w.clearTimeout(statusTimers[materialId]);
+    }
+
+    statusTimers[materialId] = w.setTimeout(function () {
+      status.textContent = '';
+      delete statusTimers[materialId];
+    }, 2600);
+  }
+
+  function ensureCard(card) {
+    if (!dataReady || !card) return;
+
+    var materialId = cleanId(card.getAttribute('data-bapp-material-id'));
+    if (!materialId) return;
+
+    var quoteId = quoteIdFor(materialId);
+    var actions = card.querySelector('.bapp-hero__personal-actions');
+    var existingTrigger = card.querySelector('[data-bapp-share-trigger]');
+    var existingPanel = card.querySelector('[data-bapp-share-panel]');
+
+    if (!quoteId) {
+      if (existingTrigger) existingTrigger.remove();
+      if (existingPanel) existingPanel.remove();
+      return;
+    }
+
+    if (!actions) return;
+
+    if (!existingTrigger) {
+      actions.appendChild(createTrigger(materialId));
+    }
+
+    if (!existingPanel) {
+      card.appendChild(createPanel(materialId));
+    }
+  }
+
+  function processGrid() {
+    if (!dataReady) return;
+
+    var cards = grid.querySelectorAll(
+      '.bapp-hero__result-card--personalized[data-bapp-material-id]'
+    );
+    cards.forEach(ensureCard);
+  }
+
+  function handleClick(event) {
+    var trigger = event.target && event.target.closest
+      ? event.target.closest('[data-bapp-share-trigger]')
+      : null;
+
+    if (trigger && root.contains(trigger)) {
+      var triggerCard = trigger.closest('[data-bapp-material-id]');
+      if (!triggerCard) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      togglePanel(triggerCard);
+      return;
+    }
+
+    var actionButtonNode = event.target && event.target.closest
+      ? event.target.closest('[data-bapp-share-action]')
+      : null;
+
+    if (!actionButtonNode || !root.contains(actionButtonNode)) return;
+
+    var card = actionButtonNode.closest('[data-bapp-material-id]');
+    if (!card) return;
+
+    var materialId = cleanId(card.getAttribute('data-bapp-material-id'));
+    var action = actionButtonNode.getAttribute('data-bapp-share-action');
+    if (!materialId) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (action === 'close') {
+      closePanel(card, true);
+      return;
+    }
+
+    if (action === 'open') {
+      if (openQuote(materialId)) {
+        say(card, 'Цитата открыта в новой вкладке');
+      }
+      return;
+    }
+
+    if (action === 'copy') {
+      copyQuoteUrl(materialId).then(function (ok) {
+        say(card, ok ? 'Ссылка на цитату скопирована' : 'Не удалось скопировать ссылку');
+      });
+      return;
+    }
+
+    if (action === 'telegram') {
+      if (telegram(materialId)) {
+        say(card, 'Открываем Telegram');
+      }
+      return;
+    }
+
+    if (action === 'native') {
+      nativeShare(materialId).then(function (ok) {
+        if (ok) say(card, 'Готово');
+      });
+    }
+  }
+
+  grid.addEventListener('click', handleClick);
+
+  d.addEventListener('click', function (event) {
+    if (!root.contains(event.target)) closeAll(null);
+  });
+
+  d.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape') return;
+
+    var openPanel = grid.querySelector('.bapp-share__panel.is-open');
+    if (!openPanel) return;
+
+    var card = openPanel.closest('[data-bapp-material-id]');
+    closePanel(card, true);
+  });
+
+  w.addEventListener('bapp:data-updated', function (event) {
+    if (event.detail) buildData(event.detail);
+  });
+
+  observer = new MutationObserver(function () {
+    processGrid();
+  });
+
+  observer.observe(grid, {
+    childList: true,
+    subtree: false
+  });
+
+  if (w.BookAppData && typeof w.BookAppData.then === 'function') {
+    w.BookAppData.then(function (data) {
+      buildData(data || {});
+    }).catch(function () {
+      /* Fail-open: Hero/search остаются рабочими без share UI. */
+    });
+  }
+
+})(window, document);
+</script>
