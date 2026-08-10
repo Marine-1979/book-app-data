@@ -1,0 +1,364 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+  ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 3 · ROUTES PERSONAL ACTIONS PATCH
+  Файл: 05_PATCH_ROUTES_PERSONAL_ACTIONS_T123.html
+  Версия: 1.0 · 10.08.2026
+
+  Назначение:
+  - добавляет «Сохранить / Сохранено» и «В мой маршрут / В маршруте»
+    к материалам внутри модального окна блока «8 маршрутов»;
+  - НЕ меняет карточки маршрутов, порядок материалов, ссылки и логику модалки;
+  - НЕ содержит собственного fetch и НЕ пишет в localStorage;
+  - использует только window.BookAppData + window.BookAppPersonal;
+  - fail-open: если персональный API недоступен, модалка и ссылки материалов
+    продолжают работать как раньше без персональных кнопок.
+
+  Установка для приемки:
+  - отдельный T123 на /navigator-copy;
+  - размещать сразу ПОСЛЕ T123 «8 маршрутов»;
+  - ядро BookAppPersonal может находиться ниже по странице: патч дождется его.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+#bapp-navigator .bapp-routes__material-shell{
+  margin-bottom:9px;
+  border-radius:var(--r-card,8px);
+}
+#bapp-navigator .bapp-routes__material-shell > .bapp-routes__material{
+  margin-bottom:0;
+}
+#bapp-navigator .bapp-routes__material-actions{
+  display:none;
+  flex-wrap:wrap;
+  gap:7px;
+  padding:8px 14px 12px 66px;
+  border:1px solid #F0F0F0;
+  border-top:0;
+  border-radius:0 0 var(--r-card,8px) var(--r-card,8px);
+  background:var(--bg-card,#FFFFFF);
+}
+#bapp-navigator .bapp-routes__material-shell--personal-ready > .bapp-routes__material{
+  border-radius:var(--r-card,8px) var(--r-card,8px) 0 0;
+}
+#bapp-navigator .bapp-routes__material-shell--personal-ready .bapp-routes__material-actions{
+  display:flex;
+}
+#bapp-navigator .bapp-routes__personal-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  padding:7px 10px;
+  border:1px solid var(--c-border,#E2E2E2);
+  border-radius:6px;
+  background:var(--bg-card,#FFFFFF);
+  color:var(--c-body,#595959);
+  font-family:var(--f-ui,'Montserrat',sans-serif);
+  font-size:10px;
+  font-weight:600;
+  line-height:1.2;
+  cursor:pointer;
+  transition:border-color .18s ease,background .18s ease,color .18s ease;
+}
+#bapp-navigator .bapp-routes__personal-btn:hover,
+#bapp-navigator .bapp-routes__personal-btn:focus-visible{
+  border-color:rgba(255,107,53,.48);
+  background:#FFF8F5;
+  color:var(--c-accent,#E85114);
+  outline:none;
+}
+#bapp-navigator .bapp-routes__personal-btn[aria-pressed="true"]{
+  border-color:rgba(255,107,53,.34);
+  background:var(--bg-soft,#FFF0EB);
+  color:var(--c-accent,#E85114);
+}
+@media(max-width:680px){
+  #bapp-navigator .bapp-routes__material-actions{
+    gap:8px;
+    padding:8px 12px 13px;
+  }
+  #bapp-navigator .bapp-routes__personal-btn{
+    flex:1 1 135px;
+    min-height:44px;
+    padding:9px 10px;
+    font-size:11px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #bapp-navigator .bapp-routes__personal-btn{
+    transition:none!important;
+  }
+}
+</style>
+
+<script>
+(function (w, d) {
+  'use strict';
+
+  var PATCH_KEY = '__bappRoutesPersonalActionsV1';
+  if (w[PATCH_KEY]) return;
+  w[PATCH_KEY] = true;
+
+  var root = d.getElementById('bapp-navigator');
+  var dialogBody = d.getElementById('bapp-routes-dialog-body');
+  if (!root || !dialogBody) return;
+
+  var materialByPath = {};
+  var materialsReady = false;
+  var apiTimer = null;
+  var apiTries = 0;
+  var MAX_API_TRIES = 80;
+
+  function normalizePath(urlLike) {
+    try {
+      var url = new URL(urlLike, w.location.origin);
+      var host = String(url.hostname || '').replace(/^www\./, '');
+      var currentHost = String(w.location.hostname || '').replace(/^www\./, '');
+      if (host !== 'mmalova.com' && host !== currentHost) return '';
+      return (url.pathname || '/').replace(/\/+$/, '') || '/';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function buildMaterialMap(data) {
+    materialByPath = {};
+    var materials = data && Array.isArray(data.materials) ? data.materials : [];
+
+    materials.forEach(function (material) {
+      if (!material || !material.id || !material.link) return;
+      var path = normalizePath(material.link);
+      if (path && !materialByPath[path]) {
+        materialByPath[path] = String(material.id);
+      }
+    });
+
+    materialsReady = true;
+    processDialog();
+  }
+
+  function personalApi() {
+    var api = w.BookAppPersonal;
+    if (!api) return null;
+
+    var required = [
+      'saveMaterial',
+      'unsaveMaterial',
+      'isSaved',
+      'addToRoute',
+      'removeFromRoute',
+      'getState'
+    ];
+
+    for (var i = 0; i < required.length; i += 1) {
+      if (typeof api[required[i]] !== 'function') return null;
+    }
+
+    return api;
+  }
+
+  function routeHas(api, id) {
+    try {
+      var state = api.getState();
+      return !!(
+        state &&
+        Array.isArray(state.customRoute) &&
+        state.customRoute.indexOf(id) !== -1
+      );
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function makeButton(action, label) {
+    var button = d.createElement('button');
+    button.className = 'bapp-routes__personal-btn';
+    button.type = 'button';
+    button.setAttribute('data-bapp-routes-personal-action', action);
+    button.setAttribute('aria-pressed', 'false');
+    button.textContent = label;
+    return button;
+  }
+
+  function updateShell(shell) {
+    if (!shell) return;
+
+    var id = shell.getAttribute('data-bapp-material-id');
+    var saveButton = shell.querySelector('[data-bapp-routes-personal-action="save"]');
+    var routeButton = shell.querySelector('[data-bapp-routes-personal-action="route"]');
+    var api = personalApi();
+
+    if (!id || !saveButton || !routeButton || !api) {
+      shell.classList.remove('bapp-routes__material-shell--personal-ready');
+      return;
+    }
+
+    var saved = false;
+    var inRoute = false;
+
+    try {
+      saved = !!api.isSaved(id);
+      inRoute = routeHas(api, id);
+    } catch (error) {
+      shell.classList.remove('bapp-routes__material-shell--personal-ready');
+      return;
+    }
+
+    saveButton.setAttribute('aria-pressed', saved ? 'true' : 'false');
+    saveButton.textContent = saved ? 'Сохранено' : 'Сохранить';
+
+    routeButton.setAttribute('aria-pressed', inRoute ? 'true' : 'false');
+    routeButton.textContent = inRoute ? 'В маршруте' : 'В мой маршрут';
+
+    shell.classList.add('bapp-routes__material-shell--personal-ready');
+  }
+
+  function transformMaterialLink(link) {
+    if (!link || link.nodeType !== 1) return;
+    if (!link.matches('a.bapp-routes__material')) return;
+    if (!materialsReady) return;
+
+    var path = normalizePath(link.href);
+    var id = path ? materialByPath[path] : '';
+    if (!id) return;
+
+    var shell = d.createElement('article');
+    shell.className = 'bapp-routes__material-shell';
+    shell.setAttribute('data-bapp-material-id', id);
+
+    var actions = d.createElement('div');
+    actions.className = 'bapp-routes__material-actions';
+    actions.setAttribute('aria-label', 'Персональные действия с материалом');
+
+    actions.appendChild(makeButton('save', 'Сохранить'));
+    actions.appendChild(makeButton('route', 'В мой маршрут'));
+
+    link.parentNode.insertBefore(shell, link);
+    shell.appendChild(link);
+    shell.appendChild(actions);
+
+    updateShell(shell);
+  }
+
+  function processDialog() {
+    if (!materialsReady) return;
+
+    Array.prototype.slice.call(dialogBody.children).forEach(function (child) {
+      if (
+        child &&
+        child.nodeType === 1 &&
+        child.matches('a.bapp-routes__material')
+      ) {
+        transformMaterialLink(child);
+      }
+    });
+
+    dialogBody
+      .querySelectorAll('.bapp-routes__material-shell[data-bapp-material-id]')
+      .forEach(updateShell);
+  }
+
+  function handleAction(event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest('[data-bapp-routes-personal-action]')
+      : null;
+
+    if (!button || !dialogBody.contains(button)) return;
+
+    var shell = button.closest('[data-bapp-material-id]');
+    if (!shell) return;
+
+    var id = shell.getAttribute('data-bapp-material-id');
+    var action = button.getAttribute('data-bapp-routes-personal-action');
+    var api = personalApi();
+
+    if (!id || !api) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    try {
+      if (action === 'save') {
+        if (api.isSaved(id)) {
+          api.unsaveMaterial(id);
+        } else {
+          api.saveMaterial(id);
+        }
+      }
+
+      if (action === 'route') {
+        if (routeHas(api, id)) {
+          api.removeFromRoute(id);
+        } else {
+          api.addToRoute(id);
+        }
+      }
+    } catch (error) {
+      return;
+    }
+
+    updateShell(shell);
+  }
+
+  function startApiWait() {
+    if (personalApi()) {
+      processDialog();
+      return;
+    }
+
+    if (apiTimer) return;
+
+    apiTimer = w.setInterval(function () {
+      apiTries += 1;
+
+      if (personalApi()) {
+        w.clearInterval(apiTimer);
+        apiTimer = null;
+        processDialog();
+        return;
+      }
+
+      if (apiTries >= MAX_API_TRIES) {
+        w.clearInterval(apiTimer);
+        apiTimer = null;
+      }
+    }, 250);
+  }
+
+  dialogBody.addEventListener('click', handleAction);
+
+  w.addEventListener('bapp:personal-updated', function () {
+    processDialog();
+  });
+
+  w.addEventListener('bapp:data-updated', function (event) {
+    if (!event.detail) return;
+    buildMaterialMap(event.detail);
+  });
+
+  var observer = new MutationObserver(function () {
+    processDialog();
+    startApiWait();
+  });
+
+  observer.observe(dialogBody, {
+    childList: true,
+    subtree: false
+  });
+
+  if (w.BookAppData && typeof w.BookAppData.then === 'function') {
+    w.BookAppData.then(function (data) {
+      buildMaterialMap(data || {});
+      startApiWait();
+    }).catch(function () {
+      /* Fail-open: модальное окно маршрута работает без персональных кнопок. */
+    });
+  }
+
+  if (d.readyState === 'loading') {
+    d.addEventListener('DOMContentLoaded', startApiWait, { once: true });
+  } else {
+    startApiWait();
+  }
+
+})(window, document);
+</script>
