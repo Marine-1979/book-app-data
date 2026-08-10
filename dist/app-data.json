@@ -1,8 +1,8 @@
 {
   "build": {
     "schemaVersion": "2.0.0",
-    "sourceCommit": "ad691c60d8dde428bc9ba90d3b9fc671c0ab6309",
-    "generatedAt": "2026-08-10T17:29:23.758Z"
+    "sourceCommit": "e928df6ce7338e1b3da8db4c31e17a3d5e9515e2",
+    "generatedAt": "2026-08-10T19:00:18.862Z"
   },
   "meta": {
     "updated": "13 июля 2026",
@@ -210,7 +210,8 @@
       "link": "https://mmalova.com/kniga/link7",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2026-01-12"
+      "publishedAt": "2026-01-12",
+      "bookTheme": "ии и технологии"
     },
     {
       "id": "m008",
@@ -224,7 +225,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2025-11-30"
+      "publishedAt": "2025-11-30",
+      "bookTheme": "ии и технологии"
     },
     {
       "id": "m009",
@@ -273,7 +275,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2026-02-13"
+      "publishedAt": "2026-02-13",
+      "bookTheme": "ии и технологии"
     },
     {
       "id": "m011",
@@ -288,7 +291,8 @@
       "expert": true,
       "expert_name": "Мадина Малова",
       "publishedAt": "2026-02-15",
-      "shareQuoteId": "b22"
+      "shareQuoteId": "b22",
+      "bookTheme": "управление"
     },
     {
       "id": "m012",
@@ -355,7 +359,8 @@
       "link": "https://mmalova.com/kniga/link14",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2025-12-24"
+      "publishedAt": "2025-12-24",
+      "bookTheme": "профессия"
     },
     {
       "id": "m017",
@@ -369,7 +374,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Сергей Половников",
-      "publishedAt": "2025-12-27"
+      "publishedAt": "2025-12-27",
+      "bookTheme": "профессия"
     },
     {
       "id": "m018",
@@ -381,7 +387,8 @@
       "link": "https://mmalova.com/kniga/link16",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2025-12-29"
+      "publishedAt": "2025-12-29",
+      "bookTheme": "профессия"
     },
     {
       "id": "m019",
@@ -407,7 +414,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Евгений Темпераментов",
-      "publishedAt": "2026-01-04"
+      "publishedAt": "2026-01-04",
+      "bookTheme": "управление"
     },
     {
       "id": "m021",
@@ -421,7 +429,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2026-01-18"
+      "publishedAt": "2026-01-18",
+      "bookTheme": "профессия"
     },
     {
       "id": "m022",
@@ -483,7 +492,8 @@
       "expert": true,
       "expert_name": "Мадина Малова",
       "publishedAt": "2026-02-19",
-      "shareQuoteId": "b07"
+      "shareQuoteId": "b07",
+      "bookTheme": "управление"
     },
     {
       "id": "m025",
@@ -497,7 +507,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2026-02-01"
+      "publishedAt": "2026-02-01",
+      "bookTheme": "стратегия"
     },
     {
       "id": "m026",
@@ -509,7 +520,8 @@
       "link": "https://mmalova.com/kniga/link24",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2026-01-28"
+      "publishedAt": "2026-01-28",
+      "bookTheme": "человекоцентричность"
     },
     {
       "id": "m027",
@@ -589,7 +601,8 @@
       "link": "https://mmalova.com/kniga/link27",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2026-02-09"
+      "publishedAt": "2026-02-09",
+      "bookTheme": "стратегия"
     },
     {
       "id": "m030",
@@ -729,7 +742,8 @@
       "link": "https://mmalova.com/kniga/link22",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2026-01-10"
+      "publishedAt": "2026-01-10",
+      "bookTheme": "кризис"
     },
     {
       "id": "m035",
@@ -791,7 +805,8 @@
       "expert": true,
       "expert_name": "Мадина Малова",
       "publishedAt": "2026-06-13",
-      "shareQuoteId": "t15"
+      "shareQuoteId": "t15",
+      "bookTheme": "кризис"
     },
     {
       "id": "m038",
