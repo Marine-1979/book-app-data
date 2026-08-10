@@ -1,8 +1,8 @@
 {
   "build": {
     "schemaVersion": "2.0.0",
-    "sourceCommit": "8c3af85f818f48319e1f1c76857932925d0f6f0b",
-    "generatedAt": "2026-08-10T10:10:36.208Z"
+    "sourceCommit": "e7a17c44592c8aac8edd348591882f05c9f2d80a",
+    "generatedAt": "2026-08-10T11:57:07.960Z"
   },
   "meta": {
     "updated": "13 июля 2026",
@@ -258,7 +258,8 @@
         "крупный бизнес"
       ],
       "bookTheme": "ии и технологии",
-      "publishedAt": "2025-12-04"
+      "publishedAt": "2025-12-04",
+      "shareQuoteId": "v04"
     },
     {
       "id": "m010",
@@ -286,7 +287,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2026-02-15"
+      "publishedAt": "2026-02-15",
+      "shareQuoteId": "b22"
     },
     {
       "id": "m012",
@@ -340,7 +342,8 @@
       "link": "https://mmalova.com/kniga/link35",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2025-12-20"
+      "publishedAt": "2025-12-20",
+      "shareQuoteId": "b23"
     },
     {
       "id": "m016",
@@ -479,7 +482,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2026-02-19"
+      "publishedAt": "2026-02-19",
+      "shareQuoteId": "b07"
     },
     {
       "id": "m025",
@@ -539,7 +543,8 @@
         "консультант"
       ],
       "bookTheme": "человекоцентричность",
-      "publishedAt": "2026-02-05"
+      "publishedAt": "2026-02-05",
+      "shareQuoteId": "b10"
     },
     {
       "id": "m028",
@@ -571,7 +576,8 @@
         "крупный бизнес"
       ],
       "bookTheme": "стратегия",
-      "publishedAt": "2026-02-07"
+      "publishedAt": "2026-02-07",
+      "shareQuoteId": "b01"
     },
     {
       "id": "m029",
@@ -756,7 +762,8 @@
         "консультант"
       ],
       "bookTheme": "кризис",
-      "publishedAt": "2026-02-17"
+      "publishedAt": "2026-02-17",
+      "shareQuoteId": "t11"
     },
     {
       "id": "m036",
@@ -768,7 +775,8 @@
       "link": "https://mmalova.com/kniga/link28",
       "status": "доступно",
       "level": 1,
-      "publishedAt": "2026-02-20"
+      "publishedAt": "2026-02-20",
+      "shareQuoteId": "v05"
     },
     {
       "id": "m037",
@@ -782,7 +790,8 @@
       "level": 1,
       "expert": true,
       "expert_name": "Мадина Малова",
-      "publishedAt": "2026-06-13"
+      "publishedAt": "2026-06-13",
+      "shareQuoteId": "t15"
     },
     {
       "id": "m038",
@@ -812,7 +821,8 @@
         "молодой специалист"
       ],
       "bookTheme": "профессия",
-      "publishedAt": "2026-07-18"
+      "publishedAt": "2026-07-18",
+      "shareQuoteId": "t16"
     }
   ]
 }
