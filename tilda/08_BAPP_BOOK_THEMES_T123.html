@@ -1,0 +1,331 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+  ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 4C · ТЕМЫ КНИГИ В РАЗВИТИИ
+  Файл: 08_BAPP_BOOK_THEMES_T123.html
+  Версия: 1.0 · 10.08.2026
+
+  Назначение:
+  - семантический слой «живого издания»;
+  - состав материалов строится из window.BookAppData по bookTheme;
+  - статусы строятся только из publishedAt / updatedAt;
+  - собственного fetch/localStorage нет;
+  - schema/data loader не меняются;
+  - fail-open;
+  - CSS/ID только bapp-themes-*.
+
+  Размещение: после «Жизнь книги онлайн», перед 8 маршрутами.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+#bapp-themes,#bapp-themes *{box-sizing:border-box}
+#bapp-themes{
+  --c-primary:#FF6B35;--c-action:#E85114;--c-action-hover:#CE4711;
+  --c-accent-text:#C1400F;--c-heading:#111111;--c-body:#595959;--c-meta:#6E6E6E;
+  --c-page:#FAFAFA;--c-card:#FFFFFF;--c-soft:#FFF0EB;--c-warm:#FFF7F3;
+  --c-border:#E2E2E2;--c-border-soft:#EEE7E3;
+  --f-system:'Unbounded',-apple-system,BlinkMacSystemFont,sans-serif;
+  --f-heading:'Poiret One','Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --f-ui:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --r-md:8px;--r-lg:16px;--shadow:0 8px 28px rgba(0,0,0,.05);
+  position:relative;width:100%;overflow:hidden;padding:68px 0 42px;background:var(--c-page);
+  color:var(--c-body);font-family:var(--f-ui)
+}
+#bapp-themes button,#bapp-themes a{-webkit-tap-highlight-color:transparent}
+#bapp-themes .bapp-themes__container{width:min(1140px,calc(100% - 48px));margin:0 auto}
+#bapp-themes .bapp-themes__head{display:grid;grid-template-columns:minmax(0,.95fr) minmax(360px,1.05fr);gap:44px;align-items:end;margin-bottom:30px}
+#bapp-themes .bapp-themes__eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 13px;font-family:var(--f-system);font-size:10px;font-weight:600;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;color:var(--c-accent-text)}
+#bapp-themes .bapp-themes__pulse{position:relative;width:18px;height:8px;flex:0 0 18px}
+#bapp-themes .bapp-themes__pulse:before,#bapp-themes .bapp-themes__pulse:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--c-primary)}
+#bapp-themes .bapp-themes__pulse:after{left:7px;right:auto;top:1px;width:4px;height:4px;border-radius:50%;animation:bapp-themes-pulse 2.4s ease-in-out infinite}
+@keyframes bapp-themes-pulse{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(3px);opacity:1}}
+#bapp-themes .bapp-themes__title{margin:0;font-family:var(--f-heading);font-size:clamp(34px,4.2vw,46px);font-weight:400;line-height:1.12;color:var(--c-heading)}
+#bapp-themes .bapp-themes__lead{max-width:660px;margin:0;font-size:15px;line-height:1.65;color:var(--c-body)}
+#bapp-themes .bapp-themes__lead strong{font-weight:600;color:var(--c-heading)}
+#bapp-themes .bapp-themes__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#bapp-themes .bapp-themes__card{position:relative;display:flex;flex-direction:column;min-height:278px;overflow:hidden;border:1px solid var(--c-border);border-radius:var(--r-md);background:var(--c-card);box-shadow:0 3px 12px rgba(0,0,0,.025);transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+#bapp-themes .bapp-themes__card:before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:#D9D9D9}
+#bapp-themes .bapp-themes__card[data-live="true"]:before{background:linear-gradient(90deg,#FF6B35,#E85114,#FF8B5E,#FF6B35);background-size:280% 100%;animation:bapp-themes-flow 7s linear infinite}
+@keyframes bapp-themes-flow{from{background-position:0 50%}to{background-position:280% 50%}}
+#bapp-themes .bapp-themes__card:hover{border-color:rgba(193,64,15,.30);box-shadow:0 14px 34px rgba(255,107,53,.11);transform:translateY(-2px)}
+#bapp-themes .bapp-themes__card.is-active{border-color:var(--c-accent-text);background:linear-gradient(145deg,var(--c-card),var(--c-warm));box-shadow:var(--shadow)}
+#bapp-themes .bapp-themes__card-main{display:flex;flex:1 1 auto;flex-direction:column;padding:20px 20px 18px}
+#bapp-themes .bapp-themes__card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:30px;margin-bottom:14px}
+#bapp-themes .bapp-themes__num{font-family:var(--f-system);font-size:10px;font-weight:600;color:var(--c-accent-text)}
+#bapp-themes .bapp-themes__status{display:inline-flex;align-items:center;min-height:26px;padding:5px 8px;border:1px solid var(--c-border);border-radius:999px;background:var(--c-card);font-family:var(--f-system);font-size:7.5px;font-weight:600;line-height:1.25;letter-spacing:.035em;text-transform:uppercase;color:var(--c-meta)}
+#bapp-themes .bapp-themes__status.is-live{border-color:rgba(193,64,15,.28);background:var(--c-soft);color:var(--c-accent-text)}
+#bapp-themes .bapp-themes__card-title{margin:0 0 8px;font-size:17px;font-weight:600;line-height:1.35;color:var(--c-heading)}
+#bapp-themes .bapp-themes__thesis{margin:0 0 16px;min-height:55px;font-size:12px;line-height:1.55;color:var(--c-body)}
+#bapp-themes .bapp-themes__latest{margin-top:auto;padding-top:14px;border-top:1px solid var(--c-border-soft)}
+#bapp-themes .bapp-themes__latest-label{display:block;margin-bottom:6px;font-family:var(--f-system);font-size:8px;font-weight:600;line-height:1.35;letter-spacing:.055em;text-transform:uppercase;color:var(--c-accent-text)}
+#bapp-themes .bapp-themes__latest-title{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:12px;font-weight:600;line-height:1.45;color:var(--c-heading)}
+#bapp-themes .bapp-themes__latest-meta{display:flex;flex-wrap:wrap;gap:6px 9px;margin-top:7px;font-size:10px;line-height:1.35;color:var(--c-meta)}
+#bapp-themes .bapp-themes__open{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:48px;padding:10px 20px;border:0;border-top:1px solid var(--c-border-soft);background:transparent;color:var(--c-accent-text);font-family:var(--f-ui);font-size:12px;font-weight:600;text-align:left;cursor:pointer}
+#bapp-themes .bapp-themes__open:after{content:"＋";font-size:18px;font-weight:400;line-height:1}
+#bapp-themes .bapp-themes__card.is-active .bapp-themes__open:after{content:"−"}
+#bapp-themes .bapp-themes__open:hover{background:rgba(193,64,15,.045)}
+#bapp-themes .bapp-themes__open:focus-visible,#bapp-themes .bapp-themes__material-link:focus-visible,#bapp-themes .bapp-themes__all-link:focus-visible,#bapp-themes .bapp-themes__close:focus-visible{outline:2px solid var(--c-accent-text);outline-offset:3px}
+#bapp-themes .bapp-themes__detail{display:none;margin-top:16px;overflow:hidden;border:1px solid rgba(193,64,15,.20);border-radius:var(--r-lg);background:var(--c-card);box-shadow:var(--shadow)}
+#bapp-themes .bapp-themes__detail.is-visible{display:block;animation:bapp-themes-in .34s ease-out}
+@keyframes bapp-themes-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#bapp-themes .bapp-themes__detail-head{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:start;padding:24px 26px 20px;border-bottom:1px solid var(--c-border-soft);background:linear-gradient(145deg,var(--c-card),var(--c-warm))}
+#bapp-themes .bapp-themes__detail-head:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#FF6B35,#E85114,#FF8B5E,#FF6B35)}
+#bapp-themes .bapp-themes__detail-kicker{display:block;margin-bottom:5px;font-family:var(--f-system);font-size:8px;font-weight:600;line-height:1.35;letter-spacing:.06em;text-transform:uppercase;color:var(--c-accent-text)}
+#bapp-themes .bapp-themes__detail-title{margin:0;font-size:21px;font-weight:600;line-height:1.35;color:var(--c-heading)}
+#bapp-themes .bapp-themes__close{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;padding:0;border:1px solid var(--c-border);border-radius:var(--r-md);background:var(--c-card);color:var(--c-body);font-size:22px;line-height:1;cursor:pointer}
+#bapp-themes .bapp-themes__detail-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+#bapp-themes .bapp-themes__material{position:relative;min-width:0;padding:22px 24px 23px}
+#bapp-themes .bapp-themes__material+.bapp-themes__material{border-left:1px solid var(--c-border-soft)}
+#bapp-themes .bapp-themes__material-top{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-height:24px;margin-bottom:9px}
+#bapp-themes .bapp-themes__type{display:inline-flex;align-items:center;min-height:22px;padding:4px 7px;border-radius:999px;background:var(--c-soft);font-family:var(--f-system);font-size:7px;font-weight:600;text-transform:uppercase;color:var(--c-accent-text)}
+#bapp-themes .bapp-themes__date{font-size:10px;color:var(--c-meta)}
+#bapp-themes .bapp-themes__material-title{margin:0 0 8px;font-size:14px;font-weight:600;line-height:1.45;color:var(--c-heading)}
+#bapp-themes .bapp-themes__material-desc{display:-webkit-box;min-height:54px;margin:0 0 10px;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:3;font-size:11.5px;line-height:1.55;color:var(--c-body)}
+#bapp-themes .bapp-themes__material-meta{display:flex;flex-wrap:wrap;gap:6px 10px;margin-bottom:13px;font-size:10px;line-height:1.4;color:var(--c-meta)}
+#bapp-themes .bapp-themes__material-link{display:inline-flex;align-items:center;min-height:40px;color:var(--c-accent-text)!important;font-size:11px;font-weight:600;text-decoration:none!important}
+#bapp-themes .bapp-themes__material-link:after{content:" →";margin-left:4px}
+#bapp-themes .bapp-themes__detail-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 26px 20px;border-top:1px solid var(--c-border-soft)}
+#bapp-themes .bapp-themes__detail-note{margin:0;max-width:650px;font-size:11px;line-height:1.5;color:var(--c-meta)}
+#bapp-themes .bapp-themes__all-link{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-height:44px;padding:0 15px;border:1.5px solid var(--c-accent-text);border-radius:var(--r-md);background:transparent;color:var(--c-accent-text)!important;font-size:12px;font-weight:600;text-decoration:none!important}
+#bapp-themes .bapp-themes__all-link:hover{background:rgba(193,64,15,.06)}
+#bapp-themes .bapp-themes__fallback{display:none;margin-top:18px;padding:16px 18px;border:1px solid var(--c-border);border-radius:var(--r-md);background:var(--c-card);font-size:13px;line-height:1.55;color:var(--c-body)}
+#bapp-themes .bapp-themes__fallback.is-visible{display:block}
+@media(max-width:920px){
+  #bapp-themes .bapp-themes__head{grid-template-columns:1fr;gap:15px;align-items:start}
+  #bapp-themes .bapp-themes__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #bapp-themes .bapp-themes__detail-list{grid-template-columns:1fr}
+  #bapp-themes .bapp-themes__material+.bapp-themes__material{border-left:0;border-top:1px solid var(--c-border-soft)}
+  #bapp-themes .bapp-themes__material-desc{min-height:0;-webkit-line-clamp:2}
+}
+@media(max-width:680px){
+  #bapp-themes{padding:52px 0 28px}
+  #bapp-themes .bapp-themes__container{width:min(100% - 32px,1140px)}
+  #bapp-themes .bapp-themes__grid{grid-template-columns:1fr;gap:9px}
+  #bapp-themes .bapp-themes__card{min-height:0}
+  #bapp-themes .bapp-themes__card-main{padding:17px 17px 15px}
+  #bapp-themes .bapp-themes__card-top{margin-bottom:10px}
+  #bapp-themes .bapp-themes__card-title{font-size:16px}
+  #bapp-themes .bapp-themes__thesis{min-height:0;margin-bottom:12px}
+  #bapp-themes .bapp-themes__latest{padding-top:11px}
+  #bapp-themes .bapp-themes__open{min-height:48px;padding:10px 17px}
+  #bapp-themes .bapp-themes__detail{margin:9px 0 0}
+  #bapp-themes .bapp-themes__detail-head{grid-template-columns:minmax(0,1fr) 44px;gap:12px;padding:20px 17px 17px}
+  #bapp-themes .bapp-themes__detail-title{font-size:18px}
+  #bapp-themes .bapp-themes__close{width:44px;height:44px}
+  #bapp-themes .bapp-themes__material{padding:18px 17px 19px}
+  #bapp-themes .bapp-themes__material-link{min-height:44px}
+  #bapp-themes .bapp-themes__detail-actions{align-items:stretch;flex-direction:column;padding:15px 17px 18px}
+  #bapp-themes .bapp-themes__all-link{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  #bapp-themes .bapp-themes__pulse:after,#bapp-themes .bapp-themes__card[data-live="true"]:before{animation:none!important}
+  #bapp-themes .bapp-themes__card,#bapp-themes .bapp-themes__detail{animation:none!important;transition:none!important}
+}
+</style>
+
+<section id="bapp-themes" aria-labelledby="bapp-themes-title">
+  <div class="bapp-themes__container">
+    <header class="bapp-themes__head">
+      <div>
+        <p class="bapp-themes__eyebrow"><span class="bapp-themes__pulse" aria-hidden="true"></span>Живое издание · смысловые линии</p>
+        <h2 class="bapp-themes__title" id="bapp-themes-title">Темы книги в развитии</h2>
+      </div>
+      <p class="bapp-themes__lead">Печатная книга задает систему координат. Здесь ее ключевые темы получают <strong>новые кейсы, исследования, методики и профессиональный контекст.</strong></p>
+    </header>
+
+    <div class="bapp-themes__grid" id="bapp-themes-grid" aria-label="Темы книги в развитии"></div>
+
+    <div class="bapp-themes__detail" id="bapp-themes-detail" aria-live="polite" aria-atomic="false">
+      <div class="bapp-themes__detail-head">
+        <div>
+          <span class="bapp-themes__detail-kicker">Цифровое продолжение темы</span>
+          <h3 class="bapp-themes__detail-title" id="bapp-themes-detail-title"></h3>
+        </div>
+        <button class="bapp-themes__close" id="bapp-themes-close" type="button" aria-label="Закрыть тему">×</button>
+      </div>
+      <div class="bapp-themes__detail-list" id="bapp-themes-detail-list"></div>
+      <div class="bapp-themes__detail-actions">
+        <p class="bapp-themes__detail-note" id="bapp-themes-detail-note"></p>
+        <a class="bapp-themes__all-link" id="bapp-themes-all-link" href="#">Все материалы темы</a>
+      </div>
+    </div>
+
+    <div class="bapp-themes__fallback" id="bapp-themes-fallback" role="status">Темы временно недоступны — используйте поиск и маршруты ниже.</div>
+  </div>
+</section>
+
+<script>
+(function(w,d){
+  'use strict';
+
+  var root=d.getElementById('bapp-themes');
+  if(!root)return;
+
+  var POST_PRINT_CUTOFF='2026-03-01';
+  var THEME_META=[
+    {key:'ии и технологии',title:'ИИ и цифровая трансформация',thesis:'Технологии становятся частью коммуникационного управления только тогда, когда меняют процессы, данные и качество решений.'},
+    {key:'управление',title:'Коммуникации в управленческом контуре',thesis:'Коммуникационная функция развивается от сопровождения к архитектуре процессов, ответственности и влияния на решения.'},
+    {key:'стратегия',title:'Стратегия коммуникаций 2.0',thesis:'Стратегия связывает цели организации, управленческие решения, интересы людей и коммуникационную систему в один контур.'},
+    {key:'человекоцентричность',title:'Прагматичный человекоцентризм',thesis:'Человекоцентричность переводится из декларации в способ принимать решения, перестраивать процессы и измерять результат.'},
+    {key:'профессия',title:'Профессия и критерии зрелости',thesis:'Профессия взрослеет через ясные роли, компетенции, профессиональные ориентиры и понятные критерии качества работы.'},
+    {key:'кризис',title:'Антикризис и репутационная устойчивость',thesis:'Кризис рассматривается не как набор реакций пресс-службы, а как проверка управленческой системы, ответственности и устойчивости организации.'}
+  ];
+
+  var grid=d.getElementById('bapp-themes-grid');
+  var detail=d.getElementById('bapp-themes-detail');
+  var detailTitle=d.getElementById('bapp-themes-detail-title');
+  var detailList=d.getElementById('bapp-themes-detail-list');
+  var detailNote=d.getElementById('bapp-themes-detail-note');
+  var allLink=d.getElementById('bapp-themes-all-link');
+  var closeBtn=d.getElementById('bapp-themes-close');
+  var fallback=d.getElementById('bapp-themes-fallback');
+  var themeData=[];
+  var activeKey='';
+  var mobileMedia=w.matchMedia?w.matchMedia('(max-width: 680px)'):null;
+
+  function clean(v){return String(v==null?'':v).trim()}
+  function dateValue(v){if(!v)return 0;var t=Date.parse(v);return Number.isFinite(t)?t:0}
+  function effectiveDate(m){return dateValue(m.updatedAt||m.publishedAt)}
+  function newestDate(a,b){return effectiveDate(b)-effectiveDate(a)}
+
+  function formatDate(v){
+    var t=dateValue(v);if(!t)return '';
+    try{return new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric'}).format(new Date(t))}
+    catch(e){return clean(v)}
+  }
+
+  function typeLabel(v){
+    var map={'гайд':'Гайд','видео':'Видео','статья':'Статья','кейс':'Кейс','обзор':'Обзор','методика':'Методика','сообщество':'Сообщество','чек-лист':'Чек-лист','подкаст':'Подкаст'};
+    return map[v]||clean(v)||'Материал';
+  }
+
+  function postPrintState(items){
+    var cutoff=dateValue(POST_PRINT_CUTOFF);
+    if(items.some(function(i){return dateValue(i.publishedAt)>=cutoff}))return {label:'Продолжено после печати',live:true};
+    if(items.some(function(i){return dateValue(i.updatedAt)>=cutoff}))return {label:'Актуализировано',live:true};
+    return {label:'Тема книги',live:false};
+  }
+
+  function mapUrl(themeKey){
+    var copy=/\/navigator-copy\/?$/.test(w.location.pathname);
+    var base=copy?'/navigator-karta-materialov-copy':'/navigator-karta-materialov';
+    try{var u=new URL(base,w.location.origin);u.searchParams.set('theme',themeKey);return u.pathname+u.search}
+    catch(e){return base+'?theme='+encodeURIComponent(themeKey)}
+  }
+
+  function makeStatus(state){
+    var s=d.createElement('span');s.className='bapp-themes__status'+(state.live?' is-live':'');s.textContent=state.label;return s;
+  }
+
+  function makeCard(theme,index){
+    var card=d.createElement('article');
+    card.className='bapp-themes__card';
+    card.setAttribute('data-theme-key',theme.key);
+    card.setAttribute('data-live',theme.state.live?'true':'false');
+
+    var main=d.createElement('div');main.className='bapp-themes__card-main';
+    var top=d.createElement('div');top.className='bapp-themes__card-top';
+    var num=d.createElement('span');num.className='bapp-themes__num';num.textContent=String(index+1).padStart(2,'0');
+    top.appendChild(num);top.appendChild(makeStatus(theme.state));
+
+    var title=d.createElement('h3');title.className='bapp-themes__card-title';title.textContent=theme.title;
+    var thesis=d.createElement('p');thesis.className='bapp-themes__thesis';thesis.textContent=theme.thesis;
+    var latest=d.createElement('div');latest.className='bapp-themes__latest';
+    var ll=d.createElement('span');ll.className='bapp-themes__latest-label';ll.textContent='Актуальный материал';
+    var lt=d.createElement('span');lt.className='bapp-themes__latest-title';lt.textContent=theme.latest.title||'Материал';
+    var lm=d.createElement('div');lm.className='bapp-themes__latest-meta';
+    var type=d.createElement('span');type.textContent=typeLabel(theme.latest.type);lm.appendChild(type);
+    var fd=formatDate(theme.latest.updatedAt||theme.latest.publishedAt);
+    if(fd){var dn=d.createElement('span');dn.textContent=fd;lm.appendChild(dn)}
+    latest.appendChild(ll);latest.appendChild(lt);latest.appendChild(lm);
+    main.appendChild(top);main.appendChild(title);main.appendChild(thesis);main.appendChild(latest);
+
+    var open=d.createElement('button');open.className='bapp-themes__open';open.type='button';
+    open.setAttribute('data-theme-open',theme.key);open.setAttribute('aria-expanded','false');open.setAttribute('aria-controls','bapp-themes-detail');open.textContent='Открыть тему';
+    open.addEventListener('click',function(){toggleTheme(theme.key,true)});
+
+    card.appendChild(main);card.appendChild(open);return card;
+  }
+
+  function makeMaterial(m,index){
+    var item=d.createElement('article');item.className='bapp-themes__material';
+    var top=d.createElement('div');top.className='bapp-themes__material-top';
+    var type=d.createElement('span');type.className='bapp-themes__type';type.textContent=typeLabel(m.type);top.appendChild(type);
+    var fd=formatDate(m.updatedAt||m.publishedAt);if(fd){var dn=d.createElement('span');dn.className='bapp-themes__date';dn.textContent=fd;top.appendChild(dn)}
+    var title=d.createElement('h4');title.className='bapp-themes__material-title';title.textContent=m.title||'Материал';
+    var desc=d.createElement('p');desc.className='bapp-themes__material-desc';desc.textContent=m.desc||'Открыть материал и продолжить работу по теме.';
+    var meta=d.createElement('div');meta.className='bapp-themes__material-meta';
+    if(m.page){var p=d.createElement('span');p.textContent='Книга, с. '+m.page;meta.appendChild(p)}
+    if(m.expert_name){var e=d.createElement('span');e.textContent=m.expert_name;meta.appendChild(e)}
+    var link=d.createElement('a');link.className='bapp-themes__material-link';link.href=m.link||'#';link.textContent=index===0?'Открыть актуальный материал':'Открыть материал';
+    item.appendChild(top);item.appendChild(title);item.appendChild(desc);item.appendChild(meta);item.appendChild(link);return item;
+  }
+
+  function container(){return root.querySelector('.bapp-themes__container')}
+
+  function closeTheme(restoreFocus){
+    if(!activeKey)return;
+    var old=activeKey;activeKey='';detail.classList.remove('is-visible');
+    grid.querySelectorAll('.bapp-themes__card').forEach(function(c){c.classList.remove('is-active')});
+    grid.querySelectorAll('[data-theme-open]').forEach(function(b){b.setAttribute('aria-expanded','false')});
+    if(detail.parentNode!==container())container().insertBefore(detail,fallback);
+    if(restoreFocus){var t=grid.querySelector('[data-theme-open="'+old+'"]');if(t){try{t.focus()}catch(e){}}}
+  }
+
+  function placeDetail(){
+    if(!activeKey)return;
+    if(mobileMedia&&mobileMedia.matches){
+      var card=grid.querySelector('.bapp-themes__card[data-theme-key="'+activeKey+'"]');
+      if(card&&card.parentNode===grid)card.insertAdjacentElement('afterend',detail);
+    }else if(detail.parentNode!==container()){
+      container().insertBefore(detail,fallback);
+    }
+  }
+
+  function renderDetail(theme,shouldScroll){
+    detailTitle.textContent=theme.title;detailList.replaceChildren();
+    theme.items.slice(0,3).forEach(function(m,i){detailList.appendChild(makeMaterial(m,i))});
+    detailNote.textContent='Показаны самые свежие материалы этой линии. Полная подборка открывается на карте материалов.';
+    allLink.href=mapUrl(theme.key);allLink.setAttribute('aria-label','Все материалы темы «'+theme.title+'»');
+    detail.classList.add('is-visible');placeDetail();
+    if(shouldScroll&&typeof detail.scrollIntoView==='function'){
+      w.setTimeout(function(){detail.scrollIntoView({behavior:w.matchMedia&&w.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'})},35)
+    }
+  }
+
+  function toggleTheme(key,shouldScroll){
+    if(activeKey===key){closeTheme(true);return}
+    var theme=themeData.find(function(x){return x.key===key});if(!theme)return;
+    activeKey=key;
+    grid.querySelectorAll('.bapp-themes__card').forEach(function(c){c.classList.toggle('is-active',c.getAttribute('data-theme-key')===key)});
+    grid.querySelectorAll('[data-theme-open]').forEach(function(b){b.setAttribute('aria-expanded',b.getAttribute('data-theme-open')===key?'true':'false')});
+    renderDetail(theme,shouldScroll);
+  }
+
+  function buildThemes(data){
+    var materials=data&&Array.isArray(data.materials)?data.materials.slice():[];
+    themeData=THEME_META.map(function(meta){
+      var items=materials.filter(function(m){return clean(m.bookTheme)===meta.key}).sort(newestDate);
+      if(!items.length)return null;
+      return {key:meta.key,title:meta.title,thesis:meta.thesis,items:items,latest:items[0],state:postPrintState(items)};
+    }).filter(Boolean);
+
+    grid.replaceChildren();themeData.forEach(function(theme,index){grid.appendChild(makeCard(theme,index))});
+    fallback.classList.toggle('is-visible',themeData.length===0);
+    if(activeKey){var active=themeData.find(function(x){return x.key===activeKey});if(active)renderDetail(active,false);else closeTheme(false)}
+  }
+
+  closeBtn.addEventListener('click',function(){closeTheme(true)});
+  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&activeKey)closeTheme(true)});
+
+  if(mobileMedia){
+    var onMedia=function(){if(activeKey)placeDetail()};
+    if(typeof mobileMedia.addEventListener==='function')mobileMedia.addEventListener('change',onMedia);
+    else if(typeof mobileMedia.addListener==='function')mobileMedia.addListener(onMedia);
+  }
+
+  w.addEventListener('bapp:data-updated',function(e){if(e.detail)buildThemes(e.detail)});
+  if(w.BookAppData&&typeof w.BookAppData.then==='function'){
+    w.BookAppData.then(function(data){buildThemes(data||{})}).catch(function(){fallback.classList.add('is-visible')});
+  }else fallback.classList.add('is-visible');
+
+})(window,document);
+</script>
