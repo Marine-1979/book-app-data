@@ -28,18 +28,25 @@ jobs:
       - name: Validate source JSON
         run: node scripts/validate-data.mjs
 
+      - name: Validate editorial control
+        run: node scripts/build-editorial-status.mjs --validate-only
+
+      - name: Build editorial status
+        run: node scripts/build-editorial-status.mjs
+
       - name: Build one runtime data file
         run: node scripts/build-app-data.mjs
 
-      - name: Commit generated dist/app-data.json
+      - name: Commit generated files
         shell: bash
         run: |
-          if git diff --quiet -- dist/app-data.json; then
-            echo "Runtime file is already current."
+          if git diff --quiet -- dist/app-data.json docs/EDITORIAL_STATUS.md; then
+            echo "Generated files are already current."
             exit 0
           fi
+
           git config user.name "bapp-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add dist/app-data.json
-          git commit -m "chore(data): rebuild app-data.json"
+          git add dist/app-data.json docs/EDITORIAL_STATUS.md
+          git commit -m "chore(data): rebuild generated outputs"
           git push
