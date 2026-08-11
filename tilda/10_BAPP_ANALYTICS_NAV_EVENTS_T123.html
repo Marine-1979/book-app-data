@@ -1,0 +1,412 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+  ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 5A.2 · NAVIGATOR ANALYTICS EVENTS
+  Файл: 10_BAPP_ANALYTICS_NAV_EVENTS_T123.html
+  Версия: 1.1 · 11.08.2026
+
+  Исправление v1.1:
+  - синхронизация события bapp_material_save с фактическим полем
+    BookAppPersonal: savedMaterials (в v1.0 ошибочно ожидалось saved).
+
+  Назначение:
+  - подключает реальные продуктовые события /navigator к BookAppAnalytics;
+  - НЕ меняет UI, поиск, маршруты, персональную логику или данные;
+  - НЕ делает fetch;
+  - НЕ читает localStorage;
+  - НЕ отправляет поисковую фразу;
+  - использует только window.BookAppAnalytics + window.BookAppData +
+    публичное событие bapp:personal-updated;
+  - fail-open: при отсутствии аналитики приложение работает как обычно.
+
+  Покрытие /navigator:
+  - bapp_search / bapp_search_zero;
+  - bapp_material_open;
+  - bapp_material_save;
+  - bapp_personal_route_add;
+  - bapp_book_route_open;
+  - bapp_situation_select;
+  - bapp_theme_open;
+  - bapp_theme_map_open;
+  - bapp_quote_share.
+
+  Размещение для приемки:
+  - отдельный T123 на /navigator-copy;
+  - ПОСЛЕ всех функциональных модулей приложения, лучше перед Footer.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+
+<script>
+(function (w, d) {
+  'use strict';
+
+  if (w.__BAPP_ANALYTICS_NAV_EVENTS_V1__) return;
+  w.__BAPP_ANALYTICS_NAV_EVENTS_V1__ = true;
+
+  var pathToMaterial = Object.create(null);
+  var lastPersonalState = null;
+  var pendingPersonalSource = '';
+  var pendingTimer = 0;
+  var searchPending = false;
+  var searchStartedAt = 0;
+  var searchTimer = 0;
+  var searchObserver = null;
+
+  var THEME_KEYS = {
+    'ии и технологии': 'ai_digital',
+    'управление': 'management',
+    'стратегия': 'strategy_2',
+    'человекоцентричность': 'human_centered',
+    'профессия': 'profession',
+    'кризис': 'crisis_reputation'
+  };
+
+  function analytics() {
+    return w.BookAppAnalytics && typeof w.BookAppAnalytics.track === 'function'
+      ? w.BookAppAnalytics
+      : null;
+  }
+
+  function track(name, params) {
+    var api = analytics();
+    if (!api) return false;
+    try { return api.track(name, params || {}); } catch (error) { return false; }
+  }
+
+  function clean(value) {
+    return String(value == null ? '' : value).trim();
+  }
+
+  function normalizePath(raw) {
+    try {
+      var u = new URL(raw, w.location.origin);
+      return (u.pathname || '/').replace(/\/+$/, '') || '/';
+    } catch (error) {
+      return clean(raw).split('?')[0].split('#')[0].replace(/\/+$/, '') || '/';
+    }
+  }
+
+  function buildMaterialMap(data) {
+    pathToMaterial = Object.create(null);
+    var materials = data && Array.isArray(data.materials) ? data.materials : [];
+    materials.forEach(function (m) {
+      if (!m || !m.id || !m.link) return;
+      pathToMaterial[normalizePath(m.link)] = String(m.id);
+    });
+  }
+
+  function materialIdFromNode(node) {
+    if (!node) return '';
+
+    var holder = node.closest ? node.closest('[data-bapp-material-id]') : null;
+    if (holder) {
+      var direct = clean(holder.getAttribute('data-bapp-material-id'));
+      if (direct) return direct;
+    }
+
+    var anchor = node.closest ? node.closest('a[href]') : null;
+    if (!anchor) return '';
+    return pathToMaterial[normalizePath(anchor.href)] || '';
+  }
+
+  function sourceForNode(node) {
+    if (!node || !node.closest) return '';
+    if (node.closest('#bapp-search-hero')) return 'search';
+    if (node.closest('#bapp-navigator')) return 'route';
+    if (node.closest('#bapp-situation')) return 'situation';
+    if (node.closest('#bapp-themes')) return 'theme';
+    if (node.closest('#bapp-personal-layer')) return 'personal';
+    if (node.closest('#bapp-livebook')) return 'live_book';
+    return '';
+  }
+
+  function bucket(count) {
+    if (count <= 0) return '0';
+    if (count <= 5) return '1_5';
+    if (count <= 15) return '6_15';
+    return '16_plus';
+  }
+
+  function heroGrid() {
+    return d.getElementById('bapp-hero-results-grid');
+  }
+
+  function resultCount() {
+    var grid = heroGrid();
+    if (!grid) return 0;
+
+    var nodes = grid.querySelectorAll(
+      '.bapp-hero__result-card--personalized[data-bapp-material-id], a.bapp-hero__result-card'
+    );
+
+    var seen = Object.create(null);
+    var count = 0;
+    Array.prototype.forEach.call(nodes, function (node) {
+      var id = materialIdFromNode(node) || normalizePath(node.href || '');
+      if (!id || seen[id]) return;
+      seen[id] = true;
+      count += 1;
+    });
+    return count;
+  }
+
+  function finishSearch() {
+    if (!searchPending) return;
+    searchPending = false;
+    if (searchTimer) {
+      w.clearTimeout(searchTimer);
+      searchTimer = 0;
+    }
+
+    var count = resultCount();
+    track('bapp_search', {
+      source: 'hero',
+      result_bucket: bucket(count)
+    });
+
+    if (count === 0) {
+      track('bapp_search_zero', { source: 'hero' });
+    }
+  }
+
+  function scheduleSearchFinish(delay) {
+    if (!searchPending) return;
+    if (searchTimer) w.clearTimeout(searchTimer);
+    searchTimer = w.setTimeout(finishSearch, delay || 180);
+  }
+
+  function beginSearch() {
+    var now = Date.now();
+    if (searchPending && now - searchStartedAt < 250) return;
+    searchPending = true;
+    searchStartedAt = now;
+    scheduleSearchFinish(900);
+  }
+
+  function installSearchObserver() {
+    var grid = heroGrid();
+    if (!grid || searchObserver) return;
+
+    searchObserver = new MutationObserver(function () {
+      if (searchPending) scheduleSearchFinish(160);
+    });
+    searchObserver.observe(grid, { childList: true, subtree: true });
+  }
+
+  function setPendingPersonalSource(source) {
+    pendingPersonalSource = source || 'personal';
+    if (pendingTimer) w.clearTimeout(pendingTimer);
+    pendingTimer = w.setTimeout(function () {
+      pendingPersonalSource = '';
+      pendingTimer = 0;
+    }, 350);
+  }
+
+  function routeIds(state) {
+    return state && Array.isArray(state.customRoute) ? state.customRoute.slice() : [];
+  }
+
+  function savedIds(state) {
+    return state && Array.isArray(state.savedMaterials) ? state.savedMaterials.slice() : [];
+  }
+
+  function addedIds(before, after) {
+    var oldMap = Object.create(null);
+    before.forEach(function (id) { oldMap[String(id)] = true; });
+    return after.filter(function (id) { return !oldMap[String(id)]; });
+  }
+
+  function handlePersonalUpdate(event) {
+    var next = event && event.detail ? event.detail : null;
+    if (!next) return;
+
+    if (lastPersonalState) {
+      var source = pendingPersonalSource || 'personal';
+
+      addedIds(savedIds(lastPersonalState), savedIds(next)).forEach(function (id) {
+        track('bapp_material_save', {
+          material_id: String(id),
+          source: source
+        });
+      });
+
+      addedIds(routeIds(lastPersonalState), routeIds(next)).forEach(function (id) {
+        track('bapp_personal_route_add', {
+          material_id: String(id),
+          source: source
+        });
+      });
+    }
+
+    lastPersonalState = next;
+  }
+
+  function initPersonalSnapshot() {
+    try {
+      if (w.BookAppPersonal && typeof w.BookAppPersonal.getState === 'function') {
+        lastPersonalState = w.BookAppPersonal.getState();
+      }
+    } catch (error) {}
+  }
+
+  function neutralTheme(raw) {
+    var key = clean(raw).toLowerCase();
+    return THEME_KEYS[key] || key.replace(/\s+/g, '_');
+  }
+
+  function routeNumFromRoutesCard(card) {
+    var node = card && card.querySelector ? card.querySelector('.bapp-routes__num') : null;
+    return node ? clean(node.textContent) : '';
+  }
+
+  function routeNumFromSituation() {
+    var root = d.getElementById('bapp-situation');
+    var node = root ? root.querySelector('.bapp-situation__route-chip strong') : null;
+    return node ? clean(node.textContent) : '';
+  }
+
+  function routeNumFromPersonal(node) {
+    var holder = node && node.closest ? node.closest('.bapp-personal__book-route') : null;
+    var num = holder ? holder.querySelector('.bapp-personal__book-route-num') : null;
+    return num ? clean(num.textContent) : '';
+  }
+
+  function handleClickCapture(event) {
+    var target = event.target;
+    if (!target || !target.closest) return;
+
+    var hero = target.closest('#bapp-search-hero');
+    if (hero) {
+      var searchButton = target.closest('button, [role="button"]');
+      if (searchButton && clean(searchButton.textContent).toLowerCase() === 'найти') {
+        beginSearch();
+      }
+    }
+
+    var personalButton = target.closest(
+      '[data-bapp-personal-action], [data-bapp-routes-personal-action], .bapp-situation__btn--personal'
+    );
+    if (personalButton) {
+      setPendingPersonalSource(sourceForNode(personalButton) || 'personal');
+    }
+
+    var scenario = target.closest('#bapp-situation [data-scenario-id]');
+    if (scenario) {
+      var scenarioId = clean(scenario.getAttribute('data-scenario-id')).replace(/^s/i, '');
+      track('bapp_situation_select', { scenario_id: scenarioId });
+    }
+
+    var themeOpen = target.closest('#bapp-themes [data-theme-open]');
+    if (themeOpen && themeOpen.getAttribute('aria-expanded') !== 'true') {
+      track('bapp_theme_open', {
+        theme_key: neutralTheme(themeOpen.getAttribute('data-theme-open'))
+      });
+    }
+
+    var themeMap = target.closest('#bapp-themes .bapp-themes__all-link');
+    if (themeMap) {
+      try {
+        var themeParam = new URL(themeMap.href, w.location.origin).searchParams.get('theme') || '';
+        track('bapp_theme_map_open', { theme_key: neutralTheme(themeParam) });
+      } catch (error) {}
+    }
+
+    var routeCard = target.closest('#bapp-navigator .bapp-routes__card');
+    if (routeCard) {
+      var routeNum = routeNumFromRoutesCard(routeCard);
+      if (routeNum) track('bapp_book_route_open', { route_id: routeNum, source: 'routes' });
+    }
+
+    var situationRoute = target.closest('#bapp-situation .bapp-situation__btn--route');
+    if (situationRoute) {
+      var sRoute = routeNumFromSituation();
+      if (sRoute) track('bapp_book_route_open', { route_id: sRoute, source: 'situation' });
+    }
+
+    var personalBookRoute = target.closest('#bapp-personal-layer .bapp-personal__book-route-title');
+    if (personalBookRoute) {
+      var pRoute = routeNumFromPersonal(personalBookRoute);
+      if (pRoute) track('bapp_book_route_open', { route_id: pRoute, source: 'personal' });
+    }
+
+    var shareAction = target.closest('#bapp-search-hero [data-bapp-share-action]');
+    if (shareAction) {
+      var action = clean(shareAction.getAttribute('data-bapp-share-action'));
+      var channelMap = { copy: 'copy', telegram: 'telegram', native: 'native', open: 'open' };
+      if (channelMap[action]) {
+        var shareId = materialIdFromNode(shareAction);
+        if (shareId) {
+          track('bapp_quote_share', {
+            material_id: shareId,
+            channel: channelMap[action]
+          });
+        }
+      }
+    }
+
+    var anchor = target.closest('a[href]');
+    if (!anchor) return;
+
+    if (anchor.closest('#bapp-themes') && anchor.classList.contains('bapp-themes__all-link')) return;
+    if (anchor.closest('#bapp-personal-layer') && anchor.closest('.bapp-personal__book-route')) return;
+
+    var materialId = materialIdFromNode(anchor);
+    var source = sourceForNode(anchor);
+    if (materialId && source) {
+      track('bapp_material_open', {
+        material_id: materialId,
+        source: source
+      });
+    }
+  }
+
+  function handleSubmitCapture(event) {
+    var target = event.target;
+    if (target && target.closest && target.closest('#bapp-search-hero')) {
+      beginSearch();
+    }
+  }
+
+  function handleKeydownCapture(event) {
+    if (event.key !== 'Enter') return;
+    var target = event.target;
+    if (!target || !target.closest || !target.closest('#bapp-search-hero')) return;
+    if (target.matches('input[type="search"], input[type="text"], input:not([type])')) {
+      beginSearch();
+    }
+  }
+
+  function init() {
+    installSearchObserver();
+    initPersonalSnapshot();
+
+    d.addEventListener('click', handleClickCapture, true);
+    d.addEventListener('submit', handleSubmitCapture, true);
+    d.addEventListener('keydown', handleKeydownCapture, true);
+    w.addEventListener('bapp:personal-updated', handlePersonalUpdate);
+    w.addEventListener('bapp:data-updated', function (event) {
+      if (event.detail) buildMaterialMap(event.detail);
+    });
+
+    if (w.BookAppData && typeof w.BookAppData.then === 'function') {
+      w.BookAppData.then(function (data) {
+        buildMaterialMap(data || {});
+      }).catch(function () {});
+    }
+
+    if (!heroGrid()) {
+      var tries = 0;
+      var timer = w.setInterval(function () {
+        tries += 1;
+        installSearchObserver();
+        initPersonalSnapshot();
+        if (heroGrid() || tries >= 40) w.clearInterval(timer);
+      }, 250);
+    }
+  }
+
+  if (d.readyState === 'loading') {
+    d.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+
+})(window, document);
+</script>
