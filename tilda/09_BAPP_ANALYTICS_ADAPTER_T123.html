@@ -1,0 +1,182 @@
+<!-- ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 5A · ANALYTICS ADAPTER
+Файл: 09_BAPP_ANALYTICS_ADAPTER_T123.html
+Версия: 1.0 · 11.08.2026
+
+Назначение:
+- единая fail-open точка отправки продуктовых событий приложения
+  в существующую Яндекс Метрику;
+- НЕ создает новый счетчик;
+- НЕ хранит события;
+- НЕ читает localStorage;
+- НЕ отправляет текст поискового запроса / свободный текст пользователя;
+- НЕ содержит собственного fetch;
+- использует только allowlist событий и параметров;
+- технические ID нейтральны к языку и готовы к будущему RU/EN Android.
+
+API:
+window.BookAppAnalytics.track(eventName, params)
+
+Размещение:
+отдельный T123 после BAPP DATA LOADER;
+сначала /navigator-copy.
+-->
+
+<script>
+(function (w, d) {
+  'use strict';
+
+  if (w.BookAppAnalytics && typeof w.BookAppAnalytics.track === 'function') {
+    return;
+  }
+
+  var DEFAULT_COUNTER_ID = 83512621;
+
+  var RULES = {
+    bapp_search: {
+      source: ['hero', 'map'],
+      result_bucket: ['0', '1_5', '6_15', '16_plus']
+    },
+    bapp_search_zero: {
+      source: ['hero', 'map']
+    },
+    bapp_material_open: {
+      material_id: 'id',
+      source: ['search', 'route', 'situation', 'theme', 'personal', 'map', 'live_book']
+    },
+    bapp_material_save: {
+      material_id: 'id',
+      source: ['search', 'route', 'situation', 'theme', 'personal', 'map', 'live_book']
+    },
+    bapp_personal_route_add: {
+      material_id: 'id',
+      source: ['search', 'route', 'situation', 'theme', 'personal', 'map', 'live_book']
+    },
+    bapp_book_route_open: {
+      route_id: 'id',
+      source: ['routes', 'situation', 'personal']
+    },
+    bapp_situation_select: {
+      scenario_id: 'scenario'
+    },
+    bapp_theme_open: {
+      theme_key: 'key'
+    },
+    bapp_theme_map_open: {
+      theme_key: 'key'
+    },
+    bapp_quote_share: {
+      material_id: 'id',
+      channel: ['copy', 'telegram', 'native', 'open']
+    }
+  };
+
+  function counterId() {
+    var candidate = Number(w.mainMetrikaId || DEFAULT_COUNTER_ID);
+    return Number.isFinite(candidate) && candidate > 0 ? candidate : DEFAULT_COUNTER_ID;
+  }
+
+  function currentLocale() {
+    var raw = '';
+    if (d && d.documentElement) raw = String(d.documentElement.lang || '');
+    if (!raw && w.navigator) raw = String(w.navigator.language || '');
+    raw = raw.toLowerCase();
+    return raw.indexOf('ru') === 0 ? 'ru' : 'en';
+  }
+
+  function safeId(value) {
+    var str = String(value == null ? '' : value).trim();
+    if (!str || str.length > 64) return '';
+    return /^[a-z0-9_-]+$/i.test(str) ? str : '';
+  }
+
+  function safeScenario(value) {
+    var str = String(value == null ? '' : value).trim();
+    return /^(0[1-6]|[1-6])$/.test(str) ? str.padStart(2, '0') : '';
+  }
+
+  function safeKey(value) {
+    var str = String(value == null ? '' : value).trim();
+    if (!str || str.length > 64) return '';
+    return /^[a-z0-9а-яё _-]+$/i.test(str) ? str : '';
+  }
+
+  function sanitizeValue(rule, value) {
+    if (Array.isArray(rule)) {
+      var normalized = String(value == null ? '' : value).trim();
+      return rule.indexOf(normalized) !== -1 ? normalized : '';
+    }
+    if (rule === 'id') return safeId(value);
+    if (rule === 'scenario') return safeScenario(value);
+    if (rule === 'key') return safeKey(value);
+    return '';
+  }
+
+  function sanitizeParams(eventName, params) {
+    var ruleSet = RULES[eventName];
+    if (!ruleSet) return null;
+
+    var input = params && typeof params === 'object' ? params : {};
+    var out = { locale: currentLocale() };
+
+    Object.keys(ruleSet).forEach(function (key) {
+      if (!Object.prototype.hasOwnProperty.call(input, key)) return;
+      var safe = sanitizeValue(ruleSet[key], input[key]);
+      if (safe !== '') out[key] = safe;
+    });
+
+    return out;
+  }
+
+  function debugEnabled() {
+    try {
+      return new URLSearchParams(w.location.search).get('bappAnalyticsDebug') === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function debugLog(eventName, params, status) {
+    if (!debugEnabled() || !w.console || typeof w.console.info !== 'function') return;
+    w.console.info('[BookAppAnalytics]', status, eventName, params || {});
+  }
+
+  function track(eventName, params) {
+    try {
+      if (!Object.prototype.hasOwnProperty.call(RULES, eventName)) {
+        debugLog(eventName, null, 'blocked:event');
+        return false;
+      }
+
+      var safeParams = sanitizeParams(eventName, params);
+      if (!safeParams) return false;
+
+      if (typeof w.ym !== 'function') {
+        debugLog(eventName, safeParams, 'skip:no-ym');
+        return false;
+      }
+
+      w.ym(counterId(), 'reachGoal', eventName, safeParams);
+      debugLog(eventName, safeParams, 'sent');
+
+      try {
+        w.dispatchEvent(new CustomEvent('bapp:analytics-sent', {
+          detail: { event: eventName, params: safeParams }
+        }));
+      } catch (eventError) {}
+
+      return true;
+    } catch (error) {
+      debugLog(eventName, null, 'skip:error');
+      return false;
+    }
+  }
+
+  w.BookAppAnalytics = Object.freeze({
+    version: '1.0',
+    track: track,
+    hasMetrika: function () { return typeof w.ym === 'function'; },
+    counterId: counterId
+  });
+
+})(window, document);
+</script>
