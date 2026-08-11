@@ -1,0 +1,167 @@
+{
+  "version": "1.0",
+  "policy": {
+    "rapidDays": 90,
+    "regularDays": 180,
+    "evergreenDays": 365,
+    "reviewSoonDays": 30,
+    "overdueDays": 90
+  },
+  "materials": [
+    {
+      "materialId": "m001",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m002",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m003",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m004",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m005",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m006",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m007",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m008",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m009",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m010",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m011",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m012",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m013",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m014",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m015",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m016",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m017",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m018",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m019",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m020",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m021",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m022",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m023",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m024",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m025",
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-11"
+    },
+    {
+      "materialId": "m026",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m027",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m028",
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-11"
+    },
+    {
+      "materialId": "m029",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m030",
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-11"
+    },
+    {
+      "materialId": "m031",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m032",
+      "reviewClass": "evergreen"
+    },
+    {
+      "materialId": "m033",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m034",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m035",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m036",
+      "reviewClass": "regular"
+    },
+    {
+      "materialId": "m037",
+      "reviewClass": "rapid"
+    },
+    {
+      "materialId": "m038",
+      "reviewClass": "rapid"
+    }
+  ]
+}
