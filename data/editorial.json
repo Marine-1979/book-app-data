@@ -106,7 +106,8 @@
     },
     {
       "materialId": "m025",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-11"
     },
     {
       "materialId": "m026",
@@ -118,7 +119,8 @@
     },
     {
       "materialId": "m028",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-11"
     },
     {
       "materialId": "m029",
@@ -126,7 +128,8 @@
     },
     {
       "materialId": "m030",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-11"
     },
     {
       "materialId": "m031",
