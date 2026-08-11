@@ -1,7 +1,11 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
   ЦИФРОВОЕ ПРИЛОЖЕНИЕ · Stage 5A.2 · NAVIGATOR ANALYTICS EVENTS
   Файл: 10_BAPP_ANALYTICS_NAV_EVENTS_T123.html
-  Версия: 1.0 · 11.08.2026
+  Версия: 1.1 · 11.08.2026
+
+  Исправление v1.1:
+  - синхронизация события bapp_material_save с фактическим полем
+    BookAppPersonal: savedMaterials (в v1.0 ошибочно ожидалось saved).
 
   Назначение:
   - подключает реальные продуктовые события /navigator к BookAppAnalytics;
@@ -200,7 +204,7 @@
   }
 
   function savedIds(state) {
-    return state && Array.isArray(state.saved) ? state.saved.slice() : [];
+    return state && Array.isArray(state.savedMaterials) ? state.savedMaterials.slice() : [];
   }
 
   function addedIds(before, after) {
