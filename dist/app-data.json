@@ -1,8 +1,8 @@
 {
   "build": {
     "schemaVersion": "2.0.0",
-    "sourceCommit": "630a7de061ffe6daa925a1b1e2573541ecd136e9",
-    "generatedAt": "2026-08-11T15:31:00.074Z"
+    "sourceCommit": "5bb109134adaf74b2a20db3f10a390bb056a4ca4",
+    "generatedAt": "2026-08-12T12:10:44.966Z"
   },
   "meta": {
     "updated": "13 июля 2026",
@@ -430,6 +430,8 @@
       "expert": true,
       "expert_name": "Мадина Малова",
       "publishedAt": "2026-01-18",
+      "updatedAt": "2026-08-12",
+      "changeSummary": "Обновлены федеральный координационный контур, статус Единого реестра и практические выводы по 330-ФЗ; исправлена ссылка на номер закона.",
       "bookTheme": "профессия"
     },
     {
