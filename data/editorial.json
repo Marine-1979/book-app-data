@@ -34,23 +34,28 @@
     },
     {
       "materialId": "m007",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-13"
     },
     {
       "materialId": "m008",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-13"
     },
     {
       "materialId": "m009",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-13"
     },
     {
       "materialId": "m010",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-12"
     },
     {
       "materialId": "m011",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-12"
     },
     {
       "materialId": "m012",
@@ -90,7 +95,8 @@
     },
     {
       "materialId": "m021",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-12"
     },
     {
       "materialId": "m022",
