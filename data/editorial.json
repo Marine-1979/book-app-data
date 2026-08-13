@@ -34,7 +34,8 @@
     },
     {
       "materialId": "m007",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-13"
     },
     {
       "materialId": "m008",
