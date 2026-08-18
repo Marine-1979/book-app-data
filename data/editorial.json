@@ -14,23 +14,28 @@
     },
     {
       "materialId": "m002",
-      "reviewClass": "rapid"
+      "reviewClass": "rapid",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m003",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m004",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m005",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m006",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-16"
     },
     {
       "materialId": "m007",
@@ -71,11 +76,13 @@
     },
     {
       "materialId": "m015",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m016",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m017",
@@ -83,11 +90,13 @@
     },
     {
       "materialId": "m018",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m019",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m020",
@@ -100,7 +109,8 @@
     },
     {
       "materialId": "m022",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-16"
     },
     {
       "materialId": "m023",
@@ -108,29 +118,33 @@
     },
     {
       "materialId": "m024",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m025",
       "reviewClass": "rapid",
-      "reviewedAt": "2026-08-11"
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m026",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m027",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m028",
       "reviewClass": "rapid",
-      "reviewedAt": "2026-08-11"
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m029",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m030",
@@ -139,11 +153,13 @@
     },
     {
       "materialId": "m031",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m032",
-      "reviewClass": "evergreen"
+      "reviewClass": "evergreen",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m033",
@@ -151,7 +167,8 @@
     },
     {
       "materialId": "m034",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m035",
@@ -159,7 +176,8 @@
     },
     {
       "materialId": "m036",
-      "reviewClass": "regular"
+      "reviewClass": "regular",
+      "reviewedAt": "2026-08-17"
     },
     {
       "materialId": "m037",
