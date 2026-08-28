@@ -1,0 +1,353 @@
+{
+  "version": "1.0",
+  "materials": {
+    "m001": {
+      "title": "Brand Analytics webinar: trendwatching with social media analytics, 2024",
+      "desc": "How trendwatching helps business identify emerging market and consumer signals, validate them with data, and improve products and communications.",
+      "tags": [
+        "trendwatching",
+        "social media analytics",
+        "market signals"
+      ]
+    },
+    "m002": {
+      "title": "Key Research 2026: technology, strategic communications, reputation and corporate culture | Russia and the world",
+      "desc": "A review of 17 key studies from Russia and abroad across technology, trust and reputation, people and culture.",
+      "tags": [
+        "research 2026",
+        "reputation",
+        "corporate culture",
+        "technology"
+      ]
+    },
+    "m003": {
+      "title": "A robot turns liquid and escapes from a cage",
+      "desc": "A video showing a miniature magnetically controlled robot that can reversibly switch between solid and liquid states, pass an obstacle and regain its shape.",
+      "tags": [
+        "robotics",
+        "phase transition",
+        "research"
+      ]
+    },
+    "m004": {
+      "title": "Worldviews and patterns of the offline boomer and digital zoomer: a comparative analysis",
+      "desc": "A comparison of two conditional thinking profiles through ten principles of the digital environment, without rigid age stereotypes, to help adapt communication to data, hierarchy, change and uncertainty.",
+      "tags": [
+        "digital mindset",
+        "audience analysis",
+        "uncertainty"
+      ]
+    },
+    "m005": {
+      "title": "Risk map of pre-digital and digital thinking for managers and communicators",
+      "desc": "A map comparing pre-digital and digital thinking risks across decision speed, transparency, data, digital footprint and other criteria, translating the differences into practical conclusions for senior leaders.",
+      "tags": [
+        "risk map",
+        "digital mindset",
+        "leadership"
+      ]
+    },
+    "m006": {
+      "title": "15 golden rules of trendwatching for communicators: from spotting a trend to applying an insight",
+      "desc": "Fifteen rules for building trendwatching as a management process: separating signal from noise, validating hypotheses with data, translating trends into decisions and recalibrating the observation system.",
+      "tags": [
+        "trendwatching",
+        "signals",
+        "management decisions"
+      ]
+    },
+    "m007": {
+      "title": "AI in 2026: ten directions from working systems to the research frontier",
+      "desc": "An updated review of ten AI directions—from machine learning, multimodal models and AI agents to robotics, brain-computer interfaces and neuromorphic computing—with maturity assessment and implications for communications.",
+      "tags": [
+        "AI 2026",
+        "AI agents",
+        "robotics",
+        "technology maturity"
+      ]
+    },
+    "m008": {
+      "title": "Bluesky and AT Protocol: when audience relationships are not tied to one platform",
+      "desc": "An updated analysis of Bluesky and AT Protocol showing how portable identity and data, algorithm choice and an open ecosystem can reduce dependence on a single social platform.",
+      "tags": [
+        "Bluesky",
+        "AT Protocol",
+        "platform resilience"
+      ]
+    },
+    "m009": {
+      "title": "Ten questions before introducing digital technologies into communications",
+      "desc": "A practical guide for checking readiness to introduce digital technologies: management purpose, data, system authority, quality, transparency, vendor replaceability, fallback processes and impact on trust.",
+      "tags": [
+        "digital transformation",
+        "AI",
+        "checklist",
+        "risk"
+      ]
+    },
+    "m010": {
+      "title": "Scott Brinker’s marketing technology landscape: project overview and key conclusions",
+      "desc": "A review of the 2026 martech landscape, its market plateau and high turnover, and the resulting requirements for data architecture, integration, context and AI governance.",
+      "tags": [
+        "martech",
+        "data architecture",
+        "AI governance"
+      ]
+    },
+    "m011": {
+      "title": "Communications Management Center: a digital ecosystem for reputation management in 2026",
+      "desc": "A practical guide to the Communications Management Center: five functional layers, six cross-cutting processes, target operating model, CommTech, AI agents, resilience and build-or-buy logic.",
+      "tags": [
+        "communications management center",
+        "CommTech",
+        "AI agents",
+        "resilience"
+      ]
+    },
+    "m012": {
+      "title": "Ten graphic-design rules by Anton Dubinchin for a modern, stylish presentation",
+      "desc": "Ten graphic-design rules for building composition, typography and visual hierarchy around the communication task.",
+      "tags": [
+        "presentation design",
+        "typography",
+        "visual hierarchy"
+      ]
+    },
+    "m013": {
+      "title": "Eight “trust triggers” in graphic design by Marina Matasova",
+      "desc": "Eight visual trust triggers that help assess design not only aesthetically but also by how it shapes the perception of communication.",
+      "tags": [
+        "trust design",
+        "graphic design",
+        "visual perception"
+      ]
+    },
+    "m014": {
+      "title": "Timur Aslanov’s mediatization algorithm: integrating traditional media, social networks and bloggers",
+      "desc": "A guide to combining traditional media, social platforms and bloggers into one coordinated mediatization system.",
+      "tags": [
+        "mediatization",
+        "media",
+        "social platforms",
+        "bloggers"
+      ]
+    },
+    "m015": {
+      "title": "Narrative vs. news hook: do your communications create value or merely feed the content stream?",
+      "desc": "A material for checking whether communications create durable meaning and a coherent narrative or remain a sequence of isolated news hooks.",
+      "tags": [
+        "narrative",
+        "news hooks",
+        "meaning"
+      ]
+    },
+    "m016": {
+      "title": "12 myths about PR and journalism that are overdue for revision",
+      "desc": "An analysis of twelve persistent PR and journalism myths, showing why the communications function extends beyond media relations and how channels, editorial independence, measurement, crisis readiness and the CEO role have changed.",
+      "tags": [
+        "PR myths",
+        "journalism",
+        "communications function"
+      ]
+    },
+    "m017": {
+      "title": "Sergey Polovnikov’s notes on journalist–communicator relations in a mediatized environment",
+      "desc": "A guide to expectations and tensions between journalists and communicators in a mediatized environment.",
+      "tags": [
+        "journalists",
+        "communicators",
+        "mediatization"
+      ]
+    },
+    "m018": {
+      "title": "Arthur Page’s philosophy: seven principles that became professional landmarks",
+      "desc": "Arthur Page’s story and seven principles that continue to frame communications as part of management: truth, action, stakeholders, the future, people, responsibility and composure under pressure.",
+      "tags": [
+        "Arthur Page",
+        "professional principles",
+        "CCO"
+      ]
+    },
+    "m019": {
+      "title": "A film story about the people who connect our world",
+      "desc": "A short film-based material about standards as invisible infrastructure for compatibility, predictability and professional cooperation.",
+      "tags": [
+        "standards",
+        "compatibility",
+        "professional community"
+      ]
+    },
+    "m020": {
+      "title": "Professional communications management guide by Evgeny Temperamentov: from talent to sustainable reputation",
+      "desc": "A guide to professional communications management covering talent, function design and practices that support sustainable reputation.",
+      "tags": [
+        "communications management",
+        "talent",
+        "reputation"
+      ]
+    },
+    "m021": {
+      "title": "Opportunities and challenges of Russia’s Federal Law 330-FZ for the communications field",
+      "desc": "An analysis of the regulatory environment created by 330-FZ and a practical action framework for senior communicators in 2026.",
+      "tags": [
+        "330-FZ",
+        "creative industries",
+        "regulation"
+      ]
+    },
+    "m022": {
+      "title": "ISO 9001:2015 in communications management: when a PR director falls in love with a standard",
+      "desc": "An analysis of how the process approach, risk management, data and measurable objectives can help integrate communications into an organization’s management system.",
+      "tags": [
+        "ISO 9001",
+        "process management",
+        "communications management"
+      ]
+    },
+    "m023": {
+      "title": "Yaroslav Meshalkin’s step-by-step communications-function reengineering plan: from audit to implementation",
+      "desc": "A practical plan for auditing the communications function, identifying gaps in processes and accountability, and building a realistic organizational-change program.",
+      "tags": [
+        "reengineering",
+        "function audit",
+        "organizational change"
+      ]
+    },
+    "m024": {
+      "title": "Roadmap for transforming communications management: 10 steps toward a human-centered organization",
+      "desc": "A ten-step roadmap from diagnosing the current model to implementing human-centered principles and monitoring change.",
+      "tags": [
+        "transformation roadmap",
+        "human-centered management",
+        "communications function"
+      ]
+    },
+    "m025": {
+      "title": "Strategy 2.0 + Human-Centered Communications Index: methodology hub",
+      "desc": "A hub combining guidance and examples for Communication Strategy 2.0, pragmatic human-centered management and the Human-Centered Communications Index (HCI).",
+      "tags": [
+        "Strategy 2.0",
+        "HCI",
+        "human-centered communications"
+      ]
+    },
+    "m026": {
+      "title": "Case review: homeless animals — bureaucratic logic vs. pragmatic human-centered management",
+      "desc": "A case comparing bureaucratic and pragmatic human-centered approaches and showing how the initial management logic changes the communication decision.",
+      "tags": [
+        "human-centered management",
+        "case study",
+        "public sector"
+      ]
+    },
+    "m027": {
+      "title": "Moving an organization toward pragmatic human-centered communications",
+      "desc": "A method for designing the transition toward pragmatic human-centered management—from diagnosing the current model to changing decisions, processes and interactions with people.",
+      "tags": [
+        "human-centered communications",
+        "organizational change",
+        "management model"
+      ]
+    },
+    "m028": {
+      "title": "Communication Strategy 2.0: structure, content and launch",
+      "desc": "A Strategy 2.0 framework connecting organizational goals, people’s interests, management decisions and communications in a single launch and implementation plan.",
+      "tags": [
+        "Strategy 2.0",
+        "management system",
+        "communication strategy"
+      ]
+    },
+    "m029": {
+      "title": "Communication Strategy 2.0 for the “City and Animals” program",
+      "desc": "A practical example of applying Strategy 2.0 to connect goals, audiences and communication actions in the “City and Animals” program.",
+      "tags": [
+        "Strategy 2.0",
+        "practical example",
+        "audiences"
+      ]
+    },
+    "m030": {
+      "title": "Human-Centered Communications Index (HCI): methodology and assessment guide",
+      "desc": "A guide translating human-centered communications into HCI indicators for diagnostics, comparison and management decisions.",
+      "tags": [
+        "HCI",
+        "human-centered communications",
+        "diagnostics"
+      ]
+    },
+    "m031": {
+      "title": "Crisis case reviews | Retrospective | Russian cycle",
+      "desc": "A retrospective of Russian crisis cases highlighting recurring management mistakes, the cost of delayed response and lessons for crisis preparedness.",
+      "tags": [
+        "crisis cases",
+        "management mistakes",
+        "reputation risk"
+      ]
+    },
+    "m032": {
+      "title": "January freeze of trust, or the price of silence in a crisis",
+      "desc": "A case showing how organizational silence increases uncertainty and trust debt, and when a first substantive position is needed.",
+      "tags": [
+        "crisis silence",
+        "trust debt",
+        "first response"
+      ]
+    },
+    "m033": {
+      "title": "Ivan Afanasyev’s checklist for communicators under information attack",
+      "desc": "A step-by-step checklist for initial assessment, decision coordination, response choice and team control under pressure.",
+      "tags": [
+        "information attack",
+        "crisis checklist",
+        "team coordination"
+      ]
+    },
+    "m034": {
+      "title": "Media coverage examples from the campaign against counterfeit fuel",
+      "desc": "A collection of media publications showing how public coverage of the counterfeit-fuel issue developed, providing evidence for a communications case review.",
+      "tags": [
+        "media coverage",
+        "case evidence",
+        "public communication"
+      ]
+    },
+    "m035": {
+      "title": "Crisis communications strategy guide by Nika Komarova (PR machine)",
+      "desc": "A guide to roles, decision sequence, information-field management and team actions under crisis pressure.",
+      "tags": [
+        "crisis strategy",
+        "crisis team",
+        "response algorithm"
+      ]
+    },
+    "m036": {
+      "title": "Join the channel for discussing the book’s themes",
+      "desc": "A gateway to professional discussion around the book and its living digital continuation, with observations, questions and practical communications-management cases.",
+      "tags": [
+        "professional community",
+        "living edition",
+        "book discussion"
+      ]
+    },
+    "m037": {
+      "title": "The frontline-employee syndrome in the age of glass offices",
+      "desc": "A case about how the actions and statements of frontline employees can become a reputation risk for the entire system under digital transparency.",
+      "tags": [
+        "frontline employees",
+        "reputation risk",
+        "digital transparency"
+      ]
+    },
+    "m038": {
+      "title": "Access to the profession: how the world assesses communicators and what test awaits Russia",
+      "desc": "A comparison of professional-entry and conformity-assessment systems for communicators in the US, UK, EU and Russia, highlighting maturity criteria still missing from Russian practice.",
+      "tags": [
+        "professional certification",
+        "conformity assessment",
+        "professional maturity",
+        "international practice"
+      ]
+    }
+  }
+}

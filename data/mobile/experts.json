@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "expert_madina_malova",
+      "locales": {
+        "ru": "Мадина Малова",
+        "en": "Madina Malova"
+      }
+    },
+    {
+      "id": "expert_anton_dubinchin",
+      "locales": {
+        "ru": "Антон Дубинчин",
+        "en": "Anton Dubinchin"
+      }
+    },
+    {
+      "id": "expert_marina_matasova",
+      "locales": {
+        "ru": "Марина Матасова",
+        "en": "Marina Matasova"
+      }
+    },
+    {
+      "id": "expert_timur_aslanov",
+      "locales": {
+        "ru": "Тимур Асланов",
+        "en": "Timur Aslanov"
+      }
+    },
+    {
+      "id": "expert_sergey_polovnikov",
+      "locales": {
+        "ru": "Сергей Половников",
+        "en": "Sergey Polovnikov"
+      }
+    },
+    {
+      "id": "expert_evgeny_temperamentov",
+      "locales": {
+        "ru": "Евгений Темпераментов",
+        "en": "Evgeny Temperamentov"
+      }
+    },
+    {
+      "id": "expert_yaroslav_meshalkin",
+      "locales": {
+        "ru": "Ярослав Мешалкин",
+        "en": "Yaroslav Meshalkin"
+      }
+    },
+    {
+      "id": "expert_ivan_afanasyev",
+      "locales": {
+        "ru": "Иван Афанасьев",
+        "en": "Ivan Afanasyev"
+      }
+    },
+    {
+      "id": "expert_nika_komarova",
+      "locales": {
+        "ru": "Ника Комарова",
+        "en": "Nika Komarova"
+      }
+    }
+  ]
+}

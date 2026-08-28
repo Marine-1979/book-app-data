@@ -1,0 +1,117 @@
+{
+  "version": "1.0",
+  "items": [
+    {
+      "id": "route_01",
+      "code": "01",
+      "locales": {
+        "ru": {
+          "title": "Картина мира",
+          "desc": "Сигналы среды, тренды и изменения, которые влияют на управленческие решения."
+        },
+        "en": {
+          "title": "Worldview",
+          "desc": "Signals, trends and shifts that shape management decisions."
+        }
+      }
+    },
+    {
+      "id": "route_02",
+      "code": "02",
+      "locales": {
+        "ru": {
+          "title": "Технологии",
+          "desc": "Технологии и цифровая архитектура коммуникационной функции."
+        },
+        "en": {
+          "title": "Technology",
+          "desc": "Technology and the digital architecture of the communications function."
+        }
+      }
+    },
+    {
+      "id": "route_03",
+      "code": "03",
+      "locales": {
+        "ru": {
+          "title": "Дизайн доверия",
+          "desc": "Визуальные решения и дизайн как часть доверия и качества коммуникации."
+        },
+        "en": {
+          "title": "Trust Design",
+          "desc": "Visual decisions and design as part of trust and communication quality."
+        }
+      }
+    },
+    {
+      "id": "route_04",
+      "code": "04",
+      "locales": {
+        "ru": {
+          "title": "Профессия",
+          "desc": "Профессиональная зрелость, медиатизация, стандарты и роль коммуникатора."
+        },
+        "en": {
+          "title": "Profession",
+          "desc": "Professional maturity, mediatization, standards and the communicator’s role."
+        }
+      }
+    },
+    {
+      "id": "route_05",
+      "code": "05",
+      "locales": {
+        "ru": {
+          "title": "Управление",
+          "desc": "Коммуникационная функция как часть управленческого контура организации."
+        },
+        "en": {
+          "title": "Communication Management",
+          "desc": "The communications function as part of the organization’s management system."
+        }
+      }
+    },
+    {
+      "id": "route_06",
+      "code": "06",
+      "locales": {
+        "ru": {
+          "title": "Стратегия 2.0",
+          "desc": "Стратегия коммуникаций, человекоцентричность и диагностика ИЧК."
+        },
+        "en": {
+          "title": "Strategy 2.0",
+          "desc": "Communication strategy, human-centered management and HCI diagnostics."
+        }
+      }
+    },
+    {
+      "id": "route_07",
+      "code": "07",
+      "locales": {
+        "ru": {
+          "title": "Антикризис",
+          "desc": "Кризисные сценарии, риски, решения и устойчивость репутации."
+        },
+        "en": {
+          "title": "Crisis Response",
+          "desc": "Crisis scenarios, risks, decisions and reputation resilience."
+        }
+      }
+    },
+    {
+      "id": "route_08",
+      "code": "08",
+      "locales": {
+        "ru": {
+          "title": "Сообщество",
+          "desc": "Профессиональный обмен вокруг тем книги и живого издания."
+        },
+        "en": {
+          "title": "Community",
+          "desc": "Professional exchange around the book and its living edition."
+        }
+      }
+    }
+  ]
+}

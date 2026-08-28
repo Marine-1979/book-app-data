@@ -1,0 +1,161 @@
+{
+  "version": "1.0",
+  "types": {
+    "type_video": {
+      "ru": "Видео",
+      "en": "Video"
+    },
+    "type_review": {
+      "ru": "Обзор",
+      "en": "Review"
+    },
+    "type_guide": {
+      "ru": "Гайд",
+      "en": "Guide"
+    },
+    "type_article": {
+      "ru": "Статья",
+      "en": "Article"
+    },
+    "type_method": {
+      "ru": "Методика",
+      "en": "Method"
+    },
+    "type_case": {
+      "ru": "Кейс",
+      "en": "Case"
+    },
+    "type_community": {
+      "ru": "Сообщество",
+      "en": "Community"
+    }
+  },
+  "statuses": {
+    "status_available": {
+      "ru": "Доступно",
+      "en": "Available"
+    }
+  },
+  "tasks": {
+    "task_crisis": {
+      "ru": "Антикризис",
+      "en": "Crisis response"
+    },
+    "task_strategy": {
+      "ru": "Стратегия",
+      "en": "Strategy"
+    },
+    "task_leadership": {
+      "ru": "Работа с руководством",
+      "en": "Working with leadership"
+    },
+    "task_function_transformation": {
+      "ru": "Трансформация функции",
+      "en": "Function transformation"
+    },
+    "task_ai_adoption": {
+      "ru": "Внедрение ИИ",
+      "en": "AI adoption"
+    },
+    "task_trust_diagnosis": {
+      "ru": "Диагностика доверия",
+      "en": "Trust diagnostics"
+    },
+    "task_humancentricity": {
+      "ru": "Человекоцентричность",
+      "en": "Human-centered communications"
+    },
+    "task_mediatization": {
+      "ru": "Медиатизация",
+      "en": "Mediatization"
+    },
+    "task_team": {
+      "ru": "Работа с командой",
+      "en": "Team coordination"
+    },
+    "task_template": {
+      "ru": "Поиск шаблона",
+      "en": "Practical template"
+    },
+    "task_risk": {
+      "ru": "Оценка рисков",
+      "en": "Risk assessment"
+    },
+    "task_professional_standards": {
+      "ru": "Профессиональные стандарты",
+      "en": "Professional standards"
+    }
+  },
+  "audiences": {
+    "audience_first_executive": {
+      "ru": "Первое лицо / CEO",
+      "en": "CEO / First executive"
+    },
+    "audience_comms_lead": {
+      "ru": "Руководитель коммуникаций",
+      "en": "Head of Communications"
+    },
+    "audience_comms_team": {
+      "ru": "Коммуникационная команда",
+      "en": "Communications team"
+    },
+    "audience_press_service": {
+      "ru": "Пресс-служба",
+      "en": "Press office"
+    },
+    "audience_public_sector": {
+      "ru": "Госсектор",
+      "en": "Public sector"
+    },
+    "audience_large_business": {
+      "ru": "Крупный бизнес",
+      "en": "Large business"
+    },
+    "audience_consultant": {
+      "ru": "Консультант",
+      "en": "Consultant"
+    },
+    "audience_expert": {
+      "ru": "Эксперт",
+      "en": "Expert"
+    },
+    "audience_young_professional": {
+      "ru": "Молодой специалист",
+      "en": "Early-career professional"
+    }
+  },
+  "themes": {
+    "theme_trust": {
+      "ru": "Доверие",
+      "en": "Trust"
+    },
+    "theme_strategy": {
+      "ru": "Стратегия",
+      "en": "Strategy"
+    },
+    "theme_crisis": {
+      "ru": "Кризис",
+      "en": "Crisis"
+    },
+    "theme_management": {
+      "ru": "Управление",
+      "en": "Management"
+    },
+    "theme_profession": {
+      "ru": "Профессия",
+      "en": "Profession"
+    },
+    "theme_ai_technology": {
+      "ru": "ИИ и технологии",
+      "en": "AI & Technology"
+    },
+    "theme_humancentricity": {
+      "ru": "Человекоцентричность",
+      "en": "Human-centered communications"
+    },
+    "theme_community": {
+      "ru": "Сообщество",
+      "en": "Community"
+    }
+  }
+}

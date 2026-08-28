@@ -1,0 +1,866 @@
+{
+  "version": "1.0",
+  "materials": [
+    {
+      "id": "m001",
+      "routeId": "route_01",
+      "typeId": "type_video",
+      "taskIds": [
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_large_business",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_ai_technology"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "video_external",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m002",
+      "routeId": "route_01",
+      "typeId": "type_review",
+      "taskIds": [
+        "task_strategy",
+        "task_risk",
+        "task_trust_diagnosis"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_consultant",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_ai_technology",
+        "theme_trust",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "research_review",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m003",
+      "routeId": "route_01",
+      "typeId": "type_video",
+      "taskIds": [],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_ai_technology"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "video_external",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m004",
+      "routeId": "route_01",
+      "typeId": "type_review",
+      "taskIds": [
+        "task_humancentricity",
+        "task_team",
+        "task_risk"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_first_executive",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_humancentricity",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m005",
+      "routeId": "route_01",
+      "typeId": "type_review",
+      "taskIds": [
+        "task_risk",
+        "task_leadership",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_ai_technology"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m006",
+      "routeId": "route_01",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_strategy",
+        "task_risk",
+        "task_template"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_consultant",
+        "audience_large_business",
+        "audience_public_sector"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_profession"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m007",
+      "routeId": "route_02",
+      "typeId": "type_review",
+      "taskIds": [
+        "task_ai_adoption",
+        "task_risk",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_ai_technology"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "research_review",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m008",
+      "routeId": "route_02",
+      "typeId": "type_review",
+      "taskIds": [
+        "task_mediatization",
+        "task_risk",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_ai_technology",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m009",
+      "routeId": "route_02",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_ai_adoption",
+        "task_risk",
+        "task_template"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_ai_technology"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m010",
+      "routeId": "route_02",
+      "typeId": "type_review",
+      "taskIds": [
+        "task_ai_adoption",
+        "task_strategy",
+        "task_risk"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_consultant",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_ai_technology",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "research_review",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m011",
+      "routeId": "route_02",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_function_transformation",
+        "task_strategy",
+        "task_ai_adoption",
+        "task_leadership"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_public_sector",
+        "audience_large_business",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_ai_technology",
+        "theme_strategy"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m012",
+      "routeId": "route_03",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_template"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_trust",
+        "theme_profession"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m013",
+      "routeId": "route_03",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_trust_diagnosis",
+        "task_template"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_trust"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m014",
+      "routeId": "route_04",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_mediatization",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_profession",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m015",
+      "routeId": "route_04",
+      "typeId": "type_article",
+      "taskIds": [
+        "task_mediatization",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_large_business",
+        "audience_public_sector"
+      ],
+      "themeIds": [
+        "theme_profession",
+        "theme_trust"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m016",
+      "routeId": "route_04",
+      "typeId": "type_article",
+      "taskIds": [
+        "task_function_transformation",
+        "task_mediatization",
+        "task_leadership",
+        "task_professional_standards"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_profession",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m017",
+      "routeId": "route_04",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_mediatization"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_profession"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m018",
+      "routeId": "route_04",
+      "typeId": "type_article",
+      "taskIds": [
+        "task_professional_standards",
+        "task_leadership",
+        "task_function_transformation"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_expert",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_profession",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "historical_analysis",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m019",
+      "routeId": "route_04",
+      "typeId": "type_video",
+      "taskIds": [
+        "task_professional_standards"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_expert",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_profession"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "video_external",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m020",
+      "routeId": "route_05",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_function_transformation",
+        "task_team",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_trust"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m021",
+      "routeId": "route_05",
+      "typeId": "type_article",
+      "taskIds": [
+        "task_professional_standards",
+        "task_risk",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business",
+        "audience_expert"
+      ],
+      "themeIds": [
+        "theme_profession",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m022",
+      "routeId": "route_04",
+      "typeId": "type_article",
+      "taskIds": [
+        "task_professional_standards",
+        "task_function_transformation",
+        "task_risk",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_consultant",
+        "audience_expert",
+        "audience_large_business",
+        "audience_public_sector"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_profession"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m023",
+      "routeId": "route_05",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_function_transformation",
+        "task_leadership",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m024",
+      "routeId": "route_05",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_function_transformation",
+        "task_leadership",
+        "task_humancentricity",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_management",
+        "theme_humancentricity",
+        "theme_strategy"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m025",
+      "routeId": "route_06",
+      "typeId": "type_method",
+      "taskIds": [
+        "task_strategy",
+        "task_humancentricity",
+        "task_trust_diagnosis",
+        "task_function_transformation"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_consultant",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_strategy",
+        "theme_humancentricity",
+        "theme_trust"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "method_hub",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m026",
+      "routeId": "route_06",
+      "typeId": "type_case",
+      "taskIds": [
+        "task_humancentricity",
+        "task_leadership",
+        "task_risk"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector"
+      ],
+      "themeIds": [
+        "theme_humancentricity",
+        "theme_trust",
+        "theme_management"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "case_review",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m027",
+      "routeId": "route_06",
+      "typeId": "type_method",
+      "taskIds": [
+        "task_humancentricity",
+        "task_function_transformation",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_humancentricity"
+      ],
+      "origin": "app_original",
+      "sourceKind": "method_material",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m028",
+      "routeId": "route_06",
+      "typeId": "type_method",
+      "taskIds": [
+        "task_strategy",
+        "task_leadership",
+        "task_function_transformation"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_strategy"
+      ],
+      "origin": "app_original",
+      "sourceKind": "method_material",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m029",
+      "routeId": "route_06",
+      "typeId": "type_method",
+      "taskIds": [
+        "task_strategy",
+        "task_template",
+        "task_humancentricity"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_strategy",
+        "theme_humancentricity"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "method_example",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m030",
+      "routeId": "route_06",
+      "typeId": "type_method",
+      "taskIds": [
+        "task_trust_diagnosis",
+        "task_humancentricity",
+        "task_strategy"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_consultant",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_humancentricity",
+        "theme_trust"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "method_material",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m031",
+      "routeId": "route_07",
+      "typeId": "type_case",
+      "taskIds": [
+        "task_crisis",
+        "task_risk"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_crisis"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "case_hub",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m032",
+      "routeId": "route_07",
+      "typeId": "type_case",
+      "taskIds": [
+        "task_crisis",
+        "task_leadership",
+        "task_risk"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_crisis",
+        "theme_trust"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "case_review",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m033",
+      "routeId": "route_07",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_crisis",
+        "task_template",
+        "task_team"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service"
+      ],
+      "themeIds": [
+        "theme_crisis"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m034",
+      "routeId": "route_07",
+      "typeId": "type_case",
+      "taskIds": [
+        "task_crisis",
+        "task_mediatization",
+        "task_risk"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_crisis",
+        "theme_profession"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "case_evidence",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m035",
+      "routeId": "route_07",
+      "typeId": "type_guide",
+      "taskIds": [
+        "task_crisis",
+        "task_team",
+        "task_template"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_press_service",
+        "audience_consultant"
+      ],
+      "themeIds": [
+        "theme_crisis"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "classificationStatus": "source-normalized"
+    },
+    {
+      "id": "m036",
+      "routeId": "route_08",
+      "typeId": "type_community",
+      "taskIds": [],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_consultant",
+        "audience_expert",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_community"
+      ],
+      "origin": "book_qr",
+      "sourceKind": "community",
+      "classificationStatus": "editorial"
+    },
+    {
+      "id": "m037",
+      "routeId": "route_07",
+      "typeId": "type_case",
+      "taskIds": [
+        "task_crisis",
+        "task_risk",
+        "task_team",
+        "task_leadership"
+      ],
+      "audienceIds": [
+        "audience_first_executive",
+        "audience_comms_lead",
+        "audience_comms_team",
+        "audience_public_sector",
+        "audience_large_business"
+      ],
+      "themeIds": [
+        "theme_crisis",
+        "theme_management"
+      ],
+      "origin": "app_original",
+      "sourceKind": "case_review",
+      "classificationStatus": "source+editorial"
+    },
+    {
+      "id": "m038",
+      "routeId": "route_04",
+      "typeId": "type_article",
+      "taskIds": [
+        "task_professional_standards"
+      ],
+      "audienceIds": [
+        "audience_comms_lead",
+        "audience_expert",
+        "audience_young_professional"
+      ],
+      "themeIds": [
+        "theme_profession"
+      ],
+      "origin": "app_original",
+      "sourceKind": "author_analysis",
+      "classificationStatus": "source-normalized"
+    }
+  ]
+}

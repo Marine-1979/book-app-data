@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Mmalova Mobile App Data v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "dataVersion",
+    "generatedAt",
+    "defaultLocale",
+    "supportedLocales",
+    "dictionaries",
+    "routes",
+    "experts",
+    "materials",
+    "updates"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 38,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "route",
+          "type",
+          "status",
+          "availableLocales",
+          "contentLocales",
+          "locales",
+          "classification",
+          "web"
+        ]
+      }
+    }
+  }
+}
