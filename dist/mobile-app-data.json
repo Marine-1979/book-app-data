@@ -1,0 +1,2831 @@
+{
+  "schemaVersion": "1.0",
+  "dataVersion": "2026-08-28.b7beea1f79d5",
+  "generatedAt": "2026-08-28T13:08:11+03:00",
+  "sourceCommit": "b7beea1f79d5",
+  "contentPolicy": {
+    "enCatalogStatus": "editorial_draft",
+    "fullContentDefaultLocale": "ru"
+  },
+  "defaultLocale": "ru",
+  "supportedLocales": [
+    "ru",
+    "en"
+  ],
+  "dictionaries": {
+    "version": "1.0",
+    "types": {
+      "type_video": {
+        "ru": "Видео",
+        "en": "Video"
+      },
+      "type_review": {
+        "ru": "Обзор",
+        "en": "Review"
+      },
+      "type_guide": {
+        "ru": "Гайд",
+        "en": "Guide"
+      },
+      "type_article": {
+        "ru": "Статья",
+        "en": "Article"
+      },
+      "type_method": {
+        "ru": "Методика",
+        "en": "Method"
+      },
+      "type_case": {
+        "ru": "Кейс",
+        "en": "Case"
+      },
+      "type_community": {
+        "ru": "Сообщество",
+        "en": "Community"
+      }
+    },
+    "statuses": {
+      "status_available": {
+        "ru": "Доступно",
+        "en": "Available"
+      }
+    },
+    "tasks": {
+      "task_crisis": {
+        "ru": "Антикризис",
+        "en": "Crisis response"
+      },
+      "task_strategy": {
+        "ru": "Стратегия",
+        "en": "Strategy"
+      },
+      "task_leadership": {
+        "ru": "Работа с руководством",
+        "en": "Working with leadership"
+      },
+      "task_function_transformation": {
+        "ru": "Трансформация функции",
+        "en": "Function transformation"
+      },
+      "task_ai_adoption": {
+        "ru": "Внедрение ИИ",
+        "en": "AI adoption"
+      },
+      "task_trust_diagnosis": {
+        "ru": "Диагностика доверия",
+        "en": "Trust diagnostics"
+      },
+      "task_humancentricity": {
+        "ru": "Человекоцентричность",
+        "en": "Human-centered communications"
+      },
+      "task_mediatization": {
+        "ru": "Медиатизация",
+        "en": "Mediatization"
+      },
+      "task_team": {
+        "ru": "Работа с командой",
+        "en": "Team coordination"
+      },
+      "task_template": {
+        "ru": "Поиск шаблона",
+        "en": "Practical template"
+      },
+      "task_risk": {
+        "ru": "Оценка рисков",
+        "en": "Risk assessment"
+      },
+      "task_professional_standards": {
+        "ru": "Профессиональные стандарты",
+        "en": "Professional standards"
+      }
+    },
+    "audiences": {
+      "audience_first_executive": {
+        "ru": "Первое лицо / CEO",
+        "en": "CEO / First executive"
+      },
+      "audience_comms_lead": {
+        "ru": "Руководитель коммуникаций",
+        "en": "Head of Communications"
+      },
+      "audience_comms_team": {
+        "ru": "Коммуникационная команда",
+        "en": "Communications team"
+      },
+      "audience_press_service": {
+        "ru": "Пресс-служба",
+        "en": "Press office"
+      },
+      "audience_public_sector": {
+        "ru": "Госсектор",
+        "en": "Public sector"
+      },
+      "audience_large_business": {
+        "ru": "Крупный бизнес",
+        "en": "Large business"
+      },
+      "audience_consultant": {
+        "ru": "Консультант",
+        "en": "Consultant"
+      },
+      "audience_expert": {
+        "ru": "Эксперт",
+        "en": "Expert"
+      },
+      "audience_young_professional": {
+        "ru": "Молодой специалист",
+        "en": "Early-career professional"
+      }
+    },
+    "themes": {
+      "theme_trust": {
+        "ru": "Доверие",
+        "en": "Trust"
+      },
+      "theme_strategy": {
+        "ru": "Стратегия",
+        "en": "Strategy"
+      },
+      "theme_crisis": {
+        "ru": "Кризис",
+        "en": "Crisis"
+      },
+      "theme_management": {
+        "ru": "Управление",
+        "en": "Management"
+      },
+      "theme_profession": {
+        "ru": "Профессия",
+        "en": "Profession"
+      },
+      "theme_ai_technology": {
+        "ru": "ИИ и технологии",
+        "en": "AI & Technology"
+      },
+      "theme_humancentricity": {
+        "ru": "Человекоцентричность",
+        "en": "Human-centered communications"
+      },
+      "theme_community": {
+        "ru": "Сообщество",
+        "en": "Community"
+      }
+    }
+  },
+  "routes": [
+    {
+      "id": "route_01",
+      "code": "01",
+      "locales": {
+        "ru": {
+          "title": "Картина мира",
+          "desc": "Сигналы среды, тренды и изменения, которые влияют на управленческие решения."
+        },
+        "en": {
+          "title": "Worldview",
+          "desc": "Signals, trends and shifts that shape management decisions."
+        }
+      }
+    },
+    {
+      "id": "route_02",
+      "code": "02",
+      "locales": {
+        "ru": {
+          "title": "Технологии",
+          "desc": "Технологии и цифровая архитектура коммуникационной функции."
+        },
+        "en": {
+          "title": "Technology",
+          "desc": "Technology and the digital architecture of the communications function."
+        }
+      }
+    },
+    {
+      "id": "route_03",
+      "code": "03",
+      "locales": {
+        "ru": {
+          "title": "Дизайн доверия",
+          "desc": "Визуальные решения и дизайн как часть доверия и качества коммуникации."
+        },
+        "en": {
+          "title": "Trust Design",
+          "desc": "Visual decisions and design as part of trust and communication quality."
+        }
+      }
+    },
+    {
+      "id": "route_04",
+      "code": "04",
+      "locales": {
+        "ru": {
+          "title": "Профессия",
+          "desc": "Профессиональная зрелость, медиатизация, стандарты и роль коммуникатора."
+        },
+        "en": {
+          "title": "Profession",
+          "desc": "Professional maturity, mediatization, standards and the communicator’s role."
+        }
+      }
+    },
+    {
+      "id": "route_05",
+      "code": "05",
+      "locales": {
+        "ru": {
+          "title": "Управление",
+          "desc": "Коммуникационная функция как часть управленческого контура организации."
+        },
+        "en": {
+          "title": "Communication Management",
+          "desc": "The communications function as part of the organization’s management system."
+        }
+      }
+    },
+    {
+      "id": "route_06",
+      "code": "06",
+      "locales": {
+        "ru": {
+          "title": "Стратегия 2.0",
+          "desc": "Стратегия коммуникаций, человекоцентричность и диагностика ИЧК."
+        },
+        "en": {
+          "title": "Strategy 2.0",
+          "desc": "Communication strategy, human-centered management and HCI diagnostics."
+        }
+      }
+    },
+    {
+      "id": "route_07",
+      "code": "07",
+      "locales": {
+        "ru": {
+          "title": "Антикризис",
+          "desc": "Кризисные сценарии, риски, решения и устойчивость репутации."
+        },
+        "en": {
+          "title": "Crisis Response",
+          "desc": "Crisis scenarios, risks, decisions and reputation resilience."
+        }
+      }
+    },
+    {
+      "id": "route_08",
+      "code": "08",
+      "locales": {
+        "ru": {
+          "title": "Сообщество",
+          "desc": "Профессиональный обмен вокруг тем книги и живого издания."
+        },
+        "en": {
+          "title": "Community",
+          "desc": "Professional exchange around the book and its living edition."
+        }
+      }
+    }
+  ],
+  "experts": [
+    {
+      "id": "expert_madina_malova",
+      "locales": {
+        "ru": "Мадина Малова",
+        "en": "Madina Malova"
+      }
+    },
+    {
+      "id": "expert_anton_dubinchin",
+      "locales": {
+        "ru": "Антон Дубинчин",
+        "en": "Anton Dubinchin"
+      }
+    },
+    {
+      "id": "expert_marina_matasova",
+      "locales": {
+        "ru": "Марина Матасова",
+        "en": "Marina Matasova"
+      }
+    },
+    {
+      "id": "expert_timur_aslanov",
+      "locales": {
+        "ru": "Тимур Асланов",
+        "en": "Timur Aslanov"
+      }
+    },
+    {
+      "id": "expert_sergey_polovnikov",
+      "locales": {
+        "ru": "Сергей Половников",
+        "en": "Sergey Polovnikov"
+      }
+    },
+    {
+      "id": "expert_evgeny_temperamentov",
+      "locales": {
+        "ru": "Евгений Темпераментов",
+        "en": "Evgeny Temperamentov"
+      }
+    },
+    {
+      "id": "expert_yaroslav_meshalkin",
+      "locales": {
+        "ru": "Ярослав Мешалкин",
+        "en": "Yaroslav Meshalkin"
+      }
+    },
+    {
+      "id": "expert_ivan_afanasyev",
+      "locales": {
+        "ru": "Иван Афанасьев",
+        "en": "Ivan Afanasyev"
+      }
+    },
+    {
+      "id": "expert_nika_komarova",
+      "locales": {
+        "ru": "Ника Комарова",
+        "en": "Nika Komarova"
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "m001",
+      "route": "route_01",
+      "type": "type_video",
+      "status": "status_available",
+      "level": 1,
+      "page": 16,
+      "publishedAt": "2025-11-10",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Вебинар Brand Analytics: трендвотчинг с аналитикой соцмедиа, 2024 г.",
+          "desc": "Чем трендвотчинг полезен бизнесу, как находить тренды в развитии рынка и потребительских предпочтений в момент их зарождения, подтверждать на данных и улучшать продукт и коммуникации",
+          "tags": [
+            "Стратегия",
+            "Управление",
+            "ИИ и технологии"
+          ]
+        },
+        "en": {
+          "title": "Brand Analytics webinar: trendwatching with social media analytics, 2024",
+          "desc": "How trendwatching helps business identify emerging market and consumer signals, validate them with data, and improve products and communications.",
+          "tags": [
+            "trendwatching",
+            "social media analytics",
+            "market signals"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_large_business",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_ai_technology"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "video_external",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link1"
+        }
+      }
+    },
+    {
+      "id": "m002",
+      "route": "route_01",
+      "type": "type_review",
+      "status": "status_available",
+      "level": 1,
+      "page": 21,
+      "publishedAt": "2026-02-03",
+      "updatedAt": "2026-08-20",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Обзор ключевых исследований 2026: технологические тренды, стратегические коммуникации, репутация и корпоративная культура | Россия и мир",
+          "desc": "17 ключевых исследований России и мира в трех частях: технологии, доверие и репутация, люди и культура",
+          "tags": [
+            "Стратегия",
+            "Оценка рисков",
+            "Диагностика доверия",
+            "ИИ и технологии",
+            "Доверие",
+            "Управление"
+          ],
+          "changeSummary": "Обзор 17 исследований актуализирован: обновлена волна Accenture Pulse of Change 2026 и добавлены три углубленных исследовательских маршрута — технологии, доверие и репутация, люди и культура."
+        },
+        "en": {
+          "title": "Key Research 2026: technology, strategic communications, reputation and corporate culture | Russia and the world",
+          "desc": "A review of 17 key studies from Russia and abroad across technology, trust and reputation, people and culture.",
+          "tags": [
+            "research 2026",
+            "reputation",
+            "corporate culture",
+            "technology"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_strategy",
+          "task_risk",
+          "task_trust_diagnosis"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_consultant",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_ai_technology",
+          "theme_trust",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "research_review",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link2"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m003",
+      "route": "route_01",
+      "type": "type_video",
+      "status": "status_available",
+      "level": 1,
+      "page": 23,
+      "publishedAt": "2025-11-14",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Робот превращается в жидкость и сбегает из тюрьмы",
+          "desc": "Видео демонстрирует миниатюрного магнитоуправляемого робота, способного обратимо переходить из твердого состояния в жидкое, проходить препятствие и восстанавливать форму.",
+          "tags": [
+            "ИИ и технологии"
+          ],
+          "changeSummary": "Уточнен механизм магнитоуправляемого фазового перехода, добавлена фактологическая рамка к вирусному видео и разделено лабораторное подтверждение принципа и зрелое практическое применение."
+        },
+        "en": {
+          "title": "A robot turns liquid and escapes from a cage",
+          "desc": "A video showing a miniature magnetically controlled robot that can reversibly switch between solid and liquid states, pass an obstacle and regain its shape.",
+          "tags": [
+            "robotics",
+            "phase transition",
+            "research"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_ai_technology"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "video_external",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link3"
+        }
+      }
+    },
+    {
+      "id": "m004",
+      "route": "route_01",
+      "type": "type_review",
+      "status": "status_available",
+      "level": 1,
+      "page": 31,
+      "publishedAt": "2025-11-18",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Картина мира и паттерны офлайн-бумера и цифрового зумера: сравнительный анализ",
+          "desc": "Сравнительный анализ двух условных профилей мышления через десять принципов цифровой среды помогает адаптировать коммуникации к работе аудитории с данными, иерархией, изменениями и неопределенностью — без жестких возрастных стереотипов.",
+          "tags": [
+            "Человекоцентричность",
+            "Работа с командой",
+            "Оценка рисков",
+            "Человекоцентричность",
+            "Управление"
+          ],
+          "changeSummary": "Поколенческое сравнение уточнено как модель двух рабочих профилей, а не жесткая возрастная типология; добавлены исследовательские ограничения, десять практических выводов для коммуникатора и диагностика аудитории без возрастных стереотипов."
+        },
+        "en": {
+          "title": "Worldviews and patterns of the offline boomer and digital zoomer: a comparative analysis",
+          "desc": "A comparison of two conditional thinking profiles through ten principles of the digital environment, without rigid age stereotypes, to help adapt communication to data, hierarchy, change and uncertainty.",
+          "tags": [
+            "digital mindset",
+            "audience analysis",
+            "uncertainty"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_humancentricity",
+          "task_team",
+          "task_risk"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_first_executive",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_humancentricity",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link4"
+        }
+      }
+    },
+    {
+      "id": "m005",
+      "route": "route_01",
+      "type": "type_review",
+      "status": "status_available",
+      "level": 1,
+      "page": 33,
+      "publishedAt": "2025-11-22",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Карта рисков доцифрового и цифрового мышления управленца и коммуникатора",
+          "desc": "11 зон риска цифровой среды — скорость решений, прозрачность, данные, медийность, охваты, цена ошибки, восстановление, измерение, цифровая грамотность, цифровой след и рабочая коммуникация — с практическим выводом для первого лица.",
+          "tags": [
+            "Оценка рисков",
+            "Работа с руководством",
+            "Стратегия",
+            "Управление",
+            "ИИ и технологии"
+          ],
+          "changeSummary": "Карта рисков переработана без универсальной шкалы «офлайн = низкий / цифра = критический»: 11 зон переведены в модель «доцифровая логика → цифровая логика → управленческий риск → действие первого лица», уточнены абсолютные и юридически спорные формулировки."
+        },
+        "en": {
+          "title": "Risk map of pre-digital and digital thinking for managers and communicators",
+          "desc": "A map comparing pre-digital and digital thinking risks across decision speed, transparency, data, digital footprint and other criteria, translating the differences into practical conclusions for senior leaders.",
+          "tags": [
+            "risk map",
+            "digital mindset",
+            "leadership"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_risk",
+          "task_leadership",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_ai_technology"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link5"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m006",
+      "route": "route_01",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 36,
+      "publishedAt": "2025-11-26",
+      "updatedAt": "2026-08-16",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "15 золотых правил трендвотчинга для коммуникаторов: от поиска тренда до внедрения инсайта",
+          "desc": "15 правил помогают выстроить трендвотчинг как управленческий процесс: отличать сигнал от шума, проверять гипотезы данными, переводить тренды в решения и регулярно калибровать систему наблюдения.",
+          "tags": [
+            "Стратегия",
+            "Оценка рисков",
+            "Поиск шаблона",
+            "Управление",
+            "Профессия"
+          ],
+          "changeSummary": "Материал переработан в авторский гайд: трендвотчинг описан как управленческий цикл от сигнала и проверки происхождения до сценария, пилота, решения и ретроспективы; добавлены правила работы с генеративным контентом и независимостью источников."
+        },
+        "en": {
+          "title": "15 golden rules of trendwatching for communicators: from spotting a trend to applying an insight",
+          "desc": "Fifteen rules for building trendwatching as a management process: separating signal from noise, validating hypotheses with data, translating trends into decisions and recalibrating the observation system.",
+          "tags": [
+            "trendwatching",
+            "signals",
+            "management decisions"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_strategy",
+          "task_risk",
+          "task_template"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_consultant",
+          "audience_large_business",
+          "audience_public_sector"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_profession"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link6"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m007",
+      "route": "route_02",
+      "type": "type_review",
+      "status": "status_available",
+      "level": 1,
+      "page": 41,
+      "publishedAt": "2026-01-12",
+      "updatedAt": "2026-08-13",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "ИИ в 2026 году: десять направлений от рабочих систем до переднего края исследований",
+          "desc": "Обновленный обзор десяти направлений ИИ: от машинного обучения, мультимодальных моделей и ИИ-агентов до робототехники, нейроинтерфейсов и нейроморфных вычислений — с оценкой зрелости технологий и выводами для коммуникационной функции.",
+          "tags": [
+            "Внедрение ИИ",
+            "Оценка рисков",
+            "Стратегия",
+            "ИИ и технологии"
+          ],
+          "changeSummary": "Перепроверены фактура и статус десяти направлений ИИ; добавлены карта зрелости, изменения к августу 2026 года, агентные процессы, управление рисками и практикум для коммуникационной функции."
+        },
+        "en": {
+          "title": "AI in 2026: ten directions from working systems to the research frontier",
+          "desc": "An updated review of ten AI directions—from machine learning, multimodal models and AI agents to robotics, brain-computer interfaces and neuromorphic computing—with maturity assessment and implications for communications.",
+          "tags": [
+            "AI 2026",
+            "AI agents",
+            "robotics",
+            "technology maturity"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_ai_adoption",
+          "task_risk",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_ai_technology"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "research_review",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link7"
+        }
+      }
+    },
+    {
+      "id": "m008",
+      "route": "route_02",
+      "type": "type_review",
+      "status": "status_available",
+      "level": 1,
+      "page": 60,
+      "publishedAt": "2025-11-30",
+      "updatedAt": "2026-08-13",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Bluesky и AT Protocol: когда связь с аудиторией не привязана к одной платформе",
+          "desc": "Обновленный разбор Bluesky и AT Protocol показывает, как переносимость идентичности и данных, выбор алгоритмов и развитие открытой экосистемы меняют зависимость коммуникационной функции от одной социальной платформы.",
+          "tags": [
+            "Медиатизация",
+            "Оценка рисков",
+            "Стратегия",
+            "ИИ и технологии",
+            "Управление"
+          ],
+          "changeSummary": "Обновлены аудитория, руководство, финансирование и хронология Bluesky; сохранена архитектурная логика AT Protocol и добавлены выводы о переносимости, устойчивости и зависимости от платформ."
+        },
+        "en": {
+          "title": "Bluesky and AT Protocol: when audience relationships are not tied to one platform",
+          "desc": "An updated analysis of Bluesky and AT Protocol showing how portable identity and data, algorithm choice and an open ecosystem can reduce dependence on a single social platform.",
+          "tags": [
+            "Bluesky",
+            "AT Protocol",
+            "platform resilience"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_mediatization",
+          "task_risk",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_ai_technology",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link9"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m009",
+      "route": "route_02",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 70,
+      "publishedAt": "2025-12-04",
+      "updatedAt": "2026-08-13",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Десять вопросов перед внедрением цифровых технологий в коммуникации",
+          "desc": "Практический гайд помогает проверить готовность коммуникационной функции к внедрению цифровых технологий: от управленческой задачи, данных и полномочий системы до качества, прозрачности, заменяемости поставщика, резервного сценария и влияния на доверие.",
+          "tags": [
+            "искусственный интеллект",
+            "big data",
+            "блокчейн",
+            "vr/ar",
+            "цифровая трансформация",
+            "чек-лист"
+          ],
+          "changeSummary": "Материал перестроен вокруг десяти управленческих вопросов перед внедрением технологий; актуализированы ИИ и агентные сценарии, требования к данным и прозрачности, заменяемость поставщика, резервный процесс и роль специализированных технологий."
+        },
+        "en": {
+          "title": "Ten questions before introducing digital technologies into communications",
+          "desc": "A practical guide for checking readiness to introduce digital technologies: management purpose, data, system authority, quality, transparency, vendor replaceability, fallback processes and impact on trust.",
+          "tags": [
+            "digital transformation",
+            "AI",
+            "checklist",
+            "risk"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_ai_adoption",
+          "task_risk",
+          "task_template"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_ai_technology"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link10"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m010",
+      "route": "route_02",
+      "type": "type_review",
+      "status": "status_available",
+      "level": 1,
+      "page": 220,
+      "publishedAt": "2026-02-13",
+      "updatedAt": "2026-08-12",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Ландшафт маркетинговых технологий Скотта Бринкера: обзор проекта и ключевые выводы",
+          "desc": "Обзор ландшафта Скотта Бринкера показывает плато Martech 2026 при высокой ротации рынка и новые требования к архитектуре данных, интеграции, контексту и управлению ИИ.",
+          "tags": [
+            "Внедрение ИИ",
+            "Стратегия",
+            "Оценка рисков",
+            "ИИ и технологии",
+            "Управление"
+          ],
+          "changeSummary": "Обновлены данные State of Martech 2026 и выводы по плато рынка, высокой ротации, архитектуре данных, интеграции, контексту и управлению ИИ."
+        },
+        "en": {
+          "title": "Scott Brinker’s marketing technology landscape: project overview and key conclusions",
+          "desc": "A review of the 2026 martech landscape, its market plateau and high turnover, and the resulting requirements for data architecture, integration, context and AI governance.",
+          "tags": [
+            "martech",
+            "data architecture",
+            "AI governance"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_ai_adoption",
+          "task_strategy",
+          "task_risk"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_consultant",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_ai_technology",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "research_review",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link31"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m011",
+      "route": "route_02",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 232,
+      "publishedAt": "2026-02-15",
+      "updatedAt": "2026-08-12",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Центр управления коммуникациями: цифровая экосистема для управления репутацией 2026",
+          "desc": "Практическое руководство по ЦУК: пять функциональных слоев, шесть сквозных процессов, переход к целевой модели, CommTech России и мира, ИИ-агенты, устойчивость технологического контура и логика «купить или собрать».",
+          "tags": [
+            "Трансформация функции",
+            "Стратегия",
+            "Внедрение ИИ",
+            "Работа с руководством",
+            "Управление",
+            "ИИ и технологии",
+            "Стратегия"
+          ],
+          "changeSummary": "Сохранена управленческая модель ЦУК и обновлен технологический контур: CommTech России и мира, ИИ-агенты, статусы сервисов, устойчивость, заменяемость и логика «купить или собрать»."
+        },
+        "en": {
+          "title": "Communications Management Center: a digital ecosystem for reputation management in 2026",
+          "desc": "A practical guide to the Communications Management Center: five functional layers, six cross-cutting processes, target operating model, CommTech, AI agents, resilience and build-or-buy logic.",
+          "tags": [
+            "communications management center",
+            "CommTech",
+            "AI agents",
+            "resilience"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_function_transformation",
+          "task_strategy",
+          "task_ai_adoption",
+          "task_leadership"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_public_sector",
+          "audience_large_business",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_ai_technology",
+          "theme_strategy"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link32"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m012",
+      "route": "route_03",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 56,
+      "publishedAt": "2025-12-08",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Десять правил графического дизайна от Антона Дубинчина для современной и стильной презентации",
+          "desc": "Гайд Антона Дубинчина собирает десять правил графического дизайна для современной презентации и помогает выстроить композицию, типографику и визуальную иерархию с учетом задачи коммуникации.",
+          "tags": [
+            "Поиск шаблона",
+            "Доверие",
+            "Профессия"
+          ]
+        },
+        "en": {
+          "title": "Ten graphic-design rules by Anton Dubinchin for a modern, stylish presentation",
+          "desc": "Ten graphic-design rules for building composition, typography and visual hierarchy around the communication task.",
+          "tags": [
+            "presentation design",
+            "typography",
+            "visual hierarchy"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_template"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_trust",
+          "theme_profession"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link8"
+        }
+      },
+      "expertId": "expert_anton_dubinchin"
+    },
+    {
+      "id": "m013",
+      "route": "route_03",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 202,
+      "publishedAt": "2025-12-12",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Восемь «триггеров доверия» в графическом дизайне от Марины Матасовой",
+          "desc": "Гайд Марины Матасовой разбирает восемь визуальных триггеров доверия и помогает оценивать графический дизайн не только по эстетике, но и по тому, как он влияет на восприятие коммуникации.",
+          "tags": [
+            "Диагностика доверия",
+            "Поиск шаблона",
+            "Доверие"
+          ]
+        },
+        "en": {
+          "title": "Eight “trust triggers” in graphic design by Marina Matasova",
+          "desc": "Eight visual trust triggers that help assess design not only aesthetically but also by how it shapes the perception of communication.",
+          "tags": [
+            "trust design",
+            "graphic design",
+            "visual perception"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_trust_diagnosis",
+          "task_template"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_trust"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link25"
+        }
+      },
+      "expertId": "expert_marina_matasova"
+    },
+    {
+      "id": "m014",
+      "route": "route_04",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 93,
+      "publishedAt": "2025-12-16",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Гайд от Тимура Асланова «Алгоритм медиатизации: как интегрировать традиционные СМИ, соцсети и блогеров в единую систему»",
+          "desc": "Гайд Тимура Асланова показывает, как объединить традиционные СМИ, социальные сети и блогеров в единую систему медиатизации и выстроить согласованную работу каналов.",
+          "tags": [
+            "Медиатизация",
+            "Стратегия",
+            "Профессия",
+            "Управление"
+          ]
+        },
+        "en": {
+          "title": "Timur Aslanov’s mediatization algorithm: integrating traditional media, social networks and bloggers",
+          "desc": "A guide to combining traditional media, social platforms and bloggers into one coordinated mediatization system.",
+          "tags": [
+            "mediatization",
+            "media",
+            "social platforms",
+            "bloggers"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_mediatization",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_profession",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link12"
+        }
+      },
+      "expertId": "expert_timur_aslanov"
+    },
+    {
+      "id": "m015",
+      "route": "route_04",
+      "type": "type_article",
+      "status": "status_available",
+      "level": 1,
+      "page": 124,
+      "publishedAt": "2025-12-20",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "«Нарратив vs инфоповод: ваши коммуникации создают ценность для людей или просто “кормят публику”?»",
+          "desc": "Материал помогает проверить, создают ли коммуникации содержательную ценность и устойчивый нарратив или остаются набором разовых инфоповодов.",
+          "tags": [
+            "Медиатизация",
+            "Стратегия",
+            "Профессия",
+            "Доверие"
+          ],
+          "changeSummary": "Публицистическая статья о нарративе актуализирована для эпохи генеративного контента: убраны неподтвержденные универсальные утверждения, усилена управленческая рамка и добавлена граница между устойчивым нарративом и подменой реальности."
+        },
+        "en": {
+          "title": "Narrative vs. news hook: do your communications create value or merely feed the content stream?",
+          "desc": "A material for checking whether communications create durable meaning and a coherent narrative or remain a sequence of isolated news hooks.",
+          "tags": [
+            "narrative",
+            "news hooks",
+            "meaning"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_mediatization",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_large_business",
+          "audience_public_sector"
+        ],
+        "themeIds": [
+          "theme_profession",
+          "theme_trust"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link35"
+        }
+      }
+    },
+    {
+      "id": "m016",
+      "route": "route_04",
+      "type": "type_article",
+      "status": "status_available",
+      "level": 1,
+      "page": 125,
+      "publishedAt": "2025-12-24",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "12 мифов о пиаре и журналистике, которые давно пора развенчать",
+          "desc": "Разбор 12 устойчивых мифов о PR и журналистике показывает, почему коммуникационная функция шире медиаотношений и как сегодня работать с собственными каналами, редакционной независимостью, измерением, кризисной готовностью и ролью первого лица.",
+          "tags": [
+            "Трансформация функции",
+            "Медиатизация",
+            "Работа с руководством",
+            "Профессиональные стандарты",
+            "Профессия",
+            "Управление"
+          ],
+          "changeSummary": "12 профессиональных мифов переработаны без категоричных тезисов о контроле медиа и «лояльном пуле» журналистов; уточнены стратегическая роль коммуникаций, многоканальная архитектура, измерение по логике AMEC и роль первого лица."
+        },
+        "en": {
+          "title": "12 myths about PR and journalism that are overdue for revision",
+          "desc": "An analysis of twelve persistent PR and journalism myths, showing why the communications function extends beyond media relations and how channels, editorial independence, measurement, crisis readiness and the CEO role have changed.",
+          "tags": [
+            "PR myths",
+            "journalism",
+            "communications function"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_function_transformation",
+          "task_mediatization",
+          "task_leadership",
+          "task_professional_standards"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_profession",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link14"
+        }
+      }
+    },
+    {
+      "id": "m017",
+      "route": "route_04",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 134,
+      "publishedAt": "2025-12-27",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Ремарки на полях от Сергея Половникова о взаимодействии журналиста и коммуникатора в условиях медиатизированной реальности",
+          "desc": "Ремарки Сергея Половникова разбирают отношения журналиста и коммуникатора в медиатизированной среде и помогают увидеть профессиональные ожидания и точки напряжения с обеих сторон.",
+          "tags": [
+            "Медиатизация",
+            "Профессия"
+          ]
+        },
+        "en": {
+          "title": "Sergey Polovnikov’s notes on journalist–communicator relations in a mediatized environment",
+          "desc": "A guide to expectations and tensions between journalists and communicators in a mediatized environment.",
+          "tags": [
+            "journalists",
+            "communicators",
+            "mediatization"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_mediatization"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_profession"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link15"
+        }
+      },
+      "expertId": "expert_sergey_polovnikov"
+    },
+    {
+      "id": "m018",
+      "route": "route_04",
+      "type": "type_article",
+      "status": "status_available",
+      "level": 1,
+      "page": 136,
+      "publishedAt": "2025-12-29",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Философия Артура Пейджа: 7 принципов, ставших стандартом профессии",
+          "desc": "Материал знакомит с семью принципами Артура Пейджа и показывает, почему эта управленческая философия продолжает задавать ориентиры для профессиональных коммуникаций.",
+          "tags": [
+            "Профессиональные стандарты",
+            "Работа с руководством",
+            "Трансформация функции",
+            "Профессия",
+            "Управление"
+          ],
+          "changeSummary": "Материал переработан в публицистическую историю о роли Артура Пейджа в превращении коммуникаций в управленческую функцию; уточнена история семи принципов, удалены непроверенные детали и добавлены подтвержденные биографические факты."
+        },
+        "en": {
+          "title": "Arthur Page’s philosophy: seven principles that became professional landmarks",
+          "desc": "Arthur Page’s story and seven principles that continue to frame communications as part of management: truth, action, stakeholders, the future, people, responsibility and composure under pressure.",
+          "tags": [
+            "Arthur Page",
+            "professional principles",
+            "CCO"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_professional_standards",
+          "task_leadership",
+          "task_function_transformation"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_expert",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_profession",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "historical_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link16"
+        }
+      }
+    },
+    {
+      "id": "m019",
+      "route": "route_04",
+      "type": "type_video",
+      "status": "status_available",
+      "level": 1,
+      "page": 174,
+      "publishedAt": "2025-12-30",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Фильм-история о тех, кто объединяет наш мир",
+          "desc": "Видео-история показывает роль стандартов в повседневной жизни и дает человеческий контекст теме стандартизации, связанной с материалами книги.",
+          "tags": [
+            "Профессиональные стандарты",
+            "Профессия"
+          ],
+          "changeSummary": "Короткая видеостраница переработана в публицистический материал о стандартах как инфраструктуре предсказуемости, совместимости и профессионального сотрудничества; добавлены прямые точки просмотра Rutube/YouTube и официальный контекст ISO/IEC."
+        },
+        "en": {
+          "title": "A film story about the people who connect our world",
+          "desc": "A short film-based material about standards as invisible infrastructure for compatibility, predictability and professional cooperation.",
+          "tags": [
+            "standards",
+            "compatibility",
+            "professional community"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_professional_standards"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_expert",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_profession"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "video_external",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link20"
+        }
+      }
+    },
+    {
+      "id": "m020",
+      "route": "route_05",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 166,
+      "publishedAt": "2026-01-04",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Гайд профессионального коммуникационного менеджмента от Евгения Темпераментова: от работы с талантами до устойчивой репутации",
+          "desc": "Гайд Евгения Темпераментова охватывает профессиональный коммуникационный менеджмент: работу с талантами, организацию функции и практики, поддерживающие устойчивую репутацию.",
+          "tags": [
+            "Трансформация функции",
+            "Работа с командой",
+            "Стратегия",
+            "Управление",
+            "Доверие"
+          ]
+        },
+        "en": {
+          "title": "Professional communications management guide by Evgeny Temperamentov: from talent to sustainable reputation",
+          "desc": "A guide to professional communications management covering talent, function design and practices that support sustainable reputation.",
+          "tags": [
+            "communications management",
+            "talent",
+            "reputation"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_function_transformation",
+          "task_team",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_trust"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link17"
+        }
+      },
+      "expertId": "expert_evgeny_temperamentov"
+    },
+    {
+      "id": "m021",
+      "route": "route_05",
+      "type": "type_article",
+      "status": "status_available",
+      "level": 1,
+      "page": 170,
+      "publishedAt": "2026-01-18",
+      "updatedAt": "2026-08-12",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Разбор возможностей и вызовов 330-ФЗ о креативных индустриях для сферы коммуникаций",
+          "desc": "Разбор 330-ФЗ показывает возможности и ограничения новой регуляторной среды для коммуникационной отрасли и предлагает дорожную карту действий для топ-коммуникатора в 2026 году.",
+          "tags": [
+            "Профессиональные стандарты",
+            "Оценка рисков",
+            "Стратегия",
+            "Профессия",
+            "Управление"
+          ],
+          "changeSummary": "Обновлены федеральный координационный контур, статус Единого реестра и практические выводы по 330-ФЗ; исправлена ссылка на номер закона."
+        },
+        "en": {
+          "title": "Opportunities and challenges of Russia’s Federal Law 330-FZ for the communications field",
+          "desc": "An analysis of the regulatory environment created by 330-FZ and a practical action framework for senior communicators in 2026.",
+          "tags": [
+            "330-FZ",
+            "creative industries",
+            "regulation"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_professional_standards",
+          "task_risk",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business",
+          "audience_expert"
+        ],
+        "themeIds": [
+          "theme_profession",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link18"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m022",
+      "route": "route_04",
+      "type": "type_article",
+      "status": "status_available",
+      "level": 1,
+      "page": 174,
+      "publishedAt": "2026-01-21",
+      "updatedAt": "2026-08-16",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Статья о роли стандарта ISO 9001:2015 в управлении коммуникациями. Когда PR-директор влюбляется в стандарт",
+          "desc": "Разбор ISO 9001:2015 показывает, как процессный подход, работа с рисками, данные и измеримые цели помогают встроить коммуникационную функцию в систему менеджмента организации.",
+          "tags": [
+            "Профессиональные стандарты",
+            "Трансформация функции",
+            "Оценка рисков",
+            "Стратегия",
+            "Управление",
+            "Профессия"
+          ],
+          "changeSummary": "Материал актуализирован после повторной проверки ISO 9000/9001: уточнены границы принципов и требований стандарта, процессный подход, работа с рисками, коммуникация и измерение; отделены требования ISO от практических инструментов коммуникационной функции."
+        },
+        "en": {
+          "title": "ISO 9001:2015 in communications management: when a PR director falls in love with a standard",
+          "desc": "An analysis of how the process approach, risk management, data and measurable objectives can help integrate communications into an organization’s management system.",
+          "tags": [
+            "ISO 9001",
+            "process management",
+            "communications management"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_professional_standards",
+          "task_function_transformation",
+          "task_risk",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_consultant",
+          "audience_expert",
+          "audience_large_business",
+          "audience_public_sector"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_profession"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link19"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m023",
+      "route": "route_05",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 178,
+      "publishedAt": "2026-01-24",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Гайд от Ярослава Мешалкина «Пошаговый план реинжиниринга коммуникационного направления: от аудита до внедрения изменений»",
+          "desc": "Пошаговый план помогает провести аудит коммуникационного направления, определить разрывы в процессах и ответственности и собрать реалистичную программу организационных изменений.",
+          "tags": [
+            "реинжиниринг",
+            "аудит функции",
+            "организационные изменения",
+            "ответственность",
+            "план внедрения"
+          ]
+        },
+        "en": {
+          "title": "Yaroslav Meshalkin’s step-by-step communications-function reengineering plan: from audit to implementation",
+          "desc": "A practical plan for auditing the communications function, identifying gaps in processes and accountability, and building a realistic organizational-change program.",
+          "tags": [
+            "reengineering",
+            "function audit",
+            "organizational change"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_function_transformation",
+          "task_leadership",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link21"
+        }
+      },
+      "expertId": "expert_yaroslav_meshalkin"
+    },
+    {
+      "id": "m024",
+      "route": "route_05",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 238,
+      "publishedAt": "2026-02-19",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Дорожная карта трансформации управления коммуникациями: 10 шагов к человекоцентричной организации",
+          "desc": "Практическая дорожная карта трансформации коммуникационной функции: от решения первого лица и диагностики до обратной связи, метрик, антикризисной устойчивости и внутренних коммуникаций.",
+          "tags": [
+            "Трансформация функции",
+            "Работа с руководством",
+            "Человекоцентричность",
+            "Стратегия",
+            "Управление",
+            "Человекоцентричность",
+            "Стратегия"
+          ],
+          "changeSummary": "Дорожная карта трансформации коммуникаций пересобрана в 10 последовательных шагов с результатом, действиями и контрольной точкой; универсальные сроки и неподтвержденные нормативы заменены на адаптивную логику внедрения."
+        },
+        "en": {
+          "title": "Roadmap for transforming communications management: 10 steps toward a human-centered organization",
+          "desc": "A ten-step roadmap from diagnosing the current model to implementing human-centered principles and monitoring change.",
+          "tags": [
+            "transformation roadmap",
+            "human-centered management",
+            "communications function"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_function_transformation",
+          "task_leadership",
+          "task_humancentricity",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_management",
+          "theme_humancentricity",
+          "theme_strategy"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "author_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link33"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m025",
+      "route": "route_06",
+      "type": "type_method",
+      "status": "status_available",
+      "level": 1,
+      "page": 196,
+      "publishedAt": "2026-02-01",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Набор материалов | Стратегия коммуникаций 2.0 | Индекс человекоцентричности коммуникаций, ИЧК",
+          "desc": "Пять материалов к книге образуют рабочий контур Стратегии коммуникаций 2.0 и ИЧК: модельный кейс, переход организации, структура стратегии, практический пример и оценка человекоцентричности.",
+          "tags": [
+            "Стратегия",
+            "Человекоцентричность",
+            "Диагностика доверия",
+            "Трансформация функции",
+            "Стратегия",
+            "Человекоцентричность",
+            "Доверие"
+          ],
+          "changeSummary": "Страница-набор Стратегии коммуникаций 2.0 и ИЧК пересобрана как методический хаб: пять материалов объединены в три сценария использования, уточнен статус авторских рабочих инструментов и добавлена навигация по задачам."
+        },
+        "en": {
+          "title": "Strategy 2.0 + Human-Centered Communications Index: methodology hub",
+          "desc": "A hub combining guidance and examples for Communication Strategy 2.0, pragmatic human-centered management and the Human-Centered Communications Index (HCI).",
+          "tags": [
+            "Strategy 2.0",
+            "HCI",
+            "human-centered communications"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_strategy",
+          "task_humancentricity",
+          "task_trust_diagnosis",
+          "task_function_transformation"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_consultant",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_strategy",
+          "theme_humancentricity",
+          "theme_trust"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "method_hub",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link26"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m026",
+      "route": "route_06",
+      "type": "type_case",
+      "status": "status_available",
+      "level": 1,
+      "page": 196,
+      "publishedAt": "2026-01-28",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Разбор кейса о проблеме бездомных животных: разница между бюрократическим подходом и прагматичным человекоцентризмом",
+          "desc": "Модельный кейс сопоставляет формальный и прагматично человекоцентричный подходы к проблеме бездомных животных и показывает, как выбор управленческой логики меняет работу с безопасностью, законом, исполнением, обратной связью и доверием.",
+          "tags": [
+            "Человекоцентричность",
+            "Работа с руководством",
+            "Оценка рисков",
+            "Человекоцентричность",
+            "Доверие",
+            "Управление"
+          ],
+          "changeSummary": "Кейс о бездомных животных уточнен как модельная управленческая ситуация: сняты универсальные обещания эффективности отдельных мер, учтена актуальная правовая рамка и добавлена сравнительная модель формального и прагматично человекоцентричного решения."
+        },
+        "en": {
+          "title": "Case review: homeless animals — bureaucratic logic vs. pragmatic human-centered management",
+          "desc": "A case comparing bureaucratic and pragmatic human-centered approaches and showing how the initial management logic changes the communication decision.",
+          "tags": [
+            "human-centered management",
+            "case study",
+            "public sector"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_humancentricity",
+          "task_leadership",
+          "task_risk"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector"
+        ],
+        "themeIds": [
+          "theme_humancentricity",
+          "theme_trust",
+          "theme_management"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "case_review",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link24"
+        }
+      }
+    },
+    {
+      "id": "m027",
+      "route": "route_06",
+      "type": "type_method",
+      "status": "status_available",
+      "level": 1,
+      "page": 207,
+      "publishedAt": "2026-02-05",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Переход организации на принципы прагматичного человекоцентризма в коммуникациях",
+          "desc": "Методика помогает спроектировать переход организации к прагматичному человекоцентризму: от диагностики текущей модели до изменения решений, процессов и взаимодействия с людьми.",
+          "tags": [
+            "прагматичный человекоцентризм",
+            "переход организации",
+            "изменение процессов",
+            "взаимодействие с людьми",
+            "модель коммуникаций"
+          ],
+          "changeSummary": "Методика перехода к прагматичному человекоцентризму пересобрана: сохранены диагностика, шкала зрелости и шесть модулей, а универсальные сроки и неподтвержденные нормативы заменены на адаптивную логику внедрения."
+        },
+        "en": {
+          "title": "Moving an organization toward pragmatic human-centered communications",
+          "desc": "A method for designing the transition toward pragmatic human-centered management—from diagnosing the current model to changing decisions, processes and interactions with people.",
+          "tags": [
+            "human-centered communications",
+            "organizational change",
+            "management model"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_humancentricity",
+          "task_function_transformation",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_humancentricity"
+        ]
+      },
+      "origin": "app_original",
+      "sourceKind": "method_material",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/perehod-chelovekocentrizm"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m028",
+      "route": "route_06",
+      "type": "type_method",
+      "status": "status_available",
+      "level": 1,
+      "page": 211,
+      "publishedAt": "2026-02-07",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Стратегия коммуникаций 2.0: структура, содержание и запуск работ",
+          "desc": "Авторская рабочая модель коммуникационной стратегии из 13 элементов связывает цели организации, заинтересованные стороны, риски, каналы, мониторинг, аналитику, технологии и компетенции в единый управленческий контур.",
+          "tags": [
+            "стратегия коммуникаций 2.0",
+            "управленческий контур",
+            "цели организации",
+            "запуск стратегии"
+          ],
+          "changeSummary": "Стратегия коммуникаций 2.0 пересобрана как авторская рабочая модель из 13 элементов: теория отделена от модельного кейса, жесткие сроки и универсальные конфигурации сняты, для каждого элемента зафиксированы проектируемая задача и проверяемый выход."
+        },
+        "en": {
+          "title": "Communication Strategy 2.0: structure, content and launch",
+          "desc": "A Strategy 2.0 framework connecting organizational goals, people’s interests, management decisions and communications in a single launch and implementation plan.",
+          "tags": [
+            "Strategy 2.0",
+            "management system",
+            "communication strategy"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_strategy",
+          "task_leadership",
+          "task_function_transformation"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_strategy"
+        ]
+      },
+      "origin": "app_original",
+      "sourceKind": "method_material",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/strategy-20"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m029",
+      "route": "route_06",
+      "type": "type_method",
+      "status": "status_available",
+      "level": 1,
+      "page": 211,
+      "publishedAt": "2026-02-09",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Коммуникационная стратегия 2.0 для программы «Город и животные»",
+          "desc": "Модель коммуникационной стратегии для программы «Город и животные» показывает, как 13 элементов Стратегии 2.0 переводятся в цели, процессы, риски, каналы, мониторинг, аналитику, технологии и компетенции.",
+          "tags": [
+            "Стратегия",
+            "Поиск шаблона",
+            "Человекоцентричность",
+            "Стратегия",
+            "Человекоцентричность"
+          ],
+          "changeSummary": "Практический пример Стратегии коммуникаций 2.0 переработан как модель из 13 элементов: удалены универсальные целевые цифры без базового замера, добавлены паспорт модели, правовые границы, измеримые выходы и поэтапный порядок запуска."
+        },
+        "en": {
+          "title": "Communication Strategy 2.0 for the “City and Animals” program",
+          "desc": "A practical example of applying Strategy 2.0 to connect goals, audiences and communication actions in the “City and Animals” program.",
+          "tags": [
+            "Strategy 2.0",
+            "practical example",
+            "audiences"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_strategy",
+          "task_template",
+          "task_humancentricity"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_strategy",
+          "theme_humancentricity"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "method_example",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link27"
+        }
+      }
+    },
+    {
+      "id": "m030",
+      "route": "route_06",
+      "type": "type_method",
+      "status": "status_available",
+      "level": 1,
+      "page": 213,
+      "publishedAt": "2026-02-11",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Методология расчета ИЧК: руководство по оценке человекоцентричности коммуникаций в любой организации",
+          "desc": "Руководство переводит человекоцентричность коммуникаций в систему показателей ИЧК и помогает провести диагностику, сопоставить результаты и определить направления управленческих решений.",
+          "tags": [
+            "ичк",
+            "индекс человекоцентричности коммуникаций",
+            "диагностика",
+            "система показателей",
+            "управленческие решения"
+          ]
+        },
+        "en": {
+          "title": "Human-Centered Communications Index (HCI): methodology and assessment guide",
+          "desc": "A guide translating human-centered communications into HCI indicators for diagnostics, comparison and management decisions.",
+          "tags": [
+            "HCI",
+            "human-centered communications",
+            "diagnostics"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_trust_diagnosis",
+          "task_humancentricity",
+          "task_strategy"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_consultant",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_humancentricity",
+          "theme_trust"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "method_material",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link29"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m031",
+      "route": "route_07",
+      "type": "type_case",
+      "status": "status_available",
+      "level": 1,
+      "page": 92,
+      "publishedAt": "2026-01-06",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Разбор антикризисных кейсов | Ретроспектива | Российский цикл",
+          "desc": "Российские антикризисные кейсы 2020–2026 и ретроспектива BP, Tylenol и Toyota помогают сравнивать управленческие ошибки, роль первого лица, скорость решений и способность системы извлекать урок после кризиса.",
+          "tags": [
+            "кризисные кейсы",
+            "управленческие ошибки",
+            "репутационный риск",
+            "российская практика"
+          ],
+          "changeSummary": "Российский цикл и ретроспектива классики пересобраны как единый хаб: опубликованные кейсы отделены от готовящихся, добавлены четыре управленческие линзы чтения и краткая рамка «на что смотреть» для каждого разбора."
+        },
+        "en": {
+          "title": "Crisis case reviews | Retrospective | Russian cycle",
+          "desc": "A retrospective of Russian crisis cases highlighting recurring management mistakes, the cost of delayed response and lessons for crisis preparedness.",
+          "tags": [
+            "crisis cases",
+            "management mistakes",
+            "reputation risk"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_crisis",
+          "task_risk"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_crisis"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "case_hub",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link11"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m032",
+      "route": "route_07",
+      "type": "type_case",
+      "status": "status_available",
+      "level": 1,
+      "page": 195,
+      "publishedAt": "2026-01-15",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Январские заморозки доверия, или Цена молчания в кризис",
+          "desc": "Разбор аварии теплоснабжения в Климовске показывает, как задержка сигнала и публичной позиции усиливает кризис, и дает руководителю практическую рамку первой реакции и послекризисных изменений.",
+          "tags": [
+            "молчание в кризис",
+            "долг доверия",
+            "первая реакция",
+            "неопределенность"
+          ],
+          "changeSummary": "Кейс Климовска переработан как публицистико-гайдный разбор: уточнена хронология, сняты цифры без надежного паспорта источника, добавлена рамка первой антикризисной позиции и подтвержденный след модернизации после аварии."
+        },
+        "en": {
+          "title": "January freeze of trust, or the price of silence in a crisis",
+          "desc": "A case showing how organizational silence increases uncertainty and trust debt, and when a first substantive position is needed.",
+          "tags": [
+            "crisis silence",
+            "trust debt",
+            "first response"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_crisis",
+          "task_leadership",
+          "task_risk"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_crisis",
+          "theme_trust"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "case_review",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link23"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m033",
+      "route": "route_07",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 116,
+      "publishedAt": "2026-01-08",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Чек-лист от Ивана Афанасьева по поведению коммуникатора при информационной атаке",
+          "desc": "Пошаговый чек-лист для коммуникатора при информационной атаке: первичная оценка ситуации, координация решений, выбор реакции и контроль действий команды под давлением.",
+          "tags": [
+            "информационная атака",
+            "чек-лист",
+            "координация команды",
+            "антикризисный алгоритм"
+          ]
+        },
+        "en": {
+          "title": "Ivan Afanasyev’s checklist for communicators under information attack",
+          "desc": "A step-by-step checklist for initial assessment, decision coordination, response choice and team control under pressure.",
+          "tags": [
+            "information attack",
+            "crisis checklist",
+            "team coordination"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_crisis",
+          "task_template",
+          "task_team"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service"
+        ],
+        "themeIds": [
+          "theme_crisis"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link13"
+        }
+      },
+      "expertId": "expert_ivan_afanasyev"
+    },
+    {
+      "id": "m034",
+      "route": "route_07",
+      "type": "type_case",
+      "status": "status_available",
+      "level": 1,
+      "page": 182,
+      "publishedAt": "2026-01-10",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Примеры публикаций, вышедших в СМИ в рамках освещения темы о борьбе с суррогатным топливом",
+          "desc": "Подборка публикаций в СМИ показывает, как развивалось публичное освещение темы борьбы с суррогатным топливом, и дает фактический материал для разбора коммуникационного кейса.",
+          "tags": [
+            "Антикризис",
+            "Медиатизация",
+            "Оценка рисков",
+            "Кризис",
+            "Профессия"
+          ],
+          "changeSummary": "Подборка 12 публикаций СМИ 2017–2019 пересобрана как газетное редакционное досье: сохранены исходные заголовки, издания и даты, добавлена хронология развития медиаполя и проверенные ссылки на доступные оригинальные публикации."
+        },
+        "en": {
+          "title": "Media coverage examples from the campaign against counterfeit fuel",
+          "desc": "A collection of media publications showing how public coverage of the counterfeit-fuel issue developed, providing evidence for a communications case review.",
+          "tags": [
+            "media coverage",
+            "case evidence",
+            "public communication"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_crisis",
+          "task_mediatization",
+          "task_risk"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_crisis",
+          "theme_profession"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "case_evidence",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link22"
+        }
+      }
+    },
+    {
+      "id": "m035",
+      "route": "route_07",
+      "type": "type_guide",
+      "status": "status_available",
+      "level": 1,
+      "page": 215,
+      "publishedAt": "2026-02-17",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Гайд антикризисной коммуникационной стратегии от Ники Комаровой aka PR machine",
+          "desc": "Гайд помогает выстроить антикризисную стратегию: определить роли, последовательность решений, работу с информационным полем и действия коммуникационной команды в условиях давления.",
+          "tags": [
+            "антикризисная стратегия",
+            "распределение ролей",
+            "информационное поле",
+            "кризисный штаб",
+            "алгоритм действий"
+          ]
+        },
+        "en": {
+          "title": "Crisis communications strategy guide by Nika Komarova (PR machine)",
+          "desc": "A guide to roles, decision sequence, information-field management and team actions under crisis pressure.",
+          "tags": [
+            "crisis strategy",
+            "crisis team",
+            "response algorithm"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_crisis",
+          "task_team",
+          "task_template"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_press_service",
+          "audience_consultant"
+        ],
+        "themeIds": [
+          "theme_crisis"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "expert_guide",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link30"
+        }
+      },
+      "expertId": "expert_nika_komarova"
+    },
+    {
+      "id": "m036",
+      "route": "route_08",
+      "type": "type_community",
+      "status": "status_available",
+      "level": 1,
+      "page": 173,
+      "publishedAt": "2026-02-20",
+      "updatedAt": "2026-08-17",
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Переход в канал для обсуждения тем книги",
+          "desc": "История и редакционная логика канала «Коммуникации на грани»: полевой дневник коммуникационного менеджмента, связанный с книгой и ее живым цифровым продолжением, плюс подборка материалов для первого знакомства.",
+          "tags": [
+            "Сообщество"
+          ],
+          "changeSummary": "Переходная QR-страница в канал пересобрана как публицистический материал: добавлены история «Коммуникаций на грани», связь с концепцией живого издания, авторская карта тем и редакционная подборка постов."
+        },
+        "en": {
+          "title": "Join the channel for discussing the book’s themes",
+          "desc": "A gateway to professional discussion around the book and its living digital continuation, with observations, questions and practical communications-management cases.",
+          "tags": [
+            "professional community",
+            "living edition",
+            "book discussion"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_consultant",
+          "audience_expert",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_community"
+        ]
+      },
+      "origin": "book_qr",
+      "sourceKind": "community",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/kniga/link28"
+        }
+      }
+    },
+    {
+      "id": "m037",
+      "route": "route_07",
+      "type": "type_case",
+      "status": "status_available",
+      "level": 1,
+      "page": 92,
+      "publishedAt": "2026-06-13",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Синдром нижнего звена в эпоху стеклянных кабинетов",
+          "desc": "Кейс разбирает, как действия и высказывания сотрудника нижнего звена становятся репутационным риском для всей системы в условиях цифровой прозрачности и «стеклянных кабинетов».",
+          "tags": [
+            "Антикризис",
+            "Оценка рисков",
+            "Работа с командой",
+            "Работа с руководством",
+            "Кризис",
+            "Управление"
+          ]
+        },
+        "en": {
+          "title": "The frontline-employee syndrome in the age of glass offices",
+          "desc": "A case about how the actions and statements of frontline employees can become a reputation risk for the entire system under digital transparency.",
+          "tags": [
+            "frontline employees",
+            "reputation risk",
+            "digital transparency"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_crisis",
+          "task_risk",
+          "task_team",
+          "task_leadership"
+        ],
+        "audienceIds": [
+          "audience_first_executive",
+          "audience_comms_lead",
+          "audience_comms_team",
+          "audience_public_sector",
+          "audience_large_business"
+        ],
+        "themeIds": [
+          "theme_crisis",
+          "theme_management"
+        ]
+      },
+      "origin": "app_original",
+      "sourceKind": "case_review",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/sindrom-chinovnika-v-epohu-steklyannyh-kabinetov"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    },
+    {
+      "id": "m038",
+      "route": "route_04",
+      "type": "type_article",
+      "status": "status_available",
+      "level": 1,
+      "page": 174,
+      "publishedAt": "2026-07-18",
+      "updatedAt": null,
+      "availableLocales": [
+        "ru",
+        "en"
+      ],
+      "contentLocales": [
+        "ru"
+      ],
+      "locales": {
+        "ru": {
+          "title": "Допуск к профессии: как мир проверяет коммуникаторов и какой экзамен предстоит сдать России",
+          "desc": "Сопоставление систем допуска и профессиональной оценки коммуникаторов в США, Великобритании, ЕС и России — чтобы увидеть, какие критерии зрелости профессии пока отсутствуют в отечественной практике.",
+          "tags": [
+            "допуск к профессии",
+            "сертификация",
+            "оценка соответствия",
+            "профессиональная зрелость",
+            "международная практика"
+          ]
+        },
+        "en": {
+          "title": "Access to the profession: how the world assesses communicators and what test awaits Russia",
+          "desc": "A comparison of professional-entry and conformity-assessment systems for communicators in the US, UK, EU and Russia, highlighting maturity criteria still missing from Russian practice.",
+          "tags": [
+            "professional certification",
+            "conformity assessment",
+            "professional maturity",
+            "international practice"
+          ]
+        }
+      },
+      "classification": {
+        "taskIds": [
+          "task_professional_standards"
+        ],
+        "audienceIds": [
+          "audience_comms_lead",
+          "audience_expert",
+          "audience_young_professional"
+        ],
+        "themeIds": [
+          "theme_profession"
+        ]
+      },
+      "origin": "app_original",
+      "sourceKind": "author_analysis",
+      "web": {
+        "urls": {
+          "ru": "https://mmalova.com/dopusk-k-professii"
+        }
+      },
+      "expertId": "expert_madina_malova"
+    }
+  ],
+  "updates": [
+    {
+      "materialId": "m002",
+      "updatedAt": "2026-08-20"
+    },
+    {
+      "materialId": "m003",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m004",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m005",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m015",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m016",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m018",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m019",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m024",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m025",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m026",
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "materialId": "m027",
+      "updatedAt": "2026-08-17"
+    }
+  ]
+}
