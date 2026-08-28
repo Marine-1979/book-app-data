@@ -5,6 +5,7 @@ on:
   push:
     branches: [main]
     paths:
+      - ".github/workflows/mobile-data.yml"
       - "data/materials.json"
       - "data/mobile/**"
       - "scripts/build-mobile-data.mjs"
@@ -19,16 +20,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node scripts/build-mobile-data.mjs
-      - run: node scripts/validate-mobile-data.mjs
+
+      - name: Build mobile dataset
+        run: node scripts/build-mobile-data.mjs
+
+      - name: Validate mobile dataset
+        run: node scripts/validate-mobile-data.mjs
+
       - name: Commit generated mobile dataset
         run: |
-          if git diff --quiet -- dist/mobile-app-data.json; then exit 0; fi
+          git add -f dist/mobile-app-data.json
+
+          if git diff --cached --quiet; then
+            echo "No mobile dataset changes to publish."
+            exit 0
+          fi
+
           git config user.name "book-app-mobile-data-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add dist/mobile-app-data.json
           git commit -m "chore(mobile): rebuild mobile app data"
           git push
