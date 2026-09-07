@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "documentStatus": "project-reservation-register",
+  "updatedAt": "2026-09-07",
+  "runtimeConsumer": false,
+  "note": "Documentation-only reservation register. Do not load in application runtime unless a separate schema decision is approved.",
+  "lastOccupiedIdVerified": "m038",
+  "reservations": [
+    {
+      "from": "m039",
+      "to": "m048",
+      "count": 10,
+      "purpose": "Избранные материалы блога, включаемые в приложение",
+      "status": "reserved",
+      "allocationRule": "Sequential after owner approves the exact blog shortlist"
+    },
+    {
+      "from": "m049",
+      "to": "m051",
+      "count": 3,
+      "purpose": "Три новых экспертных гайда",
+      "status": "reserved",
+      "allocationRule": "m049 first registered new guide; m050 second; m051 third"
+    }
+  ],
+  "freeFrom": "m052"
+}
